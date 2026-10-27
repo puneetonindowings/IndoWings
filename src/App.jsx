@@ -211,6 +211,7 @@ export default function App() {
           <CyberoneLitePage 
             onBack={() => navigateTo('home')}
             onOpenDemo={handleOpenDemoWithProduct}
+            onNavigate={navigateTo}
           />
           <Footer 
             onOpenDemo={() => handleOpenDemoWithProduct('Cyberone Lite')}
@@ -221,22 +222,24 @@ export default function App() {
       ) : (
         /* FULL LANDING PAGE */
         <>
-                    <Preloader onExitStart={() => setIsReadyForHeroAnim(true)} />
-
-                    <Hero triggerAnim={isReadyForHeroAnim} />
-
-                    <MissionManifesto 
+          <Navbar 
+            onOpenDemo={(drone) => handleOpenDemoWithProduct(drone || '')}
+            onOpenLogin={() => setIsLoginOpen(true)}
+            onSelectAntiDrone={() => handleOpenDemoWithProduct('SKYctrl C-UAS')}
+            onNavigate={navigateTo}
+          />
+          <Preloader onExitStart={() => setIsReadyForHeroAnim(true)} />
+          <Hero triggerAnim={isReadyForHeroAnim} />
+          <MissionManifesto 
             onOpenDemo={handleOpenDemoWithProduct}
           />
-
-                    <ProductShowcase 
+          <ProductShowcase 
             onOpenDemo={handleOpenDemoWithProduct}
             onNavigate={navigateTo}
           />
-
-                    <BlogSection />
-
-                    <Footer 
+          <FeaturedOn />
+          <BlogSection />
+          <Footer 
             onOpenDemo={() => handleOpenDemoWithProduct('')}
             onOpenLogin={() => setIsLoginOpen(true)}
             onNavigate={navigateTo}

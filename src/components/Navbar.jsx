@@ -1,10 +1,6 @@
-import React, { useState, useRef } from 'react';
-import { ChevronDown, ArrowRight } from 'lucide-react';
+import React, { useState, useRef, useEffect } from 'react';
+import { ChevronDown, ArrowRight, Menu, X, ChevronRight } from 'lucide-react';
 
-/**
- * EXACT SPACEX STYLE MINIMALIST VERTICAL TEXT DROPDOWN
- * Clean, pure uppercase navigation items floating directly beneath parent nav items
- */
 const menuData = {
   company: [
     { label: 'ABOUT INDOWINGS', action: 'manifesto' },
@@ -76,8 +72,27 @@ function SpaceXDropdown({ items, onOpenDemo, onNavigate, onClose }) {
 }
 
 export default function Navbar({ onOpenDemo, onOpenLogin, onSelectAntiDrone, onNavigate }) {
-  const [activeMenu, setActiveMenu] = useState(null); // 'company' | 'products' | 'software' | 'industries' | null
+  const [activeMenu, setActiveMenu] = useState(null);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [mobileAccordion, setMobileAccordion] = useState('products');
   const leaveTimeoutRef = useRef(null);
+
+  // Close mobile drawer on route change or escape key
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === 'Escape') setMobileMenuOpen(false);
+    };
+    if (mobileMenuOpen) {
+      document.body.style.overflow = 'hidden';
+      window.addEventListener('keydown', handleKeyDown);
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [mobileMenuOpen]);
 
   const handleMouseEnter = (menu) => {
     if (leaveTimeoutRef.current) {
@@ -94,17 +109,38 @@ export default function Navbar({ onOpenDemo, onOpenLogin, onSelectAntiDrone, onN
     }, 180);
   };
 
+  const handleMobileNavClick = (item) => {
+    setMobileMenuOpen(false);
+    if (item.route && onNavigate) {
+      onNavigate(item.route);
+    } else if (item.href && item.href.startsWith('#/')) {
+      window.location.hash = item.href;
+    } else if (item.href) {
+      const el = document.querySelector(item.href);
+      if (el) el.scrollIntoView({ behavior: 'smooth' });
+    } else if (item.action === 'manifesto') {
+      const el = document.getElementById('manifesto');
+      if (el) el.scrollIntoView({ behavior: 'smooth' });
+      else onOpenDemo();
+    } else if (item.drone) {
+      onOpenDemo(item.drone);
+    } else {
+      onOpenDemo();
+    }
+  };
+
   return (
     <header className="iw-header">
       <div className="iw-header-inner">
         
-        {/* LEFT: EXACT INDOWINGS LOGO (Crisp White + Orange Wing Bars) */}
+        {/* Brand Logo */}
         <a 
           href="#" 
           className="iw-brand" 
           aria-label="IndoWings"
           onClick={(e) => {
             e.preventDefault();
+            setMobileMenuOpen(false);
             if (onNavigate) onNavigate('home');
             else window.location.hash = '';
           }}
@@ -118,9 +154,8 @@ export default function Navbar({ onOpenDemo, onOpenLogin, onSelectAntiDrone, onN
           />
         </a>
 
-        {/* CENTER: 5 MAIN NAVS WITH EXACT SPACEX VERTICAL DROPDOWNS */}
+        {/* Desktop Navigation */}
         <nav className="iw-nav-center">
-          
           {/* 1. COMPANY */}
           <div 
             className={`iw-nav-item ${activeMenu === 'company' ? 'active' : ''}`}
@@ -204,20 +239,16 @@ export default function Navbar({ onOpenDemo, onOpenLogin, onSelectAntiDrone, onN
               className="iw-nav-btn" 
               onClick={() => {
                 const el = document.getElementById('contact');
-                if (el) {
-                  el.scrollIntoView({ behavior: 'smooth' });
-                } else if (onOpenDemo) {
-                  onOpenDemo();
-                }
+                if (el) el.scrollIntoView({ behavior: 'smooth' });
+                else if (onOpenDemo) onOpenDemo();
               }}
             >
               CONTACT
             </button>
           </div>
-
         </nav>
 
-        {/* RIGHT: 3 ACTION LINKS (ANTI-DRONE, REQUEST FOR DEMO, LOGIN) */}
+        {/* Desktop Header Actions */}
         <div className="iw-nav-right">
           <button 
             type="button" 
@@ -247,6 +278,206 @@ export default function Navbar({ onOpenDemo, onOpenLogin, onSelectAntiDrone, onN
           </button>
         </div>
 
+        {/* Mobile Hamburger Toggle Button */}
+        <button
+          type="button"
+          className="iw-mobile-toggle-btn"
+          aria-label={mobileMenuOpen ? 'Close Navigation Menu' : 'Open Navigation Menu'}
+          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+        >
+          {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+        </button>
+
+      </div>
+
+      {/* Mobile Drawer Backdrop */}
+      {mobileMenuOpen && (
+        <div 
+          className="iw-mobile-drawer-backdrop"
+          onClick={() => setMobileMenuOpen(false)}
+        />
+      )}
+
+      {/* Mobile Slide-Out Drawer */}
+      <div className={`iw-mobile-drawer ${mobileMenuOpen ? 'open' : ''}`}>
+        <div className="iw-mobile-drawer-inner">
+          <div className="iw-mobile-drawer-header">
+            <img 
+              src="/assets/indowing-light.png" 
+              alt="IndoWings" 
+              className="iw-mobile-drawer-logo" 
+            />
+            <button
+              type="button"
+              className="iw-mobile-close-btn"
+              onClick={() => setMobileMenuOpen(false)}
+              aria-label="Close menu"
+            >
+              <X size={22} />
+            </button>
+          </div>
+
+          <div className="iw-mobile-menu-items">
+            {/* 1. PRODUCTS ACCORDION */}
+            <div className="iw-mobile-accordion-group">
+              <button
+                type="button"
+                className={`iw-mobile-accordion-header ${mobileAccordion === 'products' ? 'active' : ''}`}
+                onClick={() => setMobileAccordion(mobileAccordion === 'products' ? null : 'products')}
+              >
+                <span>PRODUCTS</span>
+                <ChevronDown className={`iw-mobile-accordion-arrow ${mobileAccordion === 'products' ? 'open' : ''}`} />
+              </button>
+              {mobileAccordion === 'products' && (
+                <div className="iw-mobile-accordion-body">
+                  {menuData.products.map((item, idx) => (
+                    <button
+                      key={idx}
+                      type="button"
+                      className="iw-mobile-sublink"
+                      onClick={() => handleMobileNavClick(item)}
+                    >
+                      <span>{item.label}</span>
+                      <ChevronRight size={14} className="iw-mobile-sublink-arrow" />
+                    </button>
+                  ))}
+                </div>
+              )}
+            </div>
+
+            {/* 2. COMPANY ACCORDION */}
+            <div className="iw-mobile-accordion-group">
+              <button
+                type="button"
+                className={`iw-mobile-accordion-header ${mobileAccordion === 'company' ? 'active' : ''}`}
+                onClick={() => setMobileAccordion(mobileAccordion === 'company' ? null : 'company')}
+              >
+                <span>COMPANY</span>
+                <ChevronDown className={`iw-mobile-accordion-arrow ${mobileAccordion === 'company' ? 'open' : ''}`} />
+              </button>
+              {mobileAccordion === 'company' && (
+                <div className="iw-mobile-accordion-body">
+                  {menuData.company.map((item, idx) => (
+                    <button
+                      key={idx}
+                      type="button"
+                      className="iw-mobile-sublink"
+                      onClick={() => handleMobileNavClick(item)}
+                    >
+                      <span>{item.label}</span>
+                      <ChevronRight size={14} className="iw-mobile-sublink-arrow" />
+                    </button>
+                  ))}
+                </div>
+              )}
+            </div>
+
+            {/* 3. SOFTWARE ACCORDION */}
+            <div className="iw-mobile-accordion-group">
+              <button
+                type="button"
+                className={`iw-mobile-accordion-header ${mobileAccordion === 'software' ? 'active' : ''}`}
+                onClick={() => setMobileAccordion(mobileAccordion === 'software' ? null : 'software')}
+              >
+                <span>SOFTWARE</span>
+                <ChevronDown className={`iw-mobile-accordion-arrow ${mobileAccordion === 'software' ? 'open' : ''}`} />
+              </button>
+              {mobileAccordion === 'software' && (
+                <div className="iw-mobile-accordion-body">
+                  {menuData.software.map((item, idx) => (
+                    <button
+                      key={idx}
+                      type="button"
+                      className="iw-mobile-sublink"
+                      onClick={() => handleMobileNavClick(item)}
+                    >
+                      <span>{item.label}</span>
+                      <ChevronRight size={14} className="iw-mobile-sublink-arrow" />
+                    </button>
+                  ))}
+                </div>
+              )}
+            </div>
+
+            {/* 4. INDUSTRIES ACCORDION */}
+            <div className="iw-mobile-accordion-group">
+              <button
+                type="button"
+                className={`iw-mobile-accordion-header ${mobileAccordion === 'industries' ? 'active' : ''}`}
+                onClick={() => setMobileAccordion(mobileAccordion === 'industries' ? null : 'industries')}
+              >
+                <span>INDUSTRIES</span>
+                <ChevronDown className={`iw-mobile-accordion-arrow ${mobileAccordion === 'industries' ? 'open' : ''}`} />
+              </button>
+              {mobileAccordion === 'industries' && (
+                <div className="iw-mobile-accordion-body">
+                  {menuData.industries.map((item, idx) => (
+                    <button
+                      key={idx}
+                      type="button"
+                      className="iw-mobile-sublink"
+                      onClick={() => handleMobileNavClick(item)}
+                    >
+                      <span>{item.label}</span>
+                      <ChevronRight size={14} className="iw-mobile-sublink-arrow" />
+                    </button>
+                  ))}
+                </div>
+              )}
+            </div>
+
+            {/* DIRECT LINKS */}
+            <button
+              type="button"
+              className="iw-mobile-direct-link"
+              onClick={() => {
+                setMobileMenuOpen(false);
+                if (onSelectAntiDrone) onSelectAntiDrone();
+              }}
+            >
+              <span>ANTI-DRONE DEFENSE</span>
+              <ArrowRight size={15} />
+            </button>
+
+            <button
+              type="button"
+              className="iw-mobile-direct-link"
+              onClick={() => {
+                setMobileMenuOpen(false);
+                const el = document.getElementById('contact');
+                if (el) el.scrollIntoView({ behavior: 'smooth' });
+                else if (onOpenDemo) onOpenDemo();
+              }}
+            >
+              <span>CONTACT</span>
+              <ArrowRight size={15} />
+            </button>
+          </div>
+
+          {/* Mobile Drawer Bottom Actions */}
+          <div className="iw-mobile-drawer-footer">
+            <button
+              type="button"
+              className="iw-mobile-primary-btn"
+              onClick={() => {
+                setMobileMenuOpen(false);
+                onOpenDemo();
+              }}
+            >
+              REQUEST FOR DEMO
+            </button>
+            <button
+              type="button"
+              className="iw-mobile-secondary-btn"
+              onClick={() => {
+                setMobileMenuOpen(false);
+                onOpenLogin();
+              }}
+            >
+              LOGIN
+            </button>
+          </div>
+        </div>
       </div>
     </header>
   );

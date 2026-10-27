@@ -108,12 +108,52 @@ export default function Hero({ triggerAnim = false }) {
       onContextMenu={(e) => e.preventDefault()}
       onDragStart={(e) => e.preventDefault()}
     >
-      
-            <div 
+      {/* Background Media Stack */}
+      <div className="qs-media-stack">
+        {slidesData.map((slide, idx) => (
+          <div 
+            key={slide.id} 
+            className={`qs-slide ${currentSlide === idx ? 'active' : ''}`}
+          >
+            {slide.type === 'video' ? (
+              <video
+                ref={idx === 0 ? videoRef : null}
+                className="qs-media"
+                autoPlay
+                muted
+                loop
+                playsInline
+                preload="auto"
+                poster="/assets/indo-cockpit.png"
+                draggable="false"
+                onContextMenu={(e) => e.preventDefault()}
+              >
+                <source src={slide.src} type="video/mp4" />
+              </video>
+            ) : (
+              <img 
+                src={slide.src} 
+                alt={`IndoWings Aerospace - ${slide.label}`}
+                className="qs-media" 
+                draggable="false"
+                onContextMenu={(e) => e.preventDefault()}
+                onDragStart={(e) => e.preventDefault()}
+              />
+            )}
+          </div>
+        ))}
+        <div className="qs-top-vignette" aria-hidden="true" />
+      </div>
+
+      {/* Vertical Slider Navigation */}
+      <div 
         className="qs-vertical-slider"
         style={{ cursor: 'pointer', pointerEvents: 'auto' }}
         onClick={() => setCurrentSlide((currentSlide + 1) % totalSlides)}
-        title="Click or Scroll to Change Slide"
+        title="Click to advance slide"
+        role="button"
+        aria-label="Advance slide"
+        tabIndex={0}
       >
         <div className="qs-slider-track">
           <div 
@@ -127,7 +167,8 @@ export default function Hero({ triggerAnim = false }) {
         <span className="qs-slider-number">{activeNumber}</span>
       </div>
 
-            <div 
+      {/* Brand Title Bar */}
+      <div 
         className="iw-hero-helsing-container" 
         ref={brandContainerRef}
         aria-label="INDOWINGS"

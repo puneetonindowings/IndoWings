@@ -8,7 +8,7 @@ import {
 
 gsap.registerPlugin(ScrollTrigger);
 
-export default function CyberoneLitePage({ onBack, onOpenDemo }) {
+export default function CyberoneLitePage({ onBack, onOpenDemo, onNavigate }) {
   const pageRef = useRef(null);
 
     // STATE DEFINITIONS

@@ -17,6 +17,18 @@ export default function CyberoneProPage({ onBack, onOpenDemo, onNavigate }) {
   // FAQ Accordion State (0 is open by default, -1 is closed)
   const [openFaq, setOpenFaq] = useState(0);
 
+  // Section 6: Markets 3-Card Carousel State (0 to 5)
+  const [marketIndex, setMarketIndex] = useState(0);
+  const [isMarketHovered, setIsMarketHovered] = useState(false);
+
+  useEffect(() => {
+    if (isMarketHovered) return;
+    const interval = setInterval(() => {
+      setMarketIndex(prev => (prev + 1) % 6);
+    }, 4500);
+    return () => clearInterval(interval);
+  }, [isMarketHovered]);
+
   // ---------------------------------------------------------------------------
   // 5 CORE CAPABILITY PILLARS (Authentic from IndoWings Cyberone Pro V2)
   // ---------------------------------------------------------------------------
@@ -777,42 +789,57 @@ export default function CyberoneProPage({ onBack, onOpenDemo, onNavigate }) {
       </section>
 
       {/* =========================================================================
-          SECTION 6: SOLUTIONS & SERVICES (6 Sector Industrial Grid)
+          SECTION 6: MARKETS (3-Card Carousel matching Lite)
           ========================================================================= */}
-      <section className="indo-pro-sectors-section">
-        <div className="indo-pro-sectors-container">
+      <section
+        className="indo-lite-markets-carousel-section"
+        onMouseEnter={() => setIsMarketHovered(true)}
+        onMouseLeave={() => setIsMarketHovered(false)}
+      >
+        <div className="indo-lite-container">
 
-          <div className="indo-pro-section-head">
-            <span className="indo-pro-tag">OPERATIONAL DOMAINS</span>
-            <h2 className="indo-pro-section-title">Solutions & Field Deployment</h2>
-            <p className="indo-pro-section-subtitle">
-              Delivering quantifiable ROI, risk mitigation, and zero-downtime analytics across critical infrastructure.
-            </p>
+          <h2 className="indo-lite-markets-title">MARKETS</h2>
+          <p className="indo-lite-markets-subtitle">
+            Find out how we use our technologies in key locations around the world.
+          </p>
+
+          {/* 3-Card Carousel Track */}
+          <div className="indo-lite-carousel-container">
+            <div
+              className="indo-lite-carousel-track"
+              style={{
+                transform: `translateX(-${marketIndex * (100 / 3)}%)`
+              }}
+            >
+              {[...sectorSolutions, ...sectorSolutions.slice(0, 3)].map((item, idx) => (
+                <div key={idx} className="indo-lite-market-card">
+                  <img
+                    src={item.img}
+                    alt={item.title}
+                    className="indo-lite-market-card-img"
+                    draggable="false"
+                  />
+                  <div className="indo-lite-market-card-overlay">
+                    <div className="indo-lite-market-badge-title">
+                      <span className="indo-lite-market-bar" />
+                      <h4 className="indo-lite-market-name">{item.title.toUpperCase()}</h4>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
 
-          <div className="indo-pro-sectors-grid">
-            {sectorSolutions.map((sector, idx) => (
-              <motion.div
+          {/* Carousel Pagination Dots */}
+          <div className="indo-lite-carousel-dots">
+            {sectorSolutions.map((_, idx) => (
+              <button
                 key={idx}
-                whileHover={{ y: -6, scale: 1.02 }}
-                transition={{ duration: 0.25 }}
-                className="indo-pro-sector-card"
-              >
-                <div className="indo-pro-sector-img-wrap">
-                  <img
-                    src={sector.img}
-                    alt={sector.title}
-                    className="indo-pro-sector-img"
-                    draggable="false"
-                    loading="lazy"
-                  />
-                  <div className="indo-pro-sector-gradient" />
-                </div>
-                <div className="indo-pro-sector-content">
-                  <h3 className="indo-pro-sector-card-title">{sector.title}</h3>
-                  <p className="indo-pro-sector-card-desc">{sector.desc}</p>
-                </div>
-              </motion.div>
+                type="button"
+                onClick={() => setMarketIndex(idx)}
+                className={`indo-lite-carousel-dot ${marketIndex === idx ? 'active' : ''}`}
+                aria-label={`Go to slide ${idx + 1}`}
+              />
             ))}
           </div>
 

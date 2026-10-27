@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 26.3.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Grid" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill:none;stroke:url(#SVGID_1_);stroke-width:15;stroke-linecap:round;stroke-miterlimit:10;}
+	
+		.st1{fill:none;stroke:url(#SVGID_00000166638302750890241830000008427841479401500063_);stroke-width:15;stroke-linecap:round;stroke-miterlimit:10;}
+	.st2{fill:none;stroke:#FFFFFF;stroke-width:15;stroke-linecap:round;stroke-miterlimit:10;}
+	.st3{fill:#FFFFFF;}
+	.st4{fill:none;stroke:#FFFFFF;stroke-width:12;stroke-linecap:round;stroke-miterlimit:10;}
+</style>
+<linearGradient id="SVGID_1_" gradientUnits="userSpaceOnUse" x1="132.36" y1="382.255" x2="379.4242" y2="382.255" gradientTransform="matrix(1 0 0 -1 0 512)">
+	<stop  offset="0" style="stop-color:#DD6D08"/>
+	<stop  offset="1" style="stop-color:#FD9100"/>
+</linearGradient>
+<polyline class="st0" points="139.9,114.7 345,114.7 278.9,144.8 "/>
+<linearGradient id="SVGID_00000146467447914124283700000011892438231760767888_" gradientUnits="userSpaceOnUse" x1="131.5152" y1="468.51" x2="379.64" y2="468.51" gradientTransform="matrix(1 0 0 -1 0 512)">
+	<stop  offset="0" style="stop-color:#DD6D08"/>
+	<stop  offset="1" style="stop-color:#FD9100"/>
+</linearGradient>
+<polyline style="fill:none;stroke:url(#SVGID_00000146467447914124283700000011892438231760767888_);stroke-width:15;stroke-linecap:round;stroke-miterlimit:10;" points="
+	372.1,58.6 167,58.6 235.3,28.4 "/>
+<path class="st2" d="M425.5,232.2v-20.4c0-7.2-4.5-13.1-10-13.1H106.7c-5.5,0-10,5.9-10,13.1v20.4"/>
+<path class="st2" d="M96.7,451v20.4c0,7.2,4.5,13.1,10,13.1h308.8c5.5,0,10-5.9,10-13.1V451"/>
+<path class="st2" d="M27.8,280.2c0-4.2,1.6-8.3,4.5-11.5l27.5-29.5c4.9-5.2,9.9-7.1,15-7.1H447c5.1,0,10,1.9,15,7.1l17.7,21.1
+	c2.9,3.1,4.5,7.2,4.5,11.5v138.3c0,4.2-1.6,8.3-4.5,11.5L462,442.7c-4.9,5.2-9.9,7.1-15,7.1H74.8c-5.1,0-10.1-1.9-15-7.1l-27.5-29.5
+	c-2.9-3.1-4.5-7.2-4.5-11.4"/>
+<path class="st3" d="M377.9,291.4c0.4,0,0.7,0.3,0.7,0.7v98.8c0,0.4-0.3,0.7-0.7,0.7H158.7c-0.4,0-0.7-0.3-0.7-0.7v-98.8
+	c0-0.4,0.3-0.7,0.7-0.7H377.9 M377.9,276.4H158.7c-8.7,0-15.7,7-15.7,15.7v98.8c0,8.7,7,15.7,15.7,15.7h219.2
+	c8.7,0,15.7-7,15.7-15.7v-98.8C393.6,283.4,386.6,276.4,377.9,276.4z"/>
+<path class="st4" d="M25.5,297.6h33.7c6.6,0,11.9,5.3,11.9,11.9l0,0v62.9c0,6.6-5.3,11.9-11.9,11.9c0,0,0,0,0,0H25.5l0,0V297.6
+	L25.5,297.6z"/>
+<path class="st4" d="M48.3,358.1v-34.8"/>
+<line class="st4" x1="92.6" y1="361.6" x2="92.6" y2="319.8"/>
+</svg>

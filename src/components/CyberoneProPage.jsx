@@ -978,30 +978,34 @@ export default function CyberoneProPage({ onBack, onOpenDemo, onNavigate }) {
       </section>
 
       {/* =========================================================================
-          SECTION 10: REQUEST FOR DEMO CTA SECTION
+          SECTION 10: TACTICAL CTA BANNER (Matching Cyberone Max)
           ========================================================================= */}
-      <section className="indo-pro-cta-section">
-        <div className="indo-pro-cta-container">
-          <h3 className="indo-pro-cta-title">
-            Master The Skies Today, Rule The Future Tomorrow
-          </h3>
-          <p className="indo-pro-cta-subtitle">
-            Connect with our tactical flight specialists to schedule an on-site operational demonstration for your organization.
-          </p>
-
-          <motion.button
-            whileHover={{ scale: 1.03 }}
-            whileTap={{ scale: 0.98 }}
-            type="button"
-            className="indo-pro-demo-card-btn"
-            onClick={() => {
-              if (onOpenDemo) onOpenDemo('Cyberone Pro');
-            }}
-          >
-            <span className="indo-pro-demo-btn-text">
-              Request for Demo
-            </span>
-          </motion.button>
+      <section className="indo-max-cta-section">
+        <div className="indo-max-cta-container">
+          <div className="indo-max-cta-box">
+            <div className="indo-max-cta-content">
+              <span className="indo-max-tag">COMMENCE OPERATIONS</span>
+              <h2 className="indo-max-cta-title">Ready to Experience Cyberone Pro?</h2>
+              <p className="indo-max-cta-desc">
+                Deploy advanced multi-mission tactical intelligence, edge-AI tracking, and persistent surveillance across your operations. Connect with our flight specialists for mission analysis and procurement tenders.
+              </p>
+              
+              <div className="indo-max-cta-actions">
+                <button 
+                  onClick={() => onOpenDemo && onOpenDemo('Cyberone Pro')}
+                  className="indo-max-primary-btn"
+                >
+                  <span>Request for Demo</span>
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                    <polyline points="12 5 19 12 12 19"></polyline>
+                  </svg>
+                </button>
+              </div>
+            </div>
+            
+            <div className="indo-max-cta-ambient" />
+          </div>
         </div>
       </section>
 

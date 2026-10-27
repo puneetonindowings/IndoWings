@@ -630,31 +630,34 @@ export default function CyberoneTrainerPage({ onBack, onOpenDemo, onNavigate }) 
       </section>
 
       {/* =========================================================================
-          SECTION 7: REQUEST FOR DEMO CTA SECTION
+          SECTION 7: TACTICAL CTA BANNER (Matching Cyberone Max)
           ========================================================================= */}
-      <section className="indo-trainer-cta-section">
-        <div className="indo-trainer-cta-container">
-          <h3 className="indo-trainer-cta-title">
-            Master The Skies Today, Rule The Future Tomorrow
-          </h3>
-          <p className="indo-trainer-cta-subtitle">
-            Connect with our flight training specialists to schedule an on-site operational demo for your academy or institution.
-          </p>
-
-          <motion.button
-            whileHover={{ scale: 1.03 }}
-            whileTap={{ scale: 0.98 }}
-            type="button"
-            className="indo-lite-request-demo-card"
-            onClick={() => {
-              if (onOpenDemo) onOpenDemo('Cyberone Trainer Drone');
-            }}
-          >
-            <span className="indo-lite-demo-orange-bar" />
-            <span className="indo-lite-demo-btn-text">
-              Request for Demo
-            </span>
-          </motion.button>
+      <section className="indo-max-cta-section">
+        <div className="indo-max-cta-container">
+          <div className="indo-max-cta-box">
+            <div className="indo-max-cta-content">
+              <span className="indo-max-tag">COMMENCE OPERATIONS</span>
+              <h2 className="indo-max-cta-title">Ready to Experience Cyberone Trainer?</h2>
+              <p className="indo-max-cta-desc">
+                Elevate your pilot training curriculum with master-slave dual control, rugged carbon-weave airframe, and zero-downtime flight operations. Schedule an on-site demonstration today.
+              </p>
+              
+              <div className="indo-max-cta-actions">
+                <button 
+                  onClick={() => onOpenDemo && onOpenDemo('Cyberone Trainer Drone')}
+                  className="indo-max-primary-btn"
+                >
+                  <span>Request for Demo</span>
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                    <polyline points="12 5 19 12 12 19"></polyline>
+                  </svg>
+                </button>
+              </div>
+            </div>
+            
+            <div className="indo-max-cta-ambient" />
+          </div>
         </div>
       </section>
 

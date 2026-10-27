@@ -918,7 +918,7 @@ export default function CyberoneMaxPage({ onBack, onOpenDemo, onNavigate }) {
 
               <div className="indo-max-cta-actions">
                 <button
-                  onClick={onOpenDemo}
+                  onClick={() => onOpenDemo && onOpenDemo('Cyberone Max')}
                   className="indo-max-primary-btn"
                 >
                   <span>Request for Demo</span>

@@ -951,6 +951,38 @@ export default function CyberoneLitePage({ onBack, onOpenDemo }) {
         </div>
       </section>
 
+      {/* =========================================================================
+          SECTION 10: TACTICAL CTA BANNER (Matching Cyberone Max)
+          ========================================================================= */}
+      <section className="indo-max-cta-section">
+        <div className="indo-max-cta-container">
+          <div className="indo-max-cta-box">
+            <div className="indo-max-cta-content">
+              <span className="indo-max-tag">COMMENCE OPERATIONS</span>
+              <h2 className="indo-max-cta-title">Ready to Experience Cyberone Lite?</h2>
+              <p className="indo-max-cta-desc">
+                Deploy agile multi-mission surveillance, mapping, and rapid payload response across your operations. Connect with our flight systems engineers for mission analysis and live demonstrations.
+              </p>
+              
+              <div className="indo-max-cta-actions">
+                <button 
+                  onClick={() => onOpenDemo && onOpenDemo('Cyberone Lite')}
+                  className="indo-max-primary-btn"
+                >
+                  <span>Request for Demo</span>
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                    <polyline points="12 5 19 12 12 19"></polyline>
+                  </svg>
+                </button>
+              </div>
+            </div>
+            
+            <div className="indo-max-cta-ambient" />
+          </div>
+        </div>
+      </section>
+
     </div>
   );
 }

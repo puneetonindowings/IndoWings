@@ -9821,13 +9821,18 @@ textarea,
 
 .indo-max-cta-box {
   position: relative;
-  background: linear-gradient(135deg, #111418 0%, #090a0d 100%);
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: linear-gradient(135deg, #12151b 0%, #090b0e 100%);
+  border: 1px solid rgba(255, 106, 0, 0.28);
   border-radius: 16px;
   padding: clamp(3rem, 5vw, 4.5rem) clamp(2rem, 4vw, 3.5rem);
   text-align: center;
   overflow: hidden;
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.9), 0 0 50px rgba(255, 106, 0, 0.12);
+}
+
+.indo-max-cta-box .indo-max-tag {
+  color: #ff7a1a;
+  border-bottom: 1px solid rgba(255, 106, 0, 0.45);
 }
 
 .indo-max-cta-content {
@@ -9860,14 +9865,14 @@ textarea,
 }
 
 .indo-max-primary-btn {
-  background: #ffffff;
-  color: #000000;
+  background: linear-gradient(135deg, #ff7a1a 0%, #ff5500 100%);
+  color: #ffffff;
   border: none;
   padding: 1.1rem 2.8rem;
   border-radius: 9999px;
   cursor: pointer;
   transition: all 0.25s ease;
-  box-shadow: 0 10px 30px rgba(255, 255, 255, 0.15);
+  box-shadow: 0 10px 30px rgba(255, 106, 0, 0.38);
   display: inline-flex;
   align-items: center;
   gap: 0.75rem;
@@ -9877,18 +9882,18 @@ textarea,
 
 .indo-max-primary-btn:hover {
   transform: translateY(-2px);
-  box-shadow: 0 15px 40px rgba(255, 255, 255, 0.3);
-  background: #f4f4f4;
+  box-shadow: 0 15px 45px rgba(255, 106, 0, 0.6);
+  background: linear-gradient(135deg, #ff8c38 0%, #ff6a00 100%);
 }
 
 .indo-max-cta-ambient {
   position: absolute;
-  top: -50%;
+  top: -45%;
   left: 50%;
   transform: translateX(-50%);
-  width: 500px;
-  height: 500px;
-  background: radial-gradient(circle, rgba(255, 255, 255, 0.05) 0%, transparent 70%);
+  width: 620px;
+  height: 620px;
+  background: radial-gradient(circle, rgba(255, 106, 0, 0.25) 0%, rgba(255, 80, 0, 0.07) 45%, transparent 70%);
   pointer-events: none;
   z-index: 1;
 }

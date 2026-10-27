@@ -211,7 +211,6 @@ export default function App() {
           <CyberoneLitePage 
             onBack={() => navigateTo('home')}
             onOpenDemo={handleOpenDemoWithProduct}
-            onNavigate={navigateTo}
           />
           <Footer 
             onOpenDemo={() => handleOpenDemoWithProduct('Cyberone Lite')}
@@ -222,23 +221,38 @@ export default function App() {
       ) : (
         /* FULL LANDING PAGE */
         <>
+          {/* HARMATTAN AI INTRO PRELOADER (CINEMATIC RELOAD SPLASH SCREEN) */}
+          <Preloader onExitStart={() => setIsReadyForHeroAnim(true)} />
+
+          {/* 100% TRANSPARENT DEFENSE NAVBAR */}
           <Navbar 
             onOpenDemo={(drone) => handleOpenDemoWithProduct(drone || '')}
             onOpenLogin={() => setIsLoginOpen(true)}
             onSelectAntiDrone={() => handleOpenDemoWithProduct('SKYctrl C-UAS')}
             onNavigate={navigateTo}
           />
-          <Preloader onExitStart={() => setIsReadyForHeroAnim(true)} />
+
+          {/* QUANTUM SYSTEMS STYLE HERO (NO TEXT CLUTTER, AUTO & MANUAL SCROLL) */}
           <Hero triggerAnim={isReadyForHeroAnim} />
+
+          {/* HELSING.AI STYLE MANIFESTO & ABOUT US SECTION (INDOWINGS SOVEREIGN DEFENSE IDENTITY) */}
           <MissionManifesto 
             onOpenDemo={handleOpenDemoWithProduct}
           />
+
+          {/* HELSING.AI CA-1 EUROPA STYLE PRODUCT STACK (WITH DYNAMIC SCROLL ZOOM EFFECT) */}
           <ProductShowcase 
             onOpenDemo={handleOpenDemoWithProduct}
             onNavigate={navigateTo}
           />
+
+          {/* WE ARE OFFICIALLY FEATURED ON (FLOATING LOGOS SHOWCASE) */}
           <FeaturedOn />
+
+          {/* ANDURIL STYLE EDITORIAL NEWS & INSIGHTS (WITH INDOWINGS SOVEREIGN DEFENSE PALETTE) */}
           <BlogSection />
+
+          {/* SHIELD AI STYLE FOOTER (WITH INDOWINGS SOVEREIGN DEFENSE AESTHETICS & GIANT WATERMARK) */}
           <Footer 
             onOpenDemo={() => handleOpenDemoWithProduct('')}
             onOpenLogin={() => setIsLoginOpen(true)}

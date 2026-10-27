@@ -14,7 +14,9 @@ export default function CyberoneTrainerPage({ onBack, onOpenDemo, onNavigate }) 
   // FAQ Accordion State (0 is open by default, -1 is closed)
   const [openFaq, setOpenFaq] = useState(0);
 
-  // Technical specifications
+  // ---------------------------------------------------------------------------
+  // AUTHENTIC SPECIFICATIONS DATA (Exact match to User Screenshot 2 & IndoWings)
+  // ---------------------------------------------------------------------------
   const specRows = [
     { label: 'Overall Length', val: '600 mm' },
     { label: 'UAV Type', val: 'Quadcopter' },
@@ -29,7 +31,9 @@ export default function CyberoneTrainerPage({ onBack, onOpenDemo, onNavigate }) 
     { isFull: true, val: 'Also Available in Master Slave Config.' }
   ];
 
-    // 6 DETAIL PHOTOS FOR HORIZONTAL LADI / JHALAR REEL (Clean & Minimal)
+  // ---------------------------------------------------------------------------
+  // 6 DETAIL PHOTOS FOR HORIZONTAL LADI / JHALAR REEL (Clean & Minimal)
+  // ---------------------------------------------------------------------------
   const jhalarPhotos = [
     {
       id: 'camera',
@@ -81,7 +85,9 @@ export default function CyberoneTrainerPage({ onBack, onOpenDemo, onNavigate }) 
     }
   ];
 
-    // IN THE BOX (11 Accessories Packout from live site)
+  // ---------------------------------------------------------------------------
+  // IN THE BOX (11 Accessories Packout from live site)
+  // ---------------------------------------------------------------------------
   const accessories = [
     { id: 'airframe', name: 'Cyberone Trainer Drone', img: '/assets/cyberone-trainer/trainer-drone.png', isFeatured: true },
     { id: 'props', name: 'Propeller', img: '/assets/cyberone-trainer/propeller.png' },
@@ -96,7 +102,9 @@ export default function CyberoneTrainerPage({ onBack, onOpenDemo, onNavigate }) 
     { id: 'manual', name: 'User Manual', img: '/assets/cyberone-trainer/usermenual.png' }
   ];
 
-    // 6 KEY FEATURES ROW
+  // ---------------------------------------------------------------------------
+  // 6 KEY FEATURES ROW (Screenshot 1: Styled in dark defense black)
+  // ---------------------------------------------------------------------------
   const sixFeatures = [
     { title: 'Click\n-N- Lock', icon: '/assets/cyberone-trainer/payload-ico.svg' },
     { title: 'Swappable\nBatteries', icon: '/assets/cyberone-trainer/battery-ico.svg' },
@@ -106,7 +114,9 @@ export default function CyberoneTrainerPage({ onBack, onOpenDemo, onNavigate }) 
     { title: 'Mobile\nTouch Screen GCS', icon: '/assets/cyberone-trainer/drone-controller-ico.svg' }
   ];
 
-    // FREQUENTLY ASKED QUESTIONS
+  // ---------------------------------------------------------------------------
+  // FREQUENTLY ASKED QUESTIONS (Authentic to Cyberone Trainer Drone)
+  // ---------------------------------------------------------------------------
   const faqs = [
     {
       q: 'What makes Cyberone Trainer ideal for Remote Pilot Training Organizations (RPTO)?',
@@ -142,7 +152,9 @@ export default function CyberoneTrainerPage({ onBack, onOpenDemo, onNavigate }) 
     }
   ];
 
-    // GSAP SCROLLTRIGGER ORCHESTRATION
+  // ---------------------------------------------------------------------------
+  // GSAP SCROLLTRIGGER ORCHESTRATION
+  // ---------------------------------------------------------------------------
   useEffect(() => {
     window.scrollTo(0, 0);
 
@@ -299,19 +311,22 @@ export default function CyberoneTrainerPage({ onBack, onOpenDemo, onNavigate }) 
 
   return (
     <div className="indo-trainer-page" ref={pageRef} style={{ backgroundColor: '#000000', color: '#ffffff' }}>
-      
-            <section className="indo-trainer-hero">
-        
+
+      {/* =========================================================================
+          SECTION 1: HERO SCREEN (Authentic Image from existing website, ZERO TEXT!)
+          ========================================================================= */}
+      <section className="indo-trainer-hero">
+
         {/* Fullscreen Background Drone Image with Framer Motion reveal */}
-        <motion.div 
+        <motion.div
           initial={{ scale: 1.08, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
           transition={{ duration: 1.6, ease: [0.16, 1, 0.3, 1] }}
           className="indo-trainer-hero-img-wrap"
         >
-          <img 
-            src="/assets/cyberone-trainer/cyberone-trainer-bg.webp" 
-            alt="Cyberone Trainer Drone" 
+          <img
+            src="/assets/cyberone-trainer/cyberone-trainer-bg.webp"
+            alt="Cyberone Trainer Drone"
             className="indo-trainer-hero-img"
             draggable="false"
           />
@@ -321,7 +336,7 @@ export default function CyberoneTrainerPage({ onBack, onOpenDemo, onNavigate }) 
         </motion.div>
 
         {/* Ambient Floating Scroll Indicator (No Text Clutter) */}
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 1.2, duration: 0.8 }}
@@ -330,7 +345,7 @@ export default function CyberoneTrainerPage({ onBack, onOpenDemo, onNavigate }) 
           <span className="indo-trainer-hero-scroll-text">
             SCROLL DOWN
           </span>
-          <motion.div 
+          <motion.div
             animate={{ y: [0, 6, 0] }}
             transition={{ duration: 1.8, repeat: Infinity, ease: 'easeInOut' }}
             className="indo-trainer-hero-scroll-pill"
@@ -341,9 +356,12 @@ export default function CyberoneTrainerPage({ onBack, onOpenDemo, onNavigate }) 
 
       </section>
 
-            <section className="indo-trainer-specs-section" id="specifications">
+      {/* =========================================================================
+          SECTION 2: SPECIFICATIONS (Exact Match to User Screenshot 2)
+          ========================================================================= */}
+      <section className="indo-trainer-specs-section" id="specifications">
         <div className="indo-trainer-specs-container">
-          
+
           {/* Section Header */}
           <div className="indo-trainer-specs-header">
             <h2 className="indo-trainer-specs-title">
@@ -356,7 +374,7 @@ export default function CyberoneTrainerPage({ onBack, onOpenDemo, onNavigate }) 
 
           {/* 2-Column Grid: Left Dark Table, Right Drone Perspective Render (50/50) */}
           <div className="indo-trainer-specs-grid">
-            
+
             {/* Left Column: Dark Table */}
             <div className="indo-trainer-table-box">
               <table className="indo-trainer-dark-table">
@@ -364,8 +382,8 @@ export default function CyberoneTrainerPage({ onBack, onOpenDemo, onNavigate }) 
                   {specRows.map((row, idx) => (
                     <tr key={idx}>
                       {row.isFull ? (
-                        <td 
-                          colSpan={2} 
+                        <td
+                          colSpan={2}
                           style={{
                             textAlign: 'center',
                             fontWeight: 700,
@@ -399,14 +417,14 @@ export default function CyberoneTrainerPage({ onBack, onOpenDemo, onNavigate }) 
 
             {/* Right Column: Drone Perspective Render */}
             <div className="indo-trainer-specs-drone-wrap">
-              <motion.div 
+              <motion.div
                 animate={{ y: [-5, 5, -5] }}
                 transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
                 style={{ width: '100%', display: 'flex', justifyContent: 'center' }}
               >
-                <img 
-                  src="/assets/cyberone-trainer/cyberone-TRAINER.webp" 
-                  alt="Cyberone Trainer Drone Perspective Render" 
+                <img
+                  src="/assets/cyberone-trainer/cyberone-TRAINER.webp"
+                  alt="Cyberone Trainer Drone Perspective Render"
                   className="indo-trainer-specs-drone-img"
                   draggable="false"
                 />
@@ -418,12 +436,15 @@ export default function CyberoneTrainerPage({ onBack, onOpenDemo, onNavigate }) 
         </div>
       </section>
 
-            <section 
+      {/* =========================================================================
+          SECTION 3: "EVERY FACET..." HORIZONTAL PHOTOS REEL IN JHALAR FORM (MINIMAL)
+          ========================================================================= */}
+      <section
         className="indo-trainer-jhalar-section"
         ref={jhalarSectionRef}
       >
         <div className="indo-trainer-jhalar-inner">
-          
+
           {/* Minimal Clean Header */}
           <div className="indo-trainer-jhalar-header">
             <h3 className="indo-trainer-jhalar-heading">
@@ -435,21 +456,21 @@ export default function CyberoneTrainerPage({ onBack, onOpenDemo, onNavigate }) 
           <div className="indo-trainer-jhalar-track-container">
             <div className="indo-trainer-jhalar-track" ref={jhalarTrackRef}>
               {jhalarPhotos.map((item) => (
-                <div 
-                  key={item.id} 
+                <div
+                  key={item.id}
                   className="indo-trainer-jhalar-col"
                 >
                   {/* Clean Minimal Card */}
-                  <motion.div 
+                  <motion.div
                     whileHover={{ y: -6, scale: 1.01 }}
                     transition={{ duration: 0.2 }}
                     className="indo-trainer-jhalar-card group"
                   >
                     {/* Clean Photo Viewport */}
                     <div className="indo-trainer-jhalar-img-frame">
-                      <img 
-                        src={item.img} 
-                        alt={item.title} 
+                      <img
+                        src={item.img}
+                        alt={item.title}
                         className="indo-trainer-jhalar-img"
                         draggable="false"
                         loading="lazy"
@@ -477,9 +498,12 @@ export default function CyberoneTrainerPage({ onBack, onOpenDemo, onNavigate }) 
         </div>
       </section>
 
-            <section className="indo-trainer-box-section">
+      {/* =========================================================================
+          SECTION 4: IN THE BOX (11 Accessories Grid)
+          ========================================================================= */}
+      <section className="indo-trainer-box-section">
         <div className="indo-trainer-box-container">
-          
+
           <div className="indo-trainer-box-header">
             <h2 className="indo-trainer-box-heading">
               In the Box
@@ -492,16 +516,16 @@ export default function CyberoneTrainerPage({ onBack, onOpenDemo, onNavigate }) 
           {/* 11 Accessories Packout Grid */}
           <div className="indo-trainer-box-grid">
             {accessories.map((acc) => (
-              <motion.div 
+              <motion.div
                 key={acc.id}
                 whileHover={{ y: -6, scale: 1.02 }}
                 transition={{ duration: 0.25 }}
                 className={`indo-trainer-box-item ${acc.isFeatured ? 'featured-drone' : ''}`}
               >
                 <div className={`indo-trainer-box-img-wrap ${acc.isFeatured ? 'featured' : ''}`}>
-                  <img 
-                    src={acc.img} 
-                    alt={acc.name} 
+                  <img
+                    src={acc.img}
+                    alt={acc.name}
                     className={`indo-trainer-box-img ${acc.isFeatured ? 'featured' : ''}`}
                     draggable="false"
                   />
@@ -516,9 +540,12 @@ export default function CyberoneTrainerPage({ onBack, onOpenDemo, onNavigate }) 
         </div>
       </section>
 
-            <section className="indo-trainer-dark-features">
+      {/* =========================================================================
+          SECTION 5: 6 KEY FEATURES ROW
+          ========================================================================= */}
+      <section className="indo-trainer-dark-features">
         <div className="indo-trainer-dark-container">
-          
+
           <div className="indo-trainer-dark-header">
             <h3 className="indo-trainer-dark-title">Built for Intensive Training Sorties</h3>
             <p className="indo-trainer-dark-subtitle">
@@ -528,16 +555,16 @@ export default function CyberoneTrainerPage({ onBack, onOpenDemo, onNavigate }) 
 
           <div className="indo-trainer-dark-grid">
             {sixFeatures.map((feat, idx) => (
-              <motion.div 
-                key={idx} 
+              <motion.div
+                key={idx}
                 whileHover={{ y: -6, scale: 1.03 }}
                 transition={{ duration: 0.2 }}
                 className="indo-trainer-dark-card"
               >
                 <div className="indo-trainer-dark-icon-wrap">
-                  <img 
-                    src={feat.icon} 
-                    alt={feat.title.replace('\n', ' ')} 
+                  <img
+                    src={feat.icon}
+                    alt={feat.title.replace('\n', ' ')}
                     className="indo-trainer-dark-img"
                     draggable="false"
                   />
@@ -552,9 +579,12 @@ export default function CyberoneTrainerPage({ onBack, onOpenDemo, onNavigate }) 
         </div>
       </section>
 
-            <section className="indo-trainer-faq-section">
+      {/* =========================================================================
+          SECTION 6: FREQUENTLY ASKED QUESTIONS (FAQ)
+          ========================================================================= */}
+      <section className="indo-trainer-faq-section">
         <div className="indo-trainer-faq-container">
-          
+
           <div className="indo-trainer-faq-header">
             <h2 className="indo-trainer-faq-title">FAQ's</h2>
             <p className="indo-trainer-faq-subtitle">
@@ -599,32 +629,32 @@ export default function CyberoneTrainerPage({ onBack, onOpenDemo, onNavigate }) 
         </div>
       </section>
 
-            <section className="indo-max-cta-section">
-        <div className="indo-max-cta-container">
-          <div className="indo-max-cta-box">
-            <div className="indo-max-cta-content">
-              <span className="indo-max-tag">COMMENCE OPERATIONS</span>
-              <h2 className="indo-max-cta-title">Ready to Experience Cyberone Trainer?</h2>
-              <p className="indo-max-cta-desc">
-                Elevate your pilot training curriculum with master-slave dual control, rugged carbon-weave airframe, and zero-downtime flight operations. Schedule an on-site demonstration today.
-              </p>
-              
-              <div className="indo-max-cta-actions">
-                <button 
-                  onClick={() => onOpenDemo && onOpenDemo('Cyberone Trainer Drone')}
-                  className="indo-max-primary-btn"
-                >
-                  <span>Request for Demo</span>
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <line x1="5" y1="12" x2="19" y2="12"></line>
-                    <polyline points="12 5 19 12 12 19"></polyline>
-                  </svg>
-                </button>
-              </div>
-            </div>
-            
-            <div className="indo-max-cta-ambient" />
-          </div>
+      {/* =========================================================================
+          SECTION 7: REQUEST FOR DEMO CTA SECTION
+          ========================================================================= */}
+      <section className="indo-trainer-cta-section">
+        <div className="indo-trainer-cta-container">
+          <h3 className="indo-trainer-cta-title">
+            Master The Skies Today, Rule The Future Tomorrow
+          </h3>
+          <p className="indo-trainer-cta-subtitle">
+            Connect with our flight training specialists to schedule an on-site operational demo for your academy or institution.
+          </p>
+
+          <motion.button
+            whileHover={{ scale: 1.03 }}
+            whileTap={{ scale: 0.98 }}
+            type="button"
+            className="indo-lite-request-demo-card"
+            onClick={() => {
+              if (onOpenDemo) onOpenDemo('Cyberone Trainer Drone');
+            }}
+          >
+            <span className="indo-lite-demo-orange-bar" />
+            <span className="indo-lite-demo-btn-text">
+              Request for Demo
+            </span>
+          </motion.button>
         </div>
       </section>
 

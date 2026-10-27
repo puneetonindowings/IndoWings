@@ -14,8 +14,11 @@ export default function CyberoneMaxPage({ onBack, onOpenDemo, onNavigate }) {
   // FAQ Accordion State (0 is open by default, -1 is closed)
   const [openFaq, setOpenFaq] = useState(0);
 
-      // Presented via Overhead Jhalar / Ladi / Suspended Thread Presentation
-    const capabilities = [
+  // ---------------------------------------------------------------------------
+  // 5 CORE CAPABILITIES (Authentic from IndoWings Cyberone Max)
+  // Presented via Overhead Jhalar / Ladi / Suspended Thread Presentation
+  // ---------------------------------------------------------------------------
+  const capabilities = [
     {
       num: '01',
       icon: '/assets/cyberone-max/icon-01.svg',
@@ -53,73 +56,37 @@ export default function CyberoneMaxPage({ onBack, onOpenDemo, onNavigate }) {
     }
   ];
 
-  // Specifications Category Filter Tab ('flight' | 'airframe' | 'avionics' | 'power' | 'all')
-  const [activeSpecCategory, setActiveSpecCategory] = useState('flight');
-
-  // Section 6: Markets 3-Card Carousel State (Matching Cyberone Lite)
-  const [marketIndex, setMarketIndex] = useState(0);
-  const [isMarketHovered, setIsMarketHovered] = useState(false);
-
-    // HEADLINE FLIGHT METRICS (Instant Visual Overview)
-  const headlineMetrics = [
-    { num: '65', unit: 'MIN', label: 'Max Endurance (AMSL)' },
-    { num: '5.0', unit: 'KG', label: 'Max Takeoff Weight (MTOW)' },
-    { num: '23K', unit: 'FT', label: 'Max Operational Altitude' },
-    { num: '10', unit: 'KM', label: 'Telemetry & Video Range' }
+  // ---------------------------------------------------------------------------
+  // SPECIFICATIONS DATA (100% Authentic from live cyberonemax.php)
+  // ---------------------------------------------------------------------------
+  const maxSpecs = [
+    { label: 'Overall Length', val: '800 mm' },
+    { label: 'UAV Type', val: 'Quadcopter' },
+    { label: 'Weight (Including Battery)', val: '2.8 Kg' },
+    { label: 'Max Payload Capacity', val: '2.2 Kg' },
+    { label: 'Max Takeoff Weight (MTOW)', val: '5.0 Kg' },
+    { label: 'Endurance AMSL (with Payload)', val: '65 minutes*' },
+    { label: 'Endurance AMSL (At max launch alt)', val: '45 mins (with Payload) / 38 mins (Max Payload)' },
+    { label: 'Wind Resistance', val: '54 Km/h (15 m/s)' },
+    { label: 'Max Speed', val: '72 Km/h (20 m/s - Electronically Controlled)' },
+    { label: 'Telemetry Range', val: '10 Km (Line of Sight)' },
+    { label: 'Video Transmission Range', val: '10 Km (Line of Sight)' },
+    { label: 'Port Types on Controller', val: 'HDMI, C-Type x 2, USB Ports x 2' },
+    { label: 'Propeller Type', val: 'Foldable Low-Noise Blades' },
+    { label: 'GNSS / Positioning', val: 'PPK / RTK Enabled (Compatible)' },
+    { label: 'I.O. Function', val: 'H7 Based Onboard Computer, ETH Switch Hub, Exterior UART' },
+    { label: 'Max Launch Altitude (AMSL)', val: '18,000 ft.' },
+    { label: 'Max Operational Altitude', val: '23,000 ft.' },
+    { label: 'Battery Type', val: 'Solid State Slide & Lock Battery' },
+    { label: 'Protection Class', val: 'IP 53 Ingress Protection' },
+    { label: 'Operating Temperature Limits', val: '-20°C to +55°C' },
+    { label: 'BVLOS Control Compatibility', val: 'Yes (Optional)' },
+    { label: 'Swarm Capability', val: 'Yes (Optional)' }
   ];
 
-    // SPECIFICATIONS CATEGORIES & DATA
-  const specCategories = [
-    { id: 'flight', label: 'Flight & Endurance' },
-    { id: 'airframe', label: 'Airframe & Payload' },
-    { id: 'avionics', label: 'Avionics & Comms' },
-    { id: 'power', label: 'Power & Ruggedness' },
-    { id: 'all', label: 'All Specifications' }
-  ];
-
-  const categorizedSpecs = {
-    flight: [
-      { label: 'Endurance AMSL (with Payload)', val: '65 minutes*' },
-      { label: 'Endurance AMSL (At max launch alt)', val: '45 mins (with Payload) / 38 mins (Max Payload)' },
-      { label: 'Wind Resistance', val: '54 Km/h (15 m/s)' },
-      { label: 'Max Speed', val: '72 Km/h (20 m/s - Electronically Controlled)' },
-      { label: 'Max Launch Altitude (AMSL)', val: '18,000 ft.' },
-      { label: 'Max Operational Altitude', val: '23,000 ft.' }
-    ],
-    airframe: [
-      { label: 'Overall Length', val: '800 mm' },
-      { label: 'UAV Type', val: 'Quadcopter' },
-      { label: 'Weight (Including Battery)', val: '2.8 Kg' },
-      { label: 'Max Payload Capacity', val: '2.2 Kg' },
-      { label: 'Max Takeoff Weight (MTOW)', val: '5.0 Kg' },
-      { label: 'Propeller Type', val: 'Foldable Low-Noise Blades' }
-    ],
-    avionics: [
-      { label: 'Telemetry Range (Instrumental Range)', val: '10 Km (Line of Sight)' },
-      { label: 'Video Transmission Range', val: '10 Km (Line of Sight)' },
-      { label: 'Port Types on Controller', val: 'HDMI, C-Type x 2, USB Ports x 2' },
-      { label: 'GNSS / Positioning', val: 'PPK / RTK Enabled (Compatible)' },
-      { label: 'I.O. Function', val: 'H7 Based Onboard Computer, ETH Switch Hub, Exterior UART' }
-    ],
-    power: [
-      { label: 'Battery Type', val: 'Solid State Slide & Lock Battery' },
-      { label: 'Protection Class', val: 'IP 53 Ingress Protection' },
-      { label: 'Operating Temperature Limits', val: '-20°C to +55°C' },
-      { label: 'BVLOS Control Compatibility', val: 'Yes (Optional)' },
-      { label: 'Swarm Capability', val: 'Yes (Optional)' }
-    ]
-  };
-
-  const currentSpecs = activeSpecCategory === 'all'
-    ? [
-        ...categorizedSpecs.flight,
-        ...categorizedSpecs.airframe,
-        ...categorizedSpecs.avionics,
-        ...categorizedSpecs.power
-      ]
-    : categorizedSpecs[activeSpecCategory] || categorizedSpecs.flight;
-
-    // 6 PAYLOAD INTEGRATIONS (For Pinned Horizontal Scroll Reel)
+  // ---------------------------------------------------------------------------
+  // 6 PAYLOAD INTEGRATIONS (For Pinned Horizontal Scroll Reel)
+  // ---------------------------------------------------------------------------
   const payloads = [
     {
       id: 'day-night',
@@ -165,7 +132,9 @@ export default function CyberoneMaxPage({ onBack, onOpenDemo, onNavigate }) {
     }
   ];
 
-    // 6 SECTOR SOLUTIONS
+  // ---------------------------------------------------------------------------
+  // 6 SECTOR SOLUTIONS (Verbatim authentic from IndoWings cyberonemax.php)
+  // ---------------------------------------------------------------------------
   const sectorSolutions = [
     {
       title: 'Oil & Gas',
@@ -199,7 +168,9 @@ export default function CyberoneMaxPage({ onBack, onOpenDemo, onNavigate }) {
     }
   ];
 
-    // IN THE BOX (11 Accessories Packout)
+  // ---------------------------------------------------------------------------
+  // IN THE BOX (11 Accessories Packout)
+  // ---------------------------------------------------------------------------
   const accessories = [
     { id: 'airframe', name: 'Cyberone Max', img: '/assets/cyberone-max/max.png', isFeatured: true },
     { id: 'props', name: 'Propeller Set', img: '/assets/cyberone-max/propeller.png' },
@@ -214,7 +185,9 @@ export default function CyberoneMaxPage({ onBack, onOpenDemo, onNavigate }) {
     { id: 'manual', name: 'User Manual', img: '/assets/cyberone-max/usermenual.png' }
   ];
 
-    // 6 KEY FEATURES ROW
+  // ---------------------------------------------------------------------------
+  // 6 KEY FEATURES ROW
+  // ---------------------------------------------------------------------------
   const sixFeatures = [
     { title: 'Click\n-N- Lock', desc: 'Tool-free payload swap in seconds', icon: '/assets/cyberone-max/payload-ico.svg' },
     { title: 'Swappable\nBatteries', desc: '"0" Downtime between Missions', icon: '/assets/cyberone-max/battery-ico.svg' },
@@ -224,7 +197,9 @@ export default function CyberoneMaxPage({ onBack, onOpenDemo, onNavigate }) {
     { title: 'Mobile\nTouch Screen GCS', desc: 'Integrated touch display ground station', icon: '/assets/cyberone-max/drone-controller-ico.svg' }
   ];
 
-    // FREQUENTLY ASKED QUESTIONS
+  // ---------------------------------------------------------------------------
+  // FREQUENTLY ASKED QUESTIONS (Authentic from IndoWings Cyberone Max)
+  // ---------------------------------------------------------------------------
   const faqs = [
     {
       q: 'What is a surveillance drone?',
@@ -252,16 +227,9 @@ export default function CyberoneMaxPage({ onBack, onOpenDemo, onNavigate }) {
     }
   ];
 
-    // MARKETS CAROUSEL AUTO-ADVANCE (Matching Cyberone Lite)
-  useEffect(() => {
-    if (isMarketHovered) return;
-    const interval = setInterval(() => {
-      setMarketIndex(prev => (prev + 1) % sectorSolutions.length);
-    }, 4500);
-    return () => clearInterval(interval);
-  }, [isMarketHovered, sectorSolutions.length]);
-
-    // GSAP SCROLLTRIGGER ORCHESTRATION
+  // ---------------------------------------------------------------------------
+  // GSAP SCROLLTRIGGER ORCHESTRATION
+  // ---------------------------------------------------------------------------
   useEffect(() => {
     window.scrollTo(0, 0);
 
@@ -478,11 +446,14 @@ export default function CyberoneMaxPage({ onBack, onOpenDemo, onNavigate }) {
 
   return (
     <div className="indo-max-page" ref={pageRef} style={{ backgroundColor: '#000000', color: '#ffffff' }}>
-      
-            <section className="indo-max-hero">
-        
+
+      {/* =========================================================================
+          SECTION 1: HERO SCREEN (Authentic Drone Showcase, 100vh, ZERO TEXT!)
+          ========================================================================= */}
+      <section className="indo-max-hero">
+
         {/* Fullscreen Background Drone Visual with Framer Motion reveal */}
-        <motion.div 
+        <motion.div
           initial={{ scale: 1.08, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
           transition={{ duration: 1.6, ease: [0.16, 1, 0.3, 1] }}
@@ -493,9 +464,9 @@ export default function CyberoneMaxPage({ onBack, onOpenDemo, onNavigate }) {
             transition={{ duration: 6.5, repeat: Infinity, ease: 'easeInOut' }}
             className="indo-max-hero-drone-motion"
           >
-            <img 
-              src="/assets/cyberone-max/cyberonemax-hero-uhd.jpg" 
-              alt="Cyberone Max Heavy Payload UAV" 
+            <img
+              src="/assets/cyberone-max/cyberonemax-hero-uhd.jpg"
+              alt="Cyberone Max Heavy Payload UAV"
               className="indo-max-hero-drone-img"
               draggable="false"
             />
@@ -506,13 +477,13 @@ export default function CyberoneMaxPage({ onBack, onOpenDemo, onNavigate }) {
         </motion.div>
 
         {/* Ambient Floating Scroll Indicator (Minimal Pill - Zero Clutter) */}
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 1.2, duration: 0.8 }}
           className="indo-max-hero-scroll-indicator"
         >
-          <motion.div 
+          <motion.div
             animate={{ y: [0, 6, 0] }}
             transition={{ duration: 1.8, repeat: Infinity, ease: 'easeInOut' }}
             className="indo-max-hero-scroll-pill"
@@ -523,9 +494,12 @@ export default function CyberoneMaxPage({ onBack, onOpenDemo, onNavigate }) {
 
       </section>
 
-            <section className="indo-max-pillars-section">
+      {/* =========================================================================
+          SECTION 2: 5 CORE MISSION CAPABILITIES (JHALAR / LADI / SUSPENDED THREAD PRESENTATION)
+          ========================================================================= */}
+      <section className="indo-max-pillars-section">
         <div className="indo-max-pillars-container">
-          
+
           <div className="indo-max-section-head">
             <span className="indo-max-tag">TACTICAL ADVANTAGE</span>
             <h2 className="indo-max-section-title">No Terrain Too Rugged. No Mission Too High</h2>
@@ -536,7 +510,7 @@ export default function CyberoneMaxPage({ onBack, onOpenDemo, onNavigate }) {
 
           {/* JHALAR / LADI SUSPENDED THREAD PRESENTATION */}
           <div className="indo-max-jhalar-wrapper">
-            
+
             {/* Continuous Overhead Guideline Wire / Thread */}
             <div className="indo-max-jhalar-wire-runner">
               <div className="indo-max-jhalar-main-thread" />
@@ -546,14 +520,14 @@ export default function CyberoneMaxPage({ onBack, onOpenDemo, onNavigate }) {
             <div className="indo-max-jhalar-track">
               {capabilities.map((item, idx) => (
                 <div key={idx} className="indo-max-jhalar-col">
-                  
+
                   {/* Top Connector Node Dot on Wire */}
                   <div className="indo-max-jhalar-node-wrap">
                     <span className="indo-max-jhalar-node-dot" />
                   </div>
 
                   {/* Vertical Suspended Cord / Thread of Staggered Length */}
-                  <div 
+                  <div
                     className="indo-max-jhalar-vertical-cord"
                     style={{ height: `${item.cordLength}px` }}
                   >
@@ -564,7 +538,7 @@ export default function CyberoneMaxPage({ onBack, onOpenDemo, onNavigate }) {
                   <div className="indo-max-jhalar-clip" />
 
                   {/* Suspended Card */}
-                  <motion.div 
+                  <motion.div
                     whileHover={{ y: -6, scale: 1.02 }}
                     transition={{ duration: 0.25 }}
                     className="indo-max-pillar-card"
@@ -572,21 +546,21 @@ export default function CyberoneMaxPage({ onBack, onOpenDemo, onNavigate }) {
                     <div className="indo-max-pillar-top">
                       <span className="indo-max-pillar-num">{item.num}</span>
                       <div className="indo-max-pillar-icon-box">
-                        <img 
-                          src={item.icon} 
-                          alt={item.title.replace('\n', ' ')} 
+                        <img
+                          src={item.icon}
+                          alt={item.title.replace('\n', ' ')}
                           className="indo-max-pillar-icon"
                           draggable="false"
                         />
                       </div>
                     </div>
-                    
+
                     <h3 className="indo-max-pillar-title">
                       {item.title.split('\n').map((line, lIdx) => (
                         <span key={lIdx} className="block">{line}</span>
                       ))}
                     </h3>
-                    
+
                     <p className="indo-max-pillar-desc">{item.desc}</p>
                   </motion.div>
 
@@ -599,10 +573,12 @@ export default function CyberoneMaxPage({ onBack, onOpenDemo, onNavigate }) {
         </div>
       </section>
 
-            <section className="indo-max-specs-section">
+      {/* =========================================================================
+          SECTION 3: SPECIFICATIONS 50/50 (Dark Table + Floating Drone Render)
+          ========================================================================= */}
+      <section className="indo-max-specs-section">
         <div className="indo-max-specs-container">
-          
-          {/* Section Header */}
+
           <div className="indo-max-specs-header">
             <span className="indo-max-tag">PRECISION AVIONICS</span>
             <h2 className="indo-max-specs-title">Under the Hood: Full Specifications</h2>
@@ -611,107 +587,40 @@ export default function CyberoneMaxPage({ onBack, onOpenDemo, onNavigate }) {
             </p>
           </div>
 
-          {/* 4 Headline Flight Metric Badges (Instant High-Impact Visuals) */}
-          <div className="indo-max-headline-metrics">
-            {headlineMetrics.map((metric, mIdx) => (
-              <motion.div
-                key={mIdx}
-                className="indo-max-metric-badge"
-                initial={{ opacity: 0, y: 15 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.4, delay: mIdx * 0.08 }}
-              >
-                <div className="indo-max-metric-num-wrap">
-                  <span className="indo-max-metric-num">{metric.num}</span>
-                  <span className="indo-max-metric-unit">{metric.unit}</span>
-                </div>
-                <div className="indo-max-metric-label">{metric.label}</div>
-                <div className="indo-max-metric-corner-notch" />
-              </motion.div>
-            ))}
-          </div>
-
-          {/* Interactive Category Selector Tabs */}
-          <div className="indo-max-specs-tabs-wrap">
-            <div className="indo-max-specs-tabs" role="tablist">
-              {specCategories.map((tab) => {
-                const isActive = activeSpecCategory === tab.id;
-                const count = tab.id === 'all' 
-                  ? 21 
-                  : (categorizedSpecs[tab.id]?.length || 0);
-
-                return (
-                  <button
-                    key={tab.id}
-                    role="tab"
-                    type="button"
-                    aria-selected={isActive}
-                    onClick={() => setActiveSpecCategory(tab.id)}
-                    className={`indo-max-tab-btn ${isActive ? 'active' : ''}`}
-                  >
-                    {isActive && (
-                      <motion.div
-                        layoutId="maxSpecTabActiveIndicator"
-                        className="indo-max-tab-indicator"
-                        transition={{ type: 'spring', stiffness: 450, damping: 32 }}
-                      />
-                    )}
-                    <span className="indo-max-tab-label">{tab.label}</span>
-                    <span className="indo-max-tab-count">{count}</span>
-                  </button>
-                );
-              })}
-            </div>
-          </div>
-
-          {/* Specifications grid */}
           <div className="indo-max-specs-grid">
-            
-            {/* Specifications table */}
+
+            {/* Left Column: High-contrast authentic specifications table */}
             <div className="indo-max-specs-table-col">
               <div className="indo-max-table-wrapper">
-                <AnimatePresence mode="wait">
-                  <motion.div
-                    key={activeSpecCategory}
-                    initial={{ opacity: 0, y: 8 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -8 }}
-                    transition={{ duration: 0.22, ease: 'easeOut' }}
-                    className="indo-max-table-motion-inner"
-                  >
-                    <table className="indo-max-dark-table">
-                      <tbody>
-                        {currentSpecs.map((spec, sIdx) => (
-                          <tr key={sIdx}>
-                            <td className="indo-max-table-label">{spec.label}</td>
-                            <td className="indo-max-table-val">{spec.val}</td>
-                          </tr>
-                        ))}
-                      </tbody>
-                    </table>
-                  </motion.div>
-                </AnimatePresence>
+                <table className="indo-max-dark-table">
+                  <tbody>
+                    {maxSpecs.map((spec, sIdx) => (
+                      <tr key={sIdx}>
+                        <td className="indo-max-table-label">{spec.label}</td>
+                        <td className="indo-max-table-val">{spec.val}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
               </div>
             </div>
 
-            {/* Right Column: Floating 3D Drone Visual (Clean, Balanced Centerline) */}
+            {/* Right Column: Floating 3D Drone Visual (Clean, NO Cheap Badges) */}
             <div className="indo-max-specs-drone-col">
               <div className="indo-max-specs-drone-wrap">
                 <motion.div
-                  animate={{ y: [-8, 8, -8] }}
-                  transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
+                  animate={{ y: [-10, 10, -10] }}
+                  transition={{ duration: 7, repeat: Infinity, ease: 'easeInOut' }}
                   className="indo-max-specs-floating-box"
                 >
-                  <img 
-                    src="/assets/cyberone-max/cyberonemax.png" 
-                    alt="Cyberone Max System Airframe" 
+                  <img
+                    src="/assets/cyberone-max/cyberonemax.png"
+                    alt="Cyberone Max System Airframe"
                     className="indo-max-specs-drone-img"
                     draggable="false"
                   />
                 </motion.div>
                 <div className="indo-max-specs-glow-ring" />
-                <div className="indo-max-specs-reticle-circle" />
               </div>
             </div>
 
@@ -720,9 +629,12 @@ export default function CyberoneMaxPage({ onBack, onOpenDemo, onNavigate }) {
         </div>
       </section>
 
-            <section className="indo-max-horizontal-section" ref={horizontalSectionRef}>
+      {/* =========================================================================
+          SECTION 4: PAYLOAD INTEGRATIONS (PINNED HORIZONTAL SCROLL REEL)
+          ========================================================================= */}
+      <section className="indo-max-horizontal-section" ref={horizontalSectionRef}>
         <div className="indo-max-horizontal-sticky">
-          
+
           <div className="indo-max-horizontal-header-wrap">
             <div className="indo-max-container">
               <span className="indo-max-tag">MODULAR VERSATILITY</span>
@@ -744,9 +656,9 @@ export default function CyberoneMaxPage({ onBack, onOpenDemo, onNavigate }) {
                     </div>
 
                     <div className="indo-max-payload-img-box">
-                      <img 
-                        src={payload.img} 
-                        alt={payload.title} 
+                      <img
+                        src={payload.img}
+                        alt={payload.title}
                         className="indo-max-payload-img"
                         draggable="false"
                       />
@@ -765,7 +677,10 @@ export default function CyberoneMaxPage({ onBack, onOpenDemo, onNavigate }) {
         </div>
       </section>
 
-            <section className="indo-max-video-section">
+      {/* =========================================================================
+          SECTION 5: SLEEK DESIGN VIDEO SHOWCASE (100% Full-Width Edge-to-Edge)
+          ========================================================================= */}
+      <section className="indo-max-video-section">
         <div className="indo-max-video-header">
           <span className="indo-max-tag">AERODYNAMIC EXCELLENCE</span>
           <h2 className="indo-max-video-title">Sleek Design</h2>
@@ -776,10 +691,10 @@ export default function CyberoneMaxPage({ onBack, onOpenDemo, onNavigate }) {
 
         {/* 100% Edge-to-Edge Video Showcase (ZERO Text Overlays) */}
         <div className="indo-max-video-viewport">
-          <video 
-            autoPlay 
-            muted 
-            loop 
+          <video
+            autoPlay
+            muted
+            loop
             playsInline
             className="indo-max-video-player"
           >
@@ -789,64 +704,55 @@ export default function CyberoneMaxPage({ onBack, onOpenDemo, onNavigate }) {
         </div>
       </section>
 
-            <section 
-        className="indo-lite-markets-carousel-section"
-        onMouseEnter={() => setIsMarketHovered(true)}
-        onMouseLeave={() => setIsMarketHovered(false)}
-      >
-        <div className="indo-lite-container">
-          
-          <h2 className="indo-lite-markets-title">MARKETS</h2>
-          <p className="indo-lite-markets-subtitle">
-            Find out how we use our technologies in key locations around the world.
-          </p>
+      {/* =========================================================================
+          SECTION 6: CORE INDUSTRIAL SECTORS ("Industries Transformed")
+          ========================================================================= */}
+      <section className="indo-max-sectors-section">
+        <div className="indo-max-sectors-container">
 
-          {/* 3-Card Carousel Track */}
-          <div className="indo-lite-carousel-container">
-            <div 
-              className="indo-lite-carousel-track"
-              style={{
-                transform: `translateX(-${marketIndex * (100 / 3)}%)`
-              }}
-            >
-              {[...sectorSolutions, ...sectorSolutions.slice(0, 3)].map((item, idx) => (
-                <div key={idx} className="indo-lite-market-card">
-                  <img 
-                    src={item.img} 
-                    alt={item.title} 
-                    className="indo-lite-market-card-img"
-                    draggable="false"
-                  />
-                  <div className="indo-lite-market-card-overlay">
-                    <div className="indo-lite-market-badge-title">
-                      <span className="indo-lite-market-bar" />
-                      <h4 className="indo-lite-market-name">{item.title}</h4>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
+          <div className="indo-max-section-head">
+            <span className="indo-max-tag">ECONOMIC IMPACT</span>
+            <h2 className="indo-max-section-title">Industries Transformed. Missions Accomplished</h2>
+            <p className="indo-max-section-subtitle">
+              Empowering core critical infrastructure sectors with automated aerial audits, thermal telemetry, and volumetrics.
+            </p>
           </div>
 
-          {/* Carousel Pagination Dots */}
-          <div className="indo-lite-carousel-dots">
-            {sectorSolutions.map((_, idx) => (
-              <button
+          <div className="indo-max-sectors-grid">
+            {sectorSolutions.map((sector, idx) => (
+              <motion.div
                 key={idx}
-                type="button"
-                onClick={() => setMarketIndex(idx)}
-                className={`indo-lite-carousel-dot ${marketIndex === idx ? 'active' : ''}`}
-                aria-label={`Go to slide ${idx + 1}`}
-              />
+                whileHover={{ y: -8 }}
+                transition={{ duration: 0.3 }}
+                className="indo-max-sector-card"
+              >
+                <div className="indo-max-sector-img-wrap">
+                  <img
+                    src={sector.img}
+                    alt={sector.title}
+                    className="indo-max-sector-img"
+                    loading="lazy"
+                  />
+                  <div className="indo-max-sector-img-gradient" />
+                </div>
+
+                <div className="indo-max-sector-content">
+                  <h3 className="indo-max-sector-name">{sector.title}</h3>
+                  <p className="indo-max-sector-desc">{sector.desc}</p>
+                </div>
+              </motion.div>
             ))}
           </div>
 
         </div>
       </section>
 
-            <section className="indo-max-box-section">
+      {/* =========================================================================
+          SECTION 7: IN THE BOX (11 Accessories Packout)
+          ========================================================================= */}
+      <section className="indo-max-box-section">
         <div className="indo-max-box-container">
-          
+
           <div className="indo-max-section-head">
             <span className="indo-max-tag">FIELD READY</span>
             <h2 className="indo-max-section-title">In the Box</h2>
@@ -857,16 +763,16 @@ export default function CyberoneMaxPage({ onBack, onOpenDemo, onNavigate }) {
 
           <div className="indo-max-box-grid">
             {accessories.map((item) => (
-              <motion.div 
+              <motion.div
                 key={item.id}
                 whileHover={{ y: -5 }}
                 transition={{ duration: 0.2 }}
                 className={`indo-max-box-item ${item.isFeatured ? 'is-featured' : ''}`}
               >
                 <div className="indo-max-box-img-wrap">
-                  <img 
-                    src={item.img} 
-                    alt={item.name} 
+                  <img
+                    src={item.img}
+                    alt={item.name}
                     className="indo-max-box-img"
                     draggable="false"
                   />
@@ -879,26 +785,29 @@ export default function CyberoneMaxPage({ onBack, onOpenDemo, onNavigate }) {
         </div>
       </section>
 
-            <section className="indo-max-dark-section">
+      {/* =========================================================================
+          SECTION 8: 6 KEY FEATURES ROW
+          ========================================================================= */}
+      <section className="indo-max-dark-section">
         <div className="indo-max-dark-container">
-          
+
           <div className="indo-max-dark-grid">
             {sixFeatures.map((feat, idx) => (
-              <motion.div 
+              <motion.div
                 key={idx}
                 whileHover={{ y: -6, borderColor: 'rgba(255, 255, 255, 0.25)' }}
                 transition={{ duration: 0.25 }}
                 className="indo-max-dark-card"
               >
                 <div className="indo-max-dark-icon-wrap">
-                  <img 
-                    src={feat.icon} 
-                    alt={feat.title.replace('\n', ' ')} 
+                  <img
+                    src={feat.icon}
+                    alt={feat.title.replace('\n', ' ')}
                     className="indo-max-dark-icon"
                     draggable="false"
                   />
                 </div>
-                
+
                 <h3 className="indo-max-dark-card-title">
                   {feat.title.split('\n').map((line, lIdx) => (
                     <span key={lIdx} className="block">{line}</span>
@@ -913,9 +822,12 @@ export default function CyberoneMaxPage({ onBack, onOpenDemo, onNavigate }) {
         </div>
       </section>
 
-            <section className="indo-max-faq-section">
+      {/* =========================================================================
+          SECTION 9: FREQUENTLY ASKED QUESTIONS (Authentic Accordion)
+          ========================================================================= */}
+      <section className="indo-max-faq-section">
         <div className="indo-max-faq-container">
-          
+
           <div className="indo-max-section-head">
             <span className="indo-max-tag">KNOWLEDGE BASE</span>
             <h2 className="indo-max-section-title">FAQ's</h2>
@@ -928,11 +840,11 @@ export default function CyberoneMaxPage({ onBack, onOpenDemo, onNavigate }) {
             {faqs.map((faq, idx) => {
               const isOpen = openFaq === idx;
               return (
-                <div 
-                  key={idx} 
+                <div
+                  key={idx}
                   className={`indo-max-faq-item ${isOpen ? 'is-active' : ''}`}
                 >
-                  <button 
+                  <button
                     className="indo-max-faq-btn"
                     onClick={() => setOpenFaq(isOpen ? -1 : idx)}
                     aria-expanded={isOpen}
@@ -964,7 +876,10 @@ export default function CyberoneMaxPage({ onBack, onOpenDemo, onNavigate }) {
         </div>
       </section>
 
-            <section className="indo-max-cta-section">
+      {/* =========================================================================
+          SECTION 10: TACTICAL CTA BANNER
+          ========================================================================= */}
+      <section className="indo-max-cta-section">
         <div className="indo-max-cta-container">
           <div className="indo-max-cta-box">
             <div className="indo-max-cta-content">
@@ -973,10 +888,10 @@ export default function CyberoneMaxPage({ onBack, onOpenDemo, onNavigate }) {
               <p className="indo-max-cta-desc">
                 Deploy high-altitude payload delivery and persistent surveillance across your operations. Connect with our flight systems engineers for mission analysis and procurement tenders.
               </p>
-              
+
               <div className="indo-max-cta-actions">
-                <button 
-                  onClick={() => onOpenDemo && onOpenDemo('Cyberone Max')}
+                <button
+                  onClick={onOpenDemo}
                   className="indo-max-primary-btn"
                 >
                   <span>Request for Demo</span>

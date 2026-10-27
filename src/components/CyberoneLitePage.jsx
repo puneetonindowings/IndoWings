@@ -1,18 +1,20 @@
 import React, { useState, useRef, useEffect } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { 
-  Plus, 
-  Minus 
+import {
+  Plus,
+  Minus
 } from 'lucide-react';
 
 gsap.registerPlugin(ScrollTrigger);
 
-export default function CyberoneLitePage({ onBack, onOpenDemo, onNavigate }) {
+export default function CyberoneLitePage({ onBack, onOpenDemo }) {
   const pageRef = useRef(null);
 
-    // STATE DEFINITIONS
-  
+  // ---------------------------------------------------------------------------
+  // STATE DEFINITIONS
+  // ---------------------------------------------------------------------------
+
   // Section 4: Interactive 360 Drone Viewer State (Starts on frame 17, matching official angle)
   const [frame360, setFrame360] = useState(17);
   const [isDragging, setIsDragging] = useState(false);
@@ -27,7 +29,9 @@ export default function CyberoneLitePage({ onBack, onOpenDemo, onNavigate }) {
   // Section 9: FAQ Accordion State (Supports toggle open/close)
   const [openFaq, setOpenFaq] = useState(0);
 
-    // 360 INTERACTIVE VIEWER CONTROLS (Manual Drag Only - No Auto-Rotation)
+  // ---------------------------------------------------------------------------
+  // 360 INTERACTIVE VIEWER CONTROLS (Manual Drag Only - No Auto-Rotation)
+  // ---------------------------------------------------------------------------
 
   // Mouse & Touch Drag handlers for 360 viewer
   const handleStartDrag = (clientX) => {
@@ -50,7 +54,9 @@ export default function CyberoneLitePage({ onBack, onOpenDemo, onNavigate }) {
     setIsDragging(false);
   };
 
-    // MARKETS CAROUSEL AUTO-ADVANCE
+  // ---------------------------------------------------------------------------
+  // MARKETS CAROUSEL AUTO-ADVANCE
+  // ---------------------------------------------------------------------------
   useEffect(() => {
     if (isMarketHovered) return;
     const interval = setInterval(() => {
@@ -59,7 +65,9 @@ export default function CyberoneLitePage({ onBack, onOpenDemo, onNavigate }) {
     return () => clearInterval(interval);
   }, [isMarketHovered]);
 
-    // GSAP SCROLLTRIGGER ANIMATIONS (FULL PAGE ORCHESTRATION)
+  // ---------------------------------------------------------------------------
+  // GSAP SCROLLTRIGGER ANIMATIONS (FULL PAGE ORCHESTRATION)
+  // ---------------------------------------------------------------------------
   useEffect(() => {
     window.scrollTo(0, 0);
     const ctx = gsap.context(() => {
@@ -406,7 +414,9 @@ export default function CyberoneLitePage({ onBack, onOpenDemo, onNavigate }) {
     };
   }, []);
 
-    // DATA DEFINITIONS
+  // ---------------------------------------------------------------------------
+  // DATA DEFINITIONS (100% Authentic IndoWings Cyberone Lite)
+  // ---------------------------------------------------------------------------
 
   // Section 1: 5 Core Capability Icons (Official IndoWings SVGs)
   const capabilityIcons = [
@@ -432,7 +442,8 @@ export default function CyberoneLitePage({ onBack, onOpenDemo, onNavigate }) {
     }
   ];
 
-    const specRows = [
+  // Section 2: Authentic 4-Column Specifications Grid (Exact Match to Official IndoWings Site)
+  const specRows = [
     // Row 1
     [
       { label: 'Overall Length', val: '600 mm' },
@@ -470,7 +481,8 @@ export default function CyberoneLitePage({ onBack, onOpenDemo, onNavigate }) {
     ]
   ];
 
-    const marketItems = [
+  // Section 6: Markets (7 Exact Sectors from Official IndoWings Screenshots)
+  const marketItems = [
     { id: 'security', name: 'SAFETY & SECURITY', img: '/assets/cyberone-lite/market-security.webp' },
     { id: 'disaster', name: 'DISASTER MANAGEMENT', img: '/assets/cyberone-lite/market-disaster.webp' },
     { id: 'city', name: 'CITY MANAGEMENT', img: '/assets/cyberone-lite/market-city.webp' },
@@ -495,7 +507,8 @@ export default function CyberoneLitePage({ onBack, onOpenDemo, onNavigate }) {
     { id: 'manual', name: 'User Manual', img: '/assets/cyberone-lite/box-manual.png' }
   ];
 
-    const featureIconsRow = [
+  // Section 8: 6 Key Features Icons Row (Exact Match to User Screenshot 2)
+  const featureIconsRow = [
     { title: 'Click -N- Lock', icon: '/assets/cyberone-lite/step-01.svg' },
     { title: 'Swappable Batteries', icon: '/assets/cyberone-lite/step-02.svg' },
     { title: '2 Min Quick Deployment Time', icon: '/assets/cyberone-lite/step-03.svg' },
@@ -504,7 +517,8 @@ export default function CyberoneLitePage({ onBack, onOpenDemo, onNavigate }) {
     { title: 'Mobile Touch Screen GCS', icon: '/assets/cyberone-lite/step-06.svg' }
   ];
 
-    const faqs = [
+  // Section 9: Frequently Asked Questions (Exact Match to User Screenshots 2 & 3)
+  const faqs = [
     {
       q: 'What is Cyberone Lite?',
       a: 'Indo wings makes a surveillance drone named Cyberone Lite, and it is also used for mapping, delivery and surveillance purposes.'
@@ -541,37 +555,202 @@ export default function CyberoneLitePage({ onBack, onOpenDemo, onNavigate }) {
 
   return (
     <div className="indo-lite-page" ref={pageRef}>
-      
-            <section className="indo-lite-hero">
-        <video 
-          src="/assets/cyberone-lite/video-opener.mp4" 
-          autoPlay 
-          loop 
-          muted 
+
+      {/* =========================================================================
+          SCREEN 1: FULLSCREEN HERO VIDEO (Pristine, 100% Intact)
+          ========================================================================= */}
+      <section className="indo-lite-hero">
+        <video
+          src="/assets/cyberone-lite/video-opener.mp4"
+          autoPlay
+          loop
+          muted
           playsInline
           className="indo-lite-hero-video"
           onContextMenu={(e) => e.preventDefault()}
         />
       </section>
 
-            <section className="indo-lite-power-section">
+      {/* =========================================================================
+          SECTION 1: POWER BEYOND IMAGINATION (Exact Match to User Screenshot 1)
+          ========================================================================= */}
+      <section className="indo-lite-power-section">
         <div className="indo-lite-container text-center">
-          
+
           <h2 className="indo-lite-big-heading">
             POWER BEYOND<br className="hidden sm:inline" /> IMAGINATION
           </h2>
-          
+
           <p className="indo-lite-power-subtitle">
             Turning your visions into missions with a sharp eagle-eye approach. Conquering the toughest of terrains and weather to accomplish the given command.
           </p>
 
-                    <div className="indo-lite-tech-row reverse">
+          {/* 5 Capability Icons Horizontal Row */}
+          <div className="indo-lite-capabilities-grid">
+            {capabilityIcons.map((item, idx) => (
+              <div key={idx} className="indo-lite-cap-card">
+                <div className="indo-lite-cap-icon-wrap">
+                  <img
+                    src={item.icon}
+                    alt={item.title}
+                    className="indo-lite-cap-img"
+                    draggable="false"
+                  />
+                </div>
+                <p className="indo-lite-cap-label">{item.title}</p>
+              </div>
+            ))}
+          </div>
+
+        </div>
+      </section>
+
+      {/* =========================================================================
+          SECTION 2: SPECIFICATIONS (Exact 4-Column Dark Table from User Screenshot 2)
+          ========================================================================= */}
+      <section className="indo-lite-specs-table-section">
+        <div className="indo-lite-container">
+
+          <h2 className="indo-lite-section-title">SPECIFICATIONS</h2>
+          <p className="indo-lite-model-subtitle">Model Name : Cyberone Lite</p>
+
+          <div className="indo-lite-table-wrapper">
+            <div className="indo-lite-grid-table">
+              {specRows.map((row, rIdx) => (
+                <React.Fragment key={rIdx}>
+                  {row.map((cell, cIdx) => (
+                    <div
+                      key={cIdx}
+                      className={`indo-lite-grid-cell ${cell.isEmpty ? 'empty-cell' : ''}`}
+                    >
+                      {!cell.isEmpty && (
+                        <>
+                          <span className="indo-lite-cell-label">
+                            {cell.label}
+                            {cell.note && <span className="indo-lite-cell-note block text-white/60 font-normal text-[11px]">{cell.note}</span>}
+                          </span>
+                          <span className="indo-lite-cell-val">{cell.val}</span>
+                        </>
+                      )}
+                    </div>
+                  ))}
+                </React.Fragment>
+              ))}
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      {/* =========================================================================
+          SECTION 3: SLEEK DESIGN (Exact Match to User Screenshot 3)
+          ========================================================================= */}
+      <section className="indo-lite-sleek-section">
+        <div className="indo-lite-container text-center">
+
+          <p className="indo-lite-eyebrow">The Concepts of Power and Performance</p>
+          <h2 className="indo-lite-sleek-title">SLEEK DESIGN</h2>
+
+          {/* 3 Large Stat Metrics Row */}
+          <div className="indo-lite-sleek-stats-row">
+            <div className="indo-lite-sleek-stat">
+              <span className="indo-lite-stat-number">Up to 45 km/h</span>
+              <span className="indo-lite-stat-tag orange">FLY SPEED</span>
+            </div>
+
+            <div className="indo-lite-sleek-stat">
+              <span className="indo-lite-stat-number">45 minutes*</span>
+              <span className="indo-lite-stat-tag cyan">FLIGHT TIME</span>
+            </div>
+
+            <div className="indo-lite-sleek-stat">
+              <span className="indo-lite-stat-number">Up to 10 m/s</span>
+              <span className="indo-lite-stat-tag magenta">WIND RESISTANCE</span>
+            </div>
+          </div>
+
+        </div>
+
+        {/* Drone Sleek Design Video - 100% Full Width Edge-to-Edge */}
+        <div className="indo-lite-sleek-video-wrap">
+          <video
+            src="/assets/cyberone-lite/video-strick.mp4"
+            autoPlay
+            loop
+            muted
+            playsInline
+            className="indo-lite-sleek-video"
+            onContextMenu={(e) => e.preventDefault()}
+          />
+        </div>
+      </section>
+
+      {/* =========================================================================
+          SECTION 4: COME AND WITNESS OF 360° DEGREE (Exact Match to User Screenshot 4)
+          ========================================================================= */}
+      <section className="indo-lite-witness-360-section">
+        <div className="indo-lite-container text-center">
+
+          <h2 className="indo-lite-witness-title">Come and Witness of 360° Degree</h2>
+          <p className="indo-lite-witness-subtitle">Get a feel for what it's like to own Cyberone Lite.</p>
+          <p className="indo-lite-witness-instruction">Click and drag the image to view.</p>
+
+          {/* 360 Interactive Viewer Canvas - Clean, Borderless on pure black */}
+          <div
+            className={`indo-lite-witness-canvas ${isDragging ? 'grabbing' : 'grab'}`}
+            onMouseDown={(e) => handleStartDrag(e.clientX)}
+            onMouseMove={(e) => handleMoveDrag(e.clientX)}
+            onMouseUp={handleEndDrag}
+            onMouseLeave={handleEndDrag}
+            onTouchStart={(e) => handleStartDrag(e.touches[0].clientX)}
+            onTouchMove={(e) => handleMoveDrag(e.touches[0].clientX)}
+            onTouchEnd={handleEndDrag}
+          >
+            <img
+              src={`/assets/cyberone-lite/360/${frame360}.png`}
+              alt={`Cyberone Lite 360 degree frame ${frame360}`}
+              className="indo-lite-witness-img"
+              draggable="false"
+              onContextMenu={(e) => e.preventDefault()}
+            />
+          </div>
+
+        </div>
+      </section>
+
+      {/* =========================================================================
+          SECTION 5: CORE SUBSYSTEM SHOWCASES (Exact Match to User Screenshots 1 & 2)
+          ========================================================================= */}
+      <section className="indo-lite-tech-showcase-section">
+        <div className="indo-lite-container">
+
+          {/* 1. SWAPPABLE BATTERY (Visual Left, Text Right) */}
+          <div className="indo-lite-tech-row">
             <div className="indo-lite-tech-media">
-              <video 
+              <video
+                src="/assets/cyberone-lite/video-battery.mp4"
+                autoPlay
+                loop
+                muted
+                playsInline
+                className="indo-lite-tech-video"
+                onContextMenu={(e) => e.preventDefault()}
+              />
+            </div>
+            <div className="indo-lite-tech-text">
+              <h3 className="indo-lite-tech-title">SWAPPABLE BATTERY</h3>
+              <p className="indo-lite-tech-sub">Swappable Slide And Lock Battery Mechanism</p>
+            </div>
+          </div>
+
+          {/* 2. PAYLOAD (Text Left, Visual Right - Exact Match to Screenshot 1) */}
+          <div className="indo-lite-tech-row reverse">
+            <div className="indo-lite-tech-media">
+              <video
                 src="/assets/cyberone-lite/video-payload.mp4"
-                autoPlay 
-                loop 
-                muted 
+                autoPlay
+                loop
+                muted
                 playsInline
                 className="indo-lite-tech-video"
                 onContextMenu={(e) => e.preventDefault()}
@@ -583,13 +762,14 @@ export default function CyberoneLitePage({ onBack, onOpenDemo, onNavigate }) {
             </div>
           </div>
 
-                    <div className="indo-lite-tech-row">
+          {/* 3. REAL-TIME KINEMATIC (Visual Left, Text Right - Exact Match to Screenshot 2) */}
+          <div className="indo-lite-tech-row">
             <div className="indo-lite-tech-media">
-              <video 
+              <video
                 src="/assets/cyberone-lite/video-rtk.mp4"
-                autoPlay 
-                loop 
-                muted 
+                autoPlay
+                loop
+                muted
                 playsInline
                 className="indo-lite-tech-video"
                 onContextMenu={(e) => e.preventDefault()}
@@ -608,13 +788,16 @@ export default function CyberoneLitePage({ onBack, onOpenDemo, onNavigate }) {
         </div>
       </section>
 
-            <section 
+      {/* =========================================================================
+          SECTION 6: MARKETS (Exact 3-Card Carousel from User Screenshots 3, 4, 5)
+          ========================================================================= */}
+      <section
         className="indo-lite-markets-carousel-section"
         onMouseEnter={() => setIsMarketHovered(true)}
         onMouseLeave={() => setIsMarketHovered(false)}
       >
         <div className="indo-lite-container">
-          
+
           <h2 className="indo-lite-markets-title">MARKETS</h2>
           <p className="indo-lite-markets-subtitle">
             Find out how we use our technologies in key locations around the world.
@@ -622,7 +805,7 @@ export default function CyberoneLitePage({ onBack, onOpenDemo, onNavigate }) {
 
           {/* 3-Card Carousel Track */}
           <div className="indo-lite-carousel-container">
-            <div 
+            <div
               className="indo-lite-carousel-track"
               style={{
                 transform: `translateX(-${marketIndex * (100 / 3)}%)`
@@ -631,9 +814,9 @@ export default function CyberoneLitePage({ onBack, onOpenDemo, onNavigate }) {
               {/* Duplicate array for seamless infinite sliding wrap */}
               {[...marketItems, ...marketItems.slice(0, 3)].map((item, idx) => (
                 <div key={idx} className="indo-lite-market-card">
-                  <img 
-                    src={item.img} 
-                    alt={item.name} 
+                  <img
+                    src={item.img}
+                    alt={item.name}
                     className="indo-lite-market-card-img"
                     draggable="false"
                   />
@@ -664,9 +847,12 @@ export default function CyberoneLitePage({ onBack, onOpenDemo, onNavigate }) {
         </div>
       </section>
 
-            <section className="indo-lite-box-showcase-section">
+      {/* =========================================================================
+          SECTION 7: IN THE BOX (Immediately following Markets - As Requested!)
+          ========================================================================= */}
+      <section className="indo-lite-box-showcase-section">
         <div className="indo-lite-container">
-          
+
           <div className="text-center mb-12">
             <h2 className="indo-lite-box-heading">In the Box</h2>
             <p className="indo-lite-box-subheading">
@@ -677,15 +863,15 @@ export default function CyberoneLitePage({ onBack, onOpenDemo, onNavigate }) {
           {/* 11 Certified Accessories Packout Grid (4 Columns, Exactly Balanced Rows) */}
           <div className="indo-lite-box-showcase-grid">
             {accessories.map((acc) => (
-              <div 
-                key={acc.id} 
+              <div
+                key={acc.id}
                 className={`indo-lite-box-item-card ${acc.isFeatured ? 'featured-drone' : ''}`}
               >
                 {/* Uniform Height & Centered Image Frame */}
                 <div className="indo-lite-box-item-img-wrap">
-                  <img 
-                    src={acc.img} 
-                    alt={acc.name} 
+                  <img
+                    src={acc.img}
+                    alt={acc.name}
                     className="indo-lite-box-item-img"
                     draggable="false"
                   />
@@ -702,15 +888,18 @@ export default function CyberoneLitePage({ onBack, onOpenDemo, onNavigate }) {
         </div>
       </section>
 
-            <section className="indo-lite-six-features-section">
+      {/* =========================================================================
+          SECTION 8: 6 KEY FEATURES ICONS ROW (Exact Match to User Screenshot 2)
+          ========================================================================= */}
+      <section className="indo-lite-six-features-section">
         <div className="indo-lite-container">
           <div className="indo-lite-six-features-grid">
             {featureIconsRow.map((feat, idx) => (
               <div key={idx} className="indo-lite-six-feat-card">
                 <div className="indo-lite-six-feat-icon-wrap">
-                  <img 
-                    src={feat.icon} 
-                    alt={feat.title} 
+                  <img
+                    src={feat.icon}
+                    alt={feat.title}
                     className="indo-lite-six-feat-img"
                     draggable="false"
                   />
@@ -722,9 +911,12 @@ export default function CyberoneLitePage({ onBack, onOpenDemo, onNavigate }) {
         </div>
       </section>
 
-            <section className="indo-lite-official-faq-section">
+      {/* =========================================================================
+          SECTION 9: FAQ'S (Exact Match to User Screenshots 2 & 3)
+          ========================================================================= */}
+      <section className="indo-lite-official-faq-section">
         <div className="indo-lite-container max-w-4xl mx-auto">
-          
+
           <div className="mb-8">
             <h2 className="indo-lite-faq-title">FAQ's</h2>
             <p className="indo-lite-faq-sub">Key Questions Answered in cyberone Lite</p>
@@ -756,35 +948,6 @@ export default function CyberoneLitePage({ onBack, onOpenDemo, onNavigate }) {
             })}
           </div>
 
-        </div>
-      </section>
-
-            <section className="indo-max-cta-section">
-        <div className="indo-max-cta-container">
-          <div className="indo-max-cta-box">
-            <div className="indo-max-cta-content">
-              <span className="indo-max-tag">COMMENCE OPERATIONS</span>
-              <h2 className="indo-max-cta-title">Ready to Experience Cyberone Lite?</h2>
-              <p className="indo-max-cta-desc">
-                Deploy agile multi-mission surveillance, mapping, and rapid payload response across your operations. Connect with our flight systems engineers for mission analysis and live demonstrations.
-              </p>
-              
-              <div className="indo-max-cta-actions">
-                <button 
-                  onClick={() => onOpenDemo && onOpenDemo('Cyberone Lite')}
-                  className="indo-max-primary-btn"
-                >
-                  <span>Request for Demo</span>
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <line x1="5" y1="12" x2="19" y2="12"></line>
-                    <polyline points="12 5 19 12 12 19"></polyline>
-                  </svg>
-                </button>
-              </div>
-            </div>
-            
-            <div className="indo-max-cta-ambient" />
-          </div>
         </div>
       </section>
 

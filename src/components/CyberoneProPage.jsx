@@ -14,14 +14,12 @@ export default function CyberoneProPage({ onBack, onOpenDemo, onNavigate }) {
   // Specifications Tab State: 'uav' | 'payload' | 'services'
   const [activeSpecTab, setActiveSpecTab] = useState('uav');
 
-  // Section 6: Markets 3-Card Carousel State (Matching Cyberone Lite)
-  const [marketIndex, setMarketIndex] = useState(0);
-  const [isMarketHovered, setIsMarketHovered] = useState(false);
-
   // FAQ Accordion State (0 is open by default, -1 is closed)
   const [openFaq, setOpenFaq] = useState(0);
 
-    // 5 CORE CAPABILITY PILLARS
+  // ---------------------------------------------------------------------------
+  // 5 CORE CAPABILITY PILLARS (Authentic from IndoWings Cyberone Pro V2)
+  // ---------------------------------------------------------------------------
   const pillars = [
     {
       num: '01',
@@ -60,7 +58,9 @@ export default function CyberoneProPage({ onBack, onOpenDemo, onNavigate }) {
     }
   ];
 
-    // SPECIFICATIONS DATA
+  // ---------------------------------------------------------------------------
+  // SPECIFICATIONS DATA (100% Authentic from live cyberonepro_v2.php)
+  // ---------------------------------------------------------------------------
   const uavSpecs = [
     { label: 'Class of UAV', val: 'Micro or Small' },
     { label: 'Type of UAV', val: 'Copter type (Quadcopter)' },
@@ -110,7 +110,9 @@ export default function CyberoneProPage({ onBack, onOpenDemo, onNavigate }) {
     { label: 'Flight Mission Advisory', val: 'Dedicated operational consulting for border surveillance & industrial monitoring' }
   ];
 
-    // 6 PAYLOAD INTEGRATIONS (For Pinned Horizontal Scroll Reel)
+  // ---------------------------------------------------------------------------
+  // 6 PAYLOAD INTEGRATIONS (For Pinned Horizontal Scroll Reel)
+  // ---------------------------------------------------------------------------
   const payloads = [
     {
       id: 'thermal',
@@ -156,7 +158,9 @@ export default function CyberoneProPage({ onBack, onOpenDemo, onNavigate }) {
     }
   ];
 
-    // 6 SECTOR SOLUTIONS (Impactful Industrial Applications)
+  // ---------------------------------------------------------------------------
+  // 6 SECTOR SOLUTIONS (Impactful Industrial Applications)
+  // ---------------------------------------------------------------------------
   const sectorSolutions = [
     {
       title: 'Oil & Gas Pipeline Inspection',
@@ -190,7 +194,9 @@ export default function CyberoneProPage({ onBack, onOpenDemo, onNavigate }) {
     }
   ];
 
-    // IN THE BOX (11 Accessories Packout)
+  // ---------------------------------------------------------------------------
+  // IN THE BOX (11 Accessories Packout)
+  // ---------------------------------------------------------------------------
   const accessories = [
     { id: 'airframe', name: 'Cyberone Pro Drone', img: '/assets/cyberone-pro/max-drone.png', isFeatured: true },
     { id: 'props', name: 'Propeller Set', img: '/assets/cyberone-pro/propeller.png' },
@@ -205,7 +211,9 @@ export default function CyberoneProPage({ onBack, onOpenDemo, onNavigate }) {
     { id: 'manual', name: 'User Manual', img: '/assets/cyberone-pro/usermenual.png' }
   ];
 
-    // 6 KEY FEATURES ROW (Matching Cyberone Trainer / Lite)
+  // ---------------------------------------------------------------------------
+  // 6 KEY FEATURES ROW (Matching Cyberone Trainer / Lite)
+  // ---------------------------------------------------------------------------
   const sixFeatures = [
     { title: 'Click\n-N- Lock', icon: '/assets/cyberone-pro/payload-ico.svg' },
     { title: 'Swappable\nBatteries', icon: '/assets/cyberone-pro/battery-ico.svg' },
@@ -215,7 +223,9 @@ export default function CyberoneProPage({ onBack, onOpenDemo, onNavigate }) {
     { title: 'Mobile\nTouch Screen GCS', icon: '/assets/cyberone-pro/drone-controller-ico.svg' }
   ];
 
-    // FREQUENTLY ASKED QUESTIONS
+  // ---------------------------------------------------------------------------
+  // FREQUENTLY ASKED QUESTIONS (Authentic from IndoWings Cyberone Pro)
+  // ---------------------------------------------------------------------------
   const faqs = [
     {
       q: 'What is the major difference between Cyberone Pro and Cyberone Max?',
@@ -235,16 +245,9 @@ export default function CyberoneProPage({ onBack, onOpenDemo, onNavigate }) {
     }
   ];
 
-    // MARKETS CAROUSEL AUTO-ADVANCE (Matching Cyberone Lite)
-  useEffect(() => {
-    if (isMarketHovered) return;
-    const interval = setInterval(() => {
-      setMarketIndex(prev => (prev + 1) % sectorSolutions.length);
-    }, 4500);
-    return () => clearInterval(interval);
-  }, [isMarketHovered, sectorSolutions.length]);
-
-    // GSAP SCROLLTRIGGER ORCHESTRATION (Identical Quality to Trainer & Lite)
+  // ---------------------------------------------------------------------------
+  // GSAP SCROLLTRIGGER ORCHESTRATION (Identical Quality to Trainer & Lite)
+  // ---------------------------------------------------------------------------
   useEffect(() => {
     window.scrollTo(0, 0);
 
@@ -459,19 +462,22 @@ export default function CyberoneProPage({ onBack, onOpenDemo, onNavigate }) {
     };
   }, []);
 
-  const activeSpecsList = activeSpecTab === 'uav' 
-    ? uavSpecs 
-    : activeSpecTab === 'payload' 
-      ? payloadSpecs 
+  const activeSpecsList = activeSpecTab === 'uav'
+    ? uavSpecs
+    : activeSpecTab === 'payload'
+      ? payloadSpecs
       : serviceSpecs;
 
   return (
     <div className="indo-pro-page" ref={pageRef} style={{ backgroundColor: '#000000', color: '#ffffff' }}>
-      
-            <section className="indo-pro-hero">
-        
+
+      {/* =========================================================================
+          SECTION 1: HERO SCREEN (Authentic Visual, 100% Fullscreen, ZERO TEXT!)
+          ========================================================================= */}
+      <section className="indo-pro-hero">
+
         {/* Fullscreen Background Drone Visual with Framer Motion reveal */}
-        <motion.div 
+        <motion.div
           initial={{ scale: 1.08, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
           transition={{ duration: 1.6, ease: [0.16, 1, 0.3, 1] }}
@@ -482,9 +488,9 @@ export default function CyberoneProPage({ onBack, onOpenDemo, onNavigate }) {
             transition={{ duration: 6.5, repeat: Infinity, ease: 'easeInOut' }}
             className="indo-pro-hero-drone-motion"
           >
-            <img 
-              src="/assets/cyberone-pro/cyberonepro4.avif" 
-              alt="Cyberone Pro Drone" 
+            <img
+              src="/assets/cyberone-pro/cyberonepro4.avif"
+              alt="Cyberone Pro Drone"
               className="indo-pro-hero-drone-img"
               draggable="false"
             />
@@ -495,13 +501,13 @@ export default function CyberoneProPage({ onBack, onOpenDemo, onNavigate }) {
         </motion.div>
 
         {/* Ambient Floating Scroll Indicator (Minimal Pill - Zero Clutter) */}
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 1.2, duration: 0.8 }}
           className="indo-pro-hero-scroll-indicator"
         >
-          <motion.div 
+          <motion.div
             animate={{ y: [0, 6, 0] }}
             transition={{ duration: 1.8, repeat: Infinity, ease: 'easeInOut' }}
             className="indo-pro-hero-scroll-pill"
@@ -512,9 +518,12 @@ export default function CyberoneProPage({ onBack, onOpenDemo, onNavigate }) {
 
       </section>
 
-            <section className="indo-pro-pillars-section">
+      {/* =========================================================================
+          SECTION 2: 5 CORE MISSION CAPABILITIES (JHALAR / LADI / THREAD SUSPENDED SHOWCASE)
+          ========================================================================= */}
+      <section className="indo-pro-pillars-section">
         <div className="indo-pro-pillars-container">
-          
+
           <div className="indo-pro-section-head">
             <span className="indo-pro-tag">TACTICAL ADVANTAGE</span>
             <h2 className="indo-pro-section-title">Core Mission Capabilities</h2>
@@ -525,7 +534,7 @@ export default function CyberoneProPage({ onBack, onOpenDemo, onNavigate }) {
 
           {/* JHALAR / LADI SUSPENDED THREAD PRESENTATION */}
           <div className="indo-pro-jhalar-wrapper">
-            
+
             {/* Continuous Overhead Guideline Wire / Thread */}
             <div className="indo-pro-jhalar-wire-runner">
               <div className="indo-pro-jhalar-main-thread" />
@@ -535,14 +544,14 @@ export default function CyberoneProPage({ onBack, onOpenDemo, onNavigate }) {
             <div className="indo-pro-jhalar-track">
               {pillars.map((pillar, idx) => (
                 <div key={idx} className="indo-pro-jhalar-col">
-                  
+
                   {/* Top Connector Node Dot on Wire */}
                   <div className="indo-pro-jhalar-node-wrap">
                     <span className="indo-pro-jhalar-node-dot" />
                   </div>
 
                   {/* Vertical Suspended Cord / Thread of Staggered Length */}
-                  <div 
+                  <div
                     className="indo-pro-jhalar-vertical-cord"
                     style={{ height: `${pillar.cordLength}px` }}
                   >
@@ -553,7 +562,7 @@ export default function CyberoneProPage({ onBack, onOpenDemo, onNavigate }) {
                   <div className="indo-pro-jhalar-clip" />
 
                   {/* Suspended Card */}
-                  <motion.div 
+                  <motion.div
                     whileHover={{ y: -6, scale: 1.02 }}
                     transition={{ duration: 0.25 }}
                     className="indo-pro-pillar-card"
@@ -561,9 +570,9 @@ export default function CyberoneProPage({ onBack, onOpenDemo, onNavigate }) {
                     <div className="indo-pro-pillar-top">
                       <span className="indo-pro-pillar-num">{pillar.num}</span>
                       <div className="indo-pro-pillar-icon-box">
-                        <img 
-                          src={pillar.icon} 
-                          alt={pillar.title.replace('\n', ' ')} 
+                        <img
+                          src={pillar.icon}
+                          alt={pillar.title.replace('\n', ' ')}
                           className="indo-pro-pillar-icon"
                           draggable="false"
                         />
@@ -585,9 +594,12 @@ export default function CyberoneProPage({ onBack, onOpenDemo, onNavigate }) {
         </div>
       </section>
 
-            <section className="indo-pro-specs-section" id="specifications">
+      {/* =========================================================================
+          SECTION 3: SPECIFICATIONS (Exact 50/50 Layout Matching Cyberone Trainer)
+          ========================================================================= */}
+      <section className="indo-pro-specs-section" id="specifications">
         <div className="indo-pro-specs-container">
-          
+
           {/* Section Header */}
           <div className="indo-pro-specs-header">
             <h2 className="indo-pro-specs-title">
@@ -636,7 +648,7 @@ export default function CyberoneProPage({ onBack, onOpenDemo, onNavigate }) {
 
           {/* 2-Column Grid: Left Dark Table, Right Drone Perspective Render (50/50) */}
           <div className="indo-pro-specs-grid">
-            
+
             {/* Left Column: Dark Table */}
             <div className="indo-pro-table-box">
               <table className="indo-pro-dark-table">
@@ -657,14 +669,14 @@ export default function CyberoneProPage({ onBack, onOpenDemo, onNavigate }) {
 
             {/* Right Column: Drone Perspective Render (Clean, No Pill Badges) */}
             <div className="indo-pro-specs-drone-wrap">
-              <motion.div 
+              <motion.div
                 animate={{ y: [-6, 6, -6] }}
                 transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
                 style={{ width: '100%', display: 'flex', justifyContent: 'center' }}
               >
-                <img 
-                  src="/assets/cyberone-pro/cyberonepro4.avif" 
-                  alt="Cyberone Pro Drone Perspective Render" 
+                <img
+                  src="/assets/cyberone-pro/cyberonepro4.avif"
+                  alt="Cyberone Pro Drone Perspective Render"
                   className="indo-pro-specs-drone-img"
                   draggable="false"
                 />
@@ -676,12 +688,15 @@ export default function CyberoneProPage({ onBack, onOpenDemo, onNavigate }) {
         </div>
       </section>
 
-            <section 
+      {/* =========================================================================
+          SECTION 4: PAYLOAD INTEGRATIONS - HORIZONTAL PINNED SCROLL REEL
+          ========================================================================= */}
+      <section
         className="indo-pro-horizontal-section"
         ref={horizontalSectionRef}
       >
         <div className="indo-pro-horizontal-inner">
-          
+
           {/* Header */}
           <div className="indo-pro-horizontal-header">
             <span className="indo-pro-tag">TACTICAL SENSOR ECOSYSTEM</span>
@@ -694,20 +709,20 @@ export default function CyberoneProPage({ onBack, onOpenDemo, onNavigate }) {
           <div className="indo-pro-horizontal-track-container">
             <div className="indo-pro-horizontal-track" ref={horizontalTrackRef}>
               {payloads.map((item) => (
-                <div 
-                  key={item.id} 
+                <div
+                  key={item.id}
                   className="indo-pro-horizontal-col"
                 >
-                  <motion.div 
+                  <motion.div
                     whileHover={{ y: -6, scale: 1.01 }}
                     transition={{ duration: 0.2 }}
                     className="indo-pro-horizontal-card group"
                   >
                     {/* Photo Viewport */}
                     <div className="indo-pro-horizontal-img-frame">
-                      <img 
-                        src={item.img} 
-                        alt={item.title} 
+                      <img
+                        src={item.img}
+                        alt={item.title}
                         className="indo-pro-horizontal-img"
                         draggable="false"
                         loading="lazy"
@@ -735,7 +750,10 @@ export default function CyberoneProPage({ onBack, onOpenDemo, onNavigate }) {
         </div>
       </section>
 
-            <section className="indo-pro-video-section">
+      {/* =========================================================================
+          SECTION 5: SLEEK DESIGN VIDEO SHOWCASE (100% FULL-WIDTH EDGE-TO-EDGE)
+          ========================================================================= */}
+      <section className="indo-pro-video-section">
         <div className="indo-pro-video-header-container">
           <div className="indo-pro-section-head">
             <span className="indo-pro-tag">THE CONCEPTS OF POWER AND PERFORMANCE</span>
@@ -745,12 +763,12 @@ export default function CyberoneProPage({ onBack, onOpenDemo, onNavigate }) {
 
         {/* 100% Edge-to-Edge Full-Width Video Viewport (Zero Text Overlay) */}
         <div className="indo-pro-video-viewport">
-          <video 
-            src="/assets/cyberone-pro/strick-video.mp4" 
-            autoPlay 
-            loop 
-            muted 
-            playsInline 
+          <video
+            src="/assets/cyberone-pro/strick-video.mp4"
+            autoPlay
+            loop
+            muted
+            playsInline
             className="indo-pro-video-player"
             onContextMenu={(e) => e.preventDefault()}
           />
@@ -758,64 +776,55 @@ export default function CyberoneProPage({ onBack, onOpenDemo, onNavigate }) {
         </div>
       </section>
 
-            <section 
-        className="indo-lite-markets-carousel-section"
-        onMouseEnter={() => setIsMarketHovered(true)}
-        onMouseLeave={() => setIsMarketHovered(false)}
-      >
-        <div className="indo-lite-container">
-          
-          <h2 className="indo-lite-markets-title">MARKETS</h2>
-          <p className="indo-lite-markets-subtitle">
-            Find out how we use our technologies in key locations around the world.
-          </p>
+      {/* =========================================================================
+          SECTION 6: SOLUTIONS & SERVICES (6 Sector Industrial Grid)
+          ========================================================================= */}
+      <section className="indo-pro-sectors-section">
+        <div className="indo-pro-sectors-container">
 
-          {/* 3-Card Carousel Track */}
-          <div className="indo-lite-carousel-container">
-            <div 
-              className="indo-lite-carousel-track"
-              style={{
-                transform: `translateX(-${marketIndex * (100 / 3)}%)`
-              }}
-            >
-              {[...sectorSolutions, ...sectorSolutions.slice(0, 3)].map((item, idx) => (
-                <div key={idx} className="indo-lite-market-card">
-                  <img 
-                    src={item.img} 
-                    alt={item.title} 
-                    className="indo-lite-market-card-img"
-                    draggable="false"
-                  />
-                  <div className="indo-lite-market-card-overlay">
-                    <div className="indo-lite-market-badge-title">
-                      <span className="indo-lite-market-bar" />
-                      <h4 className="indo-lite-market-name">{item.title}</h4>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
+          <div className="indo-pro-section-head">
+            <span className="indo-pro-tag">OPERATIONAL DOMAINS</span>
+            <h2 className="indo-pro-section-title">Solutions & Field Deployment</h2>
+            <p className="indo-pro-section-subtitle">
+              Delivering quantifiable ROI, risk mitigation, and zero-downtime analytics across critical infrastructure.
+            </p>
           </div>
 
-          {/* Carousel Pagination Dots */}
-          <div className="indo-lite-carousel-dots">
-            {sectorSolutions.map((_, idx) => (
-              <button
+          <div className="indo-pro-sectors-grid">
+            {sectorSolutions.map((sector, idx) => (
+              <motion.div
                 key={idx}
-                type="button"
-                onClick={() => setMarketIndex(idx)}
-                className={`indo-lite-carousel-dot ${marketIndex === idx ? 'active' : ''}`}
-                aria-label={`Go to slide ${idx + 1}`}
-              />
+                whileHover={{ y: -6, scale: 1.02 }}
+                transition={{ duration: 0.25 }}
+                className="indo-pro-sector-card"
+              >
+                <div className="indo-pro-sector-img-wrap">
+                  <img
+                    src={sector.img}
+                    alt={sector.title}
+                    className="indo-pro-sector-img"
+                    draggable="false"
+                    loading="lazy"
+                  />
+                  <div className="indo-pro-sector-gradient" />
+                </div>
+                <div className="indo-pro-sector-content">
+                  <h3 className="indo-pro-sector-card-title">{sector.title}</h3>
+                  <p className="indo-pro-sector-card-desc">{sector.desc}</p>
+                </div>
+              </motion.div>
             ))}
           </div>
 
         </div>
       </section>
 
-            <section className="indo-pro-box-section">
+      {/* =========================================================================
+          SECTION 7: IN THE BOX (11 Accessories Grid)
+          ========================================================================= */}
+      <section className="indo-pro-box-section">
         <div className="indo-pro-box-container">
-          
+
           <div className="indo-pro-box-header">
             <h2 className="indo-pro-box-heading">
               In the Box
@@ -828,16 +837,16 @@ export default function CyberoneProPage({ onBack, onOpenDemo, onNavigate }) {
           {/* 11 Accessories Packout Grid */}
           <div className="indo-pro-box-grid">
             {accessories.map((acc) => (
-              <motion.div 
+              <motion.div
                 key={acc.id}
                 whileHover={{ y: -6, scale: 1.02 }}
                 transition={{ duration: 0.25 }}
                 className={`indo-pro-box-item ${acc.isFeatured ? 'featured-drone' : ''}`}
               >
                 <div className={`indo-pro-box-img-wrap ${acc.isFeatured ? 'featured' : ''}`}>
-                  <img 
-                    src={acc.img} 
-                    alt={acc.name} 
+                  <img
+                    src={acc.img}
+                    alt={acc.name}
                     className={`indo-pro-box-img ${acc.isFeatured ? 'featured' : ''}`}
                     draggable="false"
                   />
@@ -852,9 +861,12 @@ export default function CyberoneProPage({ onBack, onOpenDemo, onNavigate }) {
         </div>
       </section>
 
-            <section className="indo-pro-dark-features">
+      {/* =========================================================================
+          SECTION 8: 6 KEY FEATURES ROW
+          ========================================================================= */}
+      <section className="indo-pro-dark-features">
         <div className="indo-pro-dark-container">
-          
+
           <div className="indo-pro-dark-header">
             <h3 className="indo-pro-dark-title">Built for Tactical Mission Sorties</h3>
             <p className="indo-pro-dark-subtitle">
@@ -864,16 +876,16 @@ export default function CyberoneProPage({ onBack, onOpenDemo, onNavigate }) {
 
           <div className="indo-pro-dark-grid">
             {sixFeatures.map((feat, idx) => (
-              <motion.div 
-                key={idx} 
+              <motion.div
+                key={idx}
                 whileHover={{ y: -6, scale: 1.03 }}
                 transition={{ duration: 0.2 }}
                 className="indo-pro-dark-card"
               >
                 <div className="indo-pro-dark-icon-wrap">
-                  <img 
-                    src={feat.icon} 
-                    alt={feat.title.replace('\n', ' ')} 
+                  <img
+                    src={feat.icon}
+                    alt={feat.title.replace('\n', ' ')}
                     className="indo-pro-dark-img"
                     draggable="false"
                   />
@@ -888,9 +900,12 @@ export default function CyberoneProPage({ onBack, onOpenDemo, onNavigate }) {
         </div>
       </section>
 
-            <section className="indo-pro-faq-section">
+      {/* =========================================================================
+          SECTION 9: FREQUENTLY ASKED QUESTIONS (FAQ)
+          ========================================================================= */}
+      <section className="indo-pro-faq-section">
         <div className="indo-pro-faq-container">
-          
+
           <div className="indo-pro-faq-header">
             <h2 className="indo-pro-faq-title">FAQ's</h2>
             <p className="indo-pro-faq-subtitle">
@@ -935,32 +950,31 @@ export default function CyberoneProPage({ onBack, onOpenDemo, onNavigate }) {
         </div>
       </section>
 
-            <section className="indo-max-cta-section">
-        <div className="indo-max-cta-container">
-          <div className="indo-max-cta-box">
-            <div className="indo-max-cta-content">
-              <span className="indo-max-tag">COMMENCE OPERATIONS</span>
-              <h2 className="indo-max-cta-title">Ready to Experience Cyberone Pro?</h2>
-              <p className="indo-max-cta-desc">
-                Deploy advanced multi-mission tactical intelligence, edge-AI tracking, and persistent surveillance across your operations. Connect with our flight specialists for mission analysis and procurement tenders.
-              </p>
-              
-              <div className="indo-max-cta-actions">
-                <button 
-                  onClick={() => onOpenDemo && onOpenDemo('Cyberone Pro')}
-                  className="indo-max-primary-btn"
-                >
-                  <span>Request for Demo</span>
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <line x1="5" y1="12" x2="19" y2="12"></line>
-                    <polyline points="12 5 19 12 12 19"></polyline>
-                  </svg>
-                </button>
-              </div>
-            </div>
-            
-            <div className="indo-max-cta-ambient" />
-          </div>
+      {/* =========================================================================
+          SECTION 10: REQUEST FOR DEMO CTA SECTION
+          ========================================================================= */}
+      <section className="indo-pro-cta-section">
+        <div className="indo-pro-cta-container">
+          <h3 className="indo-pro-cta-title">
+            Master The Skies Today, Rule The Future Tomorrow
+          </h3>
+          <p className="indo-pro-cta-subtitle">
+            Connect with our tactical flight specialists to schedule an on-site operational demonstration for your organization.
+          </p>
+
+          <motion.button
+            whileHover={{ scale: 1.03 }}
+            whileTap={{ scale: 0.98 }}
+            type="button"
+            className="indo-pro-demo-card-btn"
+            onClick={() => {
+              if (onOpenDemo) onOpenDemo('Cyberone Pro');
+            }}
+          >
+            <span className="indo-pro-demo-btn-text">
+              Request for Demo
+            </span>
+          </motion.button>
         </div>
       </section>
 

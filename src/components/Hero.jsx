@@ -108,52 +108,92 @@ export default function Hero({ triggerAnim = false }) {
       onContextMenu={(e) => e.preventDefault()}
       onDragStart={(e) => e.preventDefault()}
     >
-      {/* Background Media Stack */}
+      
+      {/* FULLSCREEN PRISTINE MEDIA STACK (PROTECTED AGAINST DRAG & THEFT) */}
       <div className="qs-media-stack">
-        {slidesData.map((slide, idx) => (
-          <div 
-            key={slide.id} 
-            className={`qs-slide ${currentSlide === idx ? 'active' : ''}`}
+        
+        {/* SLIDE 0: 4K LOOPING DRONE VIDEO */}
+        <div className={`qs-slide ${currentSlide === 0 ? 'active' : ''}`}>
+          <video
+            ref={videoRef}
+            className="qs-media"
+            autoPlay
+            muted
+            loop
+            playsInline
+            preload="auto"
+            poster="/assets/indo-cockpit.png"
+            draggable="false"
+            onContextMenu={(e) => e.preventDefault()}
           >
-            {slide.type === 'video' ? (
-              <video
-                ref={idx === 0 ? videoRef : null}
-                className="qs-media"
-                autoPlay
-                muted
-                loop
-                playsInline
-                preload="auto"
-                poster="/assets/indo-cockpit.png"
-                draggable="false"
-                onContextMenu={(e) => e.preventDefault()}
-              >
-                <source src={slide.src} type="video/mp4" />
-              </video>
-            ) : (
-              <img 
-                src={slide.src} 
-                alt={`IndoWings Aerospace - ${slide.label}`}
-                className="qs-media" 
-                draggable="false"
-                onContextMenu={(e) => e.preventDefault()}
-                onDragStart={(e) => e.preventDefault()}
-              />
-            )}
-          </div>
-        ))}
-        <div className="qs-top-vignette" aria-hidden="true" />
+            <source src="/assets/indo-hero-video.mp4" type="video/mp4" />
+          </video>
+        </div>
+
+        {/* SLIDE 1: TARMAC MILITARY DRONE */}
+        <div className={`qs-slide ${currentSlide === 1 ? 'active' : ''}`}>
+          <img 
+            src="/assets/indo-tarmac.jpg" 
+            alt="Tactical Defense Drone on Runway Tarmac" 
+            className="qs-media" 
+            draggable="false"
+            onContextMenu={(e) => e.preventDefault()}
+            onDragStart={(e) => e.preventDefault()}
+          />
+        </div>
+
+        {/* SLIDE 2: TACTICAL FIELD CREW */}
+        <div className={`qs-slide ${currentSlide === 2 ? 'active' : ''}`}>
+          <img 
+            src="/assets/indo-crew.jpg" 
+            alt="Defense Operators Inspecting eVTOL Drone" 
+            className="qs-media" 
+            draggable="false"
+            onContextMenu={(e) => e.preventDefault()}
+            onDragStart={(e) => e.preventDefault()}
+          />
+        </div>
+
+        {/* SLIDE 3: COCKPIT HUD */}
+        <div className={`qs-slide ${currentSlide === 3 ? 'active' : ''}`}>
+          <img 
+            src="/assets/indo-cockpit.png" 
+            alt="Autonomous Flight Cockpit Canopy" 
+            className="qs-media" 
+            draggable="false"
+            onContextMenu={(e) => e.preventDefault()}
+            onDragStart={(e) => e.preventDefault()}
+          />
+        </div>
+
+        {/* SLIDE 4: HIGH-ALTITUDE VTOL FLIGHT */}
+        <div className={`qs-slide ${currentSlide === 4 ? 'active' : ''}`}>
+          <img 
+            src="/assets/indo-vtol.jpg" 
+            alt="IndoWings VTOL Drone in Flight" 
+            className="qs-media" 
+            draggable="false"
+            onContextMenu={(e) => e.preventDefault()}
+            onDragStart={(e) => e.preventDefault()}
+          />
+        </div>
+
+        {/* TRANSPARENT PROTECTIVE SHIELD: Blocks direct drag & download to other tabs/browsers */}
+        <div 
+          className="qs-media-shield"
+          aria-hidden="true"
+          onContextMenu={(e) => e.preventDefault()}
+          onDragStart={(e) => e.preventDefault()}
+        ></div>
+
       </div>
 
-      {/* Vertical Slider Navigation */}
+      {/* EXACT QUANTUM SYSTEMS VERTICAL IN-PAGE SLIDER (SCREENSHOT 1: c-in-page-nav) */}
       <div 
         className="qs-vertical-slider"
         style={{ cursor: 'pointer', pointerEvents: 'auto' }}
         onClick={() => setCurrentSlide((currentSlide + 1) % totalSlides)}
-        title="Click to advance slide"
-        role="button"
-        aria-label="Advance slide"
-        tabIndex={0}
+        title="Click or Scroll to Change Slide"
       >
         <div className="qs-slider-track">
           <div 
@@ -167,7 +207,7 @@ export default function Hero({ triggerAnim = false }) {
         <span className="qs-slider-number">{activeNumber}</span>
       </div>
 
-      {/* Brand Title Bar */}
+      {/* HELSING.AI STYLE FULL-WIDTH HERO BRAND (EXACT IMAGE 2 REPLICA + GSAP SLIDE-UP ANIMATION) */}
       <div 
         className="iw-hero-helsing-container" 
         ref={brandContainerRef}

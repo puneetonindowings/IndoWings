@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
 
 /**
- * Preloader / Intro splash screen
+ * Preloader / Intro Splash Screen
+ * Exact Harmattan AI style: Centered pristine IndoWings logo on deep black,
+ * smooth cinematic reveal, then elegant fade-out to unveil the website on every reload.
  */
 export default function Preloader({ onExitStart }) {
   const [phase, setPhase] = useState('entering'); // 'entering' | 'visible' | 'exiting' | 'done'
@@ -53,21 +55,20 @@ export default function Preloader({ onExitStart }) {
   if (phase === 'done') return null;
 
   return (
-    <div 
+    <div
       className={`iw-preloader-overlay ${phase === 'exiting' ? 'iw-preloader-exit' : ''}`}
       aria-hidden="true"
       onContextMenu={(e) => e.preventDefault()}
       onDragStart={(e) => e.preventDefault()}
     >
-      <div 
-        className={`iw-preloader-content ${
-          phase === 'visible' ? 'iw-preloader-content-show' : ''
-        } ${phase === 'exiting' ? 'iw-preloader-content-exit' : ''}`}
+      <div
+        className={`iw-preloader-content ${phase === 'visible' ? 'iw-preloader-content-show' : ''
+          } ${phase === 'exiting' ? 'iw-preloader-content-exit' : ''}`}
       >
         <div className="iw-preloader-logo-wrapper">
-          <img 
-            src="/assets/indowing-light.png" 
-            alt="IndoWings" 
+          <img
+            src="/assets/indowing-light.png"
+            alt="IndoWings"
             className="iw-preloader-logo"
             draggable="false"
           />

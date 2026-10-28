@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { Instagram, ArrowUpRight } from 'lucide-react';
+import { Instagram, ArrowUpRight, ChevronLeft, ChevronRight } from 'lucide-react';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -56,8 +56,48 @@ const INSTAGRAM_POSTS = [
 
 export default function InstagramSection() {
   const sectionRef = useRef(null);
+  const tilesWrapperRef = useRef(null);
   const [hoveredIndex, setHoveredIndex] = useState(null);
+  const [activeIndex, setActiveIndex] = useState(0);
   const videoRefs = useRef([]);
+
+  // Track active reel on horizontal touch scroll
+  const handleScroll = () => {
+    if (!tilesWrapperRef.current) return;
+    const { scrollLeft, scrollWidth, clientWidth } = tilesWrapperRef.current;
+    const maxScroll = scrollWidth - clientWidth;
+    if (maxScroll <= 0) return;
+    const card = tilesWrapperRef.current.querySelector('.iw-insta-tile');
+    const stride = card ? card.offsetWidth + 12 : 210;
+    const idx = Math.min(
+      INSTAGRAM_POSTS.length - 1,
+      Math.max(0, Math.round(scrollLeft / stride))
+    );
+    setActiveIndex(idx);
+  };
+
+  const scrollByAmount = (direction) => {
+    if (!tilesWrapperRef.current) return;
+    const card = tilesWrapperRef.current.querySelector('.iw-insta-tile');
+    const stride = card ? card.offsetWidth + 12 : 210;
+    tilesWrapperRef.current.scrollBy({
+      left: direction * stride,
+      behavior: 'smooth'
+    });
+  };
+
+  const scrollToCard = (index) => {
+    if (!tilesWrapperRef.current) return;
+    const cards = tilesWrapperRef.current.querySelectorAll('.iw-insta-tile');
+    if (cards[index]) {
+      cards[index].scrollIntoView({
+        behavior: 'smooth',
+        block: 'nearest',
+        inline: 'start'
+      });
+      setActiveIndex(index);
+    }
+  };
 
   // Ensure videos autoplay muted safely across modern browser policies
   useEffect(() => {
@@ -146,9 +186,11 @@ export default function InstagramSection() {
           </a>
         </header>
 
-        {/* 5 VERTICAL 9:16 INSTAGRAM REEL CARDS */}
+        {/* 5 VERTICAL REEL CARDS WITH SMOOTH MOBILE SCROLL */}
         <div 
+          ref={tilesWrapperRef}
           className="iw-insta-tiles-wrapper"
+          onScroll={handleScroll}
           onMouseLeave={() => setHoveredIndex(null)}
         >
           {INSTAGRAM_POSTS.map((item, index) => {
@@ -206,6 +248,40 @@ export default function InstagramSection() {
               </a>
             );
           })}
+        </div>
+
+        {/* MOBILE CAROUSEL CONTROLS: PROGRESS PILLS & ARROWS */}
+        <div className="iw-insta-controls-mobile">
+          <div className="iw-insta-dots" role="tablist" aria-label="Reel selector">
+            {INSTAGRAM_POSTS.map((_, i) => (
+              <button
+                key={i}
+                type="button"
+                onClick={() => scrollToCard(i)}
+                className={`iw-insta-dot ${activeIndex === i ? 'is-active' : ''}`}
+                aria-label={`Go to reel ${i + 1}`}
+              />
+            ))}
+          </div>
+
+          <div className="iw-insta-nav-arrows">
+            <button
+              type="button"
+              onClick={() => scrollByAmount(-1)}
+              className="iw-insta-arrow-btn"
+              aria-label="Previous reel"
+            >
+              <ChevronLeft size={16} strokeWidth={2.4} />
+            </button>
+            <button
+              type="button"
+              onClick={() => scrollByAmount(1)}
+              className="iw-insta-arrow-btn"
+              aria-label="Next reel"
+            >
+              <ChevronRight size={16} strokeWidth={2.4} />
+            </button>
+          </div>
         </div>
       </div>
     </section>

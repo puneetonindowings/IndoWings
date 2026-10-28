@@ -5,13 +5,13 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 gsap.registerPlugin(ScrollTrigger);
 
 export const droneFleet = [
-  {
+    {
     id: 'cyberone-trainer-drone',
     categoryKey: 'surveillance',
     categoryName: 'Surveillance, Mapping & Delivery Drone',
     name: 'Cyberone Trainer Drone',
     tagline: 'Dual-pilot remote training UAV',
-    image: '/assets/cyberone-trainer/trainer-hero-hd.jpg',
+    image: '/assets/indo-crew.jpg',
     url: 'https://www.indowings.com/products/cyberone-trainer-drone.php'
   },
   {
@@ -20,7 +20,7 @@ export const droneFleet = [
     categoryName: 'Surveillance, Mapping & Delivery Drone',
     name: 'Cyberone Lite',
     tagline: 'Rapid-deployment tactical scout UAV',
-    image: '/assets/cyberone-lite/lite-hero-hd.jpg',
+    image: '/assets/indo-vtol.jpg',
     url: 'https://www.indowings.com/products/cyberone-lite.php'
   },
   {
@@ -29,7 +29,7 @@ export const droneFleet = [
     categoryName: 'Surveillance, Mapping & Delivery Drone',
     name: 'Cyberone Pro',
     tagline: 'Tactical battlefield surveillance',
-    image: '/assets/cyberone-pro/cyberonepro4.avif',
+    image: '/assets/indo-tarmac.jpg',
     url: 'https://www.indowings.com/products/cyberonepro_v2.php'
   },
   {
@@ -38,7 +38,7 @@ export const droneFleet = [
     categoryName: 'Surveillance, Mapping & Delivery Drone',
     name: 'Cyberone Max',
     tagline: 'Heavy-lift logistics & delivery UAV',
-    image: '/assets/cyberone-max/cyberonemax-hero-uhd.jpg',
+    image: '/assets/indo-cyberone-max.jpg',
     url: 'https://www.indowings.com/products/cyberonemax.php'
   },
 
@@ -48,7 +48,7 @@ export const droneFleet = [
     categoryName: 'Agricultural Drone',
     name: 'E-Series Pro',
     tagline: 'Intelligent plant protection & spraying',
-    image: '/assets/eseries-hero-hd.jpg',
+    image: '/assets/indo-agri-eseries.jpg',
     url: 'https://www.indowings.com/products/e-seriespro.php'
   },
   {
@@ -57,7 +57,7 @@ export const droneFleet = [
     categoryName: 'Agricultural Drone',
     name: 'S-Series Pro',
     tagline: 'Multispectral crop health mapping',
-    image: '/assets/sseries-hero-hd.jpg',
+    image: '/assets/indo-agri-sseries.jpg',
     url: 'https://www.indowings.com/products/s-seriespro.php'
   }
 ];

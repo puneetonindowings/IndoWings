@@ -2,11 +2,11 @@ import React, { useState, useEffect, useRef } from 'react';
 import gsap from 'gsap';
 
 const slidesData = [
-  { id: 0, type: 'image', src: '/assets/cyberone-lite/lite-hero-hd.jpg', label: '01' },
-  { id: 1, type: 'image', src: '/assets/cyberone-max/cyberonemax-hero-uhd.jpg', label: '02' },
-  { id: 2, type: 'image', src: '/assets/cyberone-trainer/trainer-hero-hd.jpg', label: '03' },
-  { id: 3, type: 'image', src: '/assets/cyberone-pro/cyberonepro4.avif', label: '04' },
-  { id: 4, type: 'image', src: '/assets/eseries-hero-hd.jpg', label: '05' }
+  { id: 0, type: 'video', src: '/assets/indo-hero-video.mp4', label: '01' },
+  { id: 1, type: 'image', src: '/assets/indo-tarmac.jpg', label: '02' },
+  { id: 2, type: 'image', src: '/assets/indo-crew.jpg', label: '03' },
+  { id: 3, type: 'image', src: '/assets/indo-cockpit.png', label: '04' },
+  { id: 4, type: 'image', src: '/assets/indo-vtol.jpg', label: '05' }
 ];
 
 export default function Hero({ triggerAnim = false }) {
@@ -18,20 +18,44 @@ export default function Hero({ triggerAnim = false }) {
 
   const totalSlides = slidesData.length;
 
-  // AUTO SCROLL TIMER: 18 seconds for relaxed cinematic pace
+  // AUTO SCROLL TIMER: Increased duration to 20 seconds for a relaxed, cinematic pace
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrentSlide(prev => (prev + 1) % totalSlides);
-    }, 18000);
+    }, 20000);
     return () => clearInterval(timer);
   }, [totalSlides, currentSlide]);
 
-  // Auto-slide transition effect
+  // Video playback management on slide change & viewport visibility
   useEffect(() => {
-    // Media transitions handled smoothly by CSS opacity
+    let isIntersecting = true;
+
+    const observer = new IntersectionObserver(([entry]) => {
+      isIntersecting = entry.isIntersecting;
+      if (!isIntersecting && videoRef.current) {
+        videoRef.current.pause();
+      } else if (isIntersecting && currentSlide === 0 && videoRef.current) {
+        videoRef.current.play().catch(() => {});
+      }
+    }, { threshold: 0.1 });
+
+    const heroEl = document.getElementById('hero');
+    if (heroEl) observer.observe(heroEl);
+
+    if (currentSlide === 0 && isIntersecting) {
+      if (videoRef.current) {
+        videoRef.current.play().catch(() => {});
+      }
+    } else {
+      if (videoRef.current) {
+        videoRef.current.pause();
+      }
+    }
+
+    return () => observer.disconnect();
   }, [currentSlide]);
 
-  // MANUAL KEYBOARD NAVIGATION: Arrow keys
+  // MANUAL KEYBOARD NAVIGATION: Optional Arrow keys
   useEffect(() => {
     const handleKeyDown = (e) => {
       if (e.key === 'ArrowDown' || e.key === 'ArrowRight') {
@@ -88,23 +112,29 @@ export default function Hero({ triggerAnim = false }) {
       {/* FULLSCREEN PRISTINE MEDIA STACK (PROTECTED AGAINST DRAG & THEFT) */}
       <div className="qs-media-stack">
         
-        {/* SLIDE 0: CYBERONE LITE AGILE TACTICAL SCOUT */}
+        {/* SLIDE 0: 4K LOOPING DRONE VIDEO */}
         <div className={`qs-slide ${currentSlide === 0 ? 'active' : ''}`}>
-          <img 
-            src="/assets/cyberone-lite/lite-hero-hd.jpg" 
-            alt="IndoWings Cyberone Lite Tactical Scout UAV" 
-            className="qs-media" 
+          <video
+            ref={videoRef}
+            className="qs-media"
+            autoPlay
+            muted
+            loop
+            playsInline
+            preload="auto"
+            poster="/assets/indo-cockpit.png"
             draggable="false"
             onContextMenu={(e) => e.preventDefault()}
-            onDragStart={(e) => e.preventDefault()}
-          />
+          >
+            <source src="/assets/indo-hero-video.mp4" type="video/mp4" />
+          </video>
         </div>
 
-        {/* SLIDE 1: CYBERONE MAX HEAVY LIFT */}
+        {/* SLIDE 1: TARMAC MILITARY DRONE */}
         <div className={`qs-slide ${currentSlide === 1 ? 'active' : ''}`}>
           <img 
-            src="/assets/cyberone-max/cyberonemax-hero-uhd.jpg" 
-            alt="IndoWings Cyberone Max Heavy-Lift UAV" 
+            src="/assets/indo-tarmac.jpg" 
+            alt="Tactical Defense Drone on Runway Tarmac" 
             className="qs-media" 
             draggable="false"
             onContextMenu={(e) => e.preventDefault()}
@@ -112,11 +142,11 @@ export default function Hero({ triggerAnim = false }) {
           />
         </div>
 
-        {/* SLIDE 2: CYBERONE TRAINER FIELD UAV */}
+        {/* SLIDE 2: TACTICAL FIELD CREW */}
         <div className={`qs-slide ${currentSlide === 2 ? 'active' : ''}`}>
           <img 
-            src="/assets/cyberone-trainer/trainer-hero-hd.jpg" 
-            alt="IndoWings Cyberone Trainer Remote Pilot UAV" 
+            src="/assets/indo-crew.jpg" 
+            alt="Defense Operators Inspecting eVTOL Drone" 
             className="qs-media" 
             draggable="false"
             onContextMenu={(e) => e.preventDefault()}
@@ -124,11 +154,11 @@ export default function Hero({ triggerAnim = false }) {
           />
         </div>
 
-        {/* SLIDE 3: CYBERONE PRO TACTICAL SURVEILLANCE */}
+        {/* SLIDE 3: COCKPIT HUD */}
         <div className={`qs-slide ${currentSlide === 3 ? 'active' : ''}`}>
           <img 
-            src="/assets/cyberone-pro/cyberonepro4.avif" 
-            alt="IndoWings Cyberone Pro Tactical Surveillance UAV" 
+            src="/assets/indo-cockpit.png" 
+            alt="Autonomous Flight Cockpit Canopy" 
             className="qs-media" 
             draggable="false"
             onContextMenu={(e) => e.preventDefault()}
@@ -136,11 +166,11 @@ export default function Hero({ triggerAnim = false }) {
           />
         </div>
 
-        {/* SLIDE 4: E-SERIES PRO PRECISION AGRICULTURE */}
+        {/* SLIDE 4: HIGH-ALTITUDE VTOL FLIGHT */}
         <div className={`qs-slide ${currentSlide === 4 ? 'active' : ''}`}>
           <img 
-            src="/assets/eseries-hero-hd.jpg" 
-            alt="IndoWings E-Series Pro Precision Agriculture Drone" 
+            src="/assets/indo-vtol.jpg" 
+            alt="IndoWings VTOL Drone in Flight" 
             className="qs-media" 
             draggable="false"
             onContextMenu={(e) => e.preventDefault()}

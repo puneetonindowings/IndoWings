@@ -12,7 +12,6 @@ export const droneFleet = [
     name: 'Cyberone Trainer Drone',
     tagline: 'Dual-pilot remote training UAV',
     image: '/assets/landing-products/cyberone-trainer.webp',
-    mobileImage: '/assets/landing-products/cyberone-trainer-mobile.webp',
     url: 'https://www.indowings.com/products/cyberone-trainer-drone.php'
   },
   {
@@ -22,7 +21,6 @@ export const droneFleet = [
     name: 'Cyberone Lite',
     tagline: 'Rapid-deployment tactical scout UAV',
     image: '/assets/landing-products/cyberone-lite.webp',
-    mobileImage: '/assets/landing-products/cyberone-lite-mobile.webp',
     url: 'https://www.indowings.com/products/cyberone-lite.php'
   },
   {
@@ -32,7 +30,6 @@ export const droneFleet = [
     name: 'Cyberone Pro',
     tagline: 'Tactical battlefield surveillance',
     image: '/assets/landing-products/cyberone-pro.webp',
-    mobileImage: '/assets/landing-products/cyberone-pro-mobile.webp',
     url: 'https://www.indowings.com/products/cyberonepro_v2.php'
   },
   {
@@ -42,7 +39,6 @@ export const droneFleet = [
     name: 'Cyberone Max',
     tagline: 'Heavy-lift logistics & delivery UAV',
     image: '/assets/landing-products/cyberone-max.webp',
-    mobileImage: '/assets/landing-products/cyberone-max-mobile.webp',
     url: 'https://www.indowings.com/products/cyberonemax.php'
   },
   {
@@ -52,7 +48,6 @@ export const droneFleet = [
     name: 'E-Series Pro',
     tagline: 'Intelligent plant protection & spraying',
     image: '/assets/landing-products/e-series-pro.webp',
-    mobileImage: '/assets/landing-products/e-series-pro-mobile.webp',
     url: 'https://www.indowings.com/products/e-seriespro.php'
   },
   {
@@ -62,7 +57,6 @@ export const droneFleet = [
     name: 'S-Series Pro',
     tagline: 'Multispectral crop health mapping',
     image: '/assets/landing-products/s-series-pro.webp',
-    mobileImage: '/assets/landing-products/s-series-pro-mobile.webp',
     url: 'https://www.indowings.com/products/s-seriespro.php'
   }
 ];
@@ -177,19 +171,16 @@ export default function ProductShowcase({ onOpenDemo, onNavigate }) {
         >
           {/* BACKGROUND MEDIA CONTAINER WITH SCROLL-ZOOM EXPANSION */}
           <div className="iw-product-media-wrapper">
-            <picture className="iw-product-media-picture">
-              <source media="(max-width: 768px)" srcSet={prod.mobileImage} type="image/webp" />
-              <img
-                src={prod.image}
-                alt={prod.name}
-                className="iw-product-media-img"
-                loading="lazy"
-                decoding="async"
-                draggable="false"
-                onContextMenu={(e) => e.preventDefault()}
-                onDragStart={(e) => e.preventDefault()}
-              />
-            </picture>
+            <img
+              src={prod.image}
+              alt={prod.name}
+              className="iw-product-media-img"
+              loading="lazy"
+              decoding="async"
+              draggable="false"
+              onContextMenu={(e) => e.preventDefault()}
+              onDragStart={(e) => e.preventDefault()}
+            />
 
             {/* CINEMATIC CONTRAST GRADIENTS */}
             <div className="iw-product-gradient-overlay" aria-hidden="true" />

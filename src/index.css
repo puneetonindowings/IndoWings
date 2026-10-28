@@ -1210,14 +1210,6 @@ textarea,
   pointer-events: none;
 }
 
-.iw-product-media-picture {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  display: block;
-}
-
 .iw-product-media-img {
   position: absolute;
   inset: 0;
@@ -1476,7 +1468,7 @@ textarea,
     background-color: #000000;
   }
 
-  /* Centered and fully contained drone media wrapper on mobile */
+  /* Full-bleed cinematic media wrapper on mobile */
   .iw-product-media-wrapper {
     position: absolute;
     inset: 0;
@@ -1484,47 +1476,42 @@ textarea,
     height: 100%;
     overflow: hidden;
     pointer-events: none;
-    display: flex;
-    align-items: center;
-    justify-content: center;
   }
 
-  .iw-product-media-picture {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    display: block;
-  }
-
-  /* Dedicated 9:16 portrait master: drone perfectly centered at 32% height, never clipped */
+  /* Authentic high-resolution photo: centered on drone in upper frame with natural terrain continuing downward */
   .iw-product-media-img {
     position: absolute;
     inset: 0;
     width: 100%;
     height: 100%;
     object-fit: cover !important;
-    object-position: center top !important;
-    transform-origin: center 32% !important;
+    object-position: center 25% !important;
+    transform-origin: center center !important;
     padding: 0 !important;
     box-sizing: border-box;
   }
 
-  /* Cinematic overlay gradients on mobile tuned to seamlessly blend photo with bottom text */
+  /* Seamless, natural film gradient on mobile: Crystal-clear drone in sky, soft smooth transition into solid black for text */
   .iw-product-gradient-overlay {
     background: linear-gradient(
       180deg,
-      rgba(0, 0, 0, 0.38) 0%,
-      transparent 16%,
-      transparent 42%,
-      rgba(0, 0, 0, 0.32) 60%,
-      rgba(0, 0, 0, 0.72) 80%,
-      rgba(0, 0, 0, 0.95) 100%
+      rgba(0, 0, 0, 0.42) 0%,
+      rgba(0, 0, 0, 0.0) 18%,
+      rgba(0, 0, 0, 0.0) 40%,
+      rgba(0, 0, 0, 0.38) 58%,
+      rgba(0, 0, 0, 0.76) 74%,
+      rgba(0, 0, 0, 0.96) 88%,
+      #000000 100%
     ) !important;
   }
 
   .iw-product-vignette {
-    display: none !important;
+    display: block !important;
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 50% 28%, transparent 52%, rgba(0, 0, 0, 0.4) 100%) !important;
+    pointer-events: none;
+    z-index: 2;
   }
 
   .iw-product-info-block {

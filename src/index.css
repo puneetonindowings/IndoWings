@@ -1383,21 +1383,95 @@ textarea,
   }
 
   .iw-product-hero-slide {
-    padding: 0 1.5rem 4rem;
+    height: 100vh;
+    height: 100dvh;
     min-height: 580px;
+    padding: 0 1.5rem calc(3.5rem + env(safe-area-inset-bottom, 0px));
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: flex-start;
+    overflow: hidden;
+    position: relative;
+    background-color: #000000;
+  }
+
+  /* Centered and fully contained drone media wrapper on mobile */
+  .iw-product-media-wrapper {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    pointer-events: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* Force drone image to be contained, centered, and never clipped */
+  .iw-product-media-img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain !important;
+    object-position: center 36% !important;
+    transform-origin: center 36% !important;
+    padding: 0 1rem;
+    box-sizing: border-box;
+  }
+
+  /* Cinematic overlay gradients on mobile tuned so the centered drone is bright & pristine */
+  .iw-product-gradient-overlay {
+    background: linear-gradient(
+      180deg,
+      rgba(0, 0, 0, 0.45) 0%,
+      transparent 20%,
+      transparent 58%,
+      rgba(0, 0, 0, 0.95) 100%
+    ) !important;
+  }
+
+  .iw-product-vignette {
+    background: radial-gradient(
+      ellipse at 50% 36%,
+      transparent 55%,
+      rgba(0, 0, 0, 0.65) 100%
+    ) !important;
+  }
+
+  .iw-product-info-block {
+    position: relative;
+    z-index: 10;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+
+  .iw-product-cat-label {
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    margin-bottom: 0.35rem;
+    display: block;
   }
 
   .iw-product-title {
-    font-size: 2.2rem;
+    font-size: 2.1rem;
+    line-height: 1.1;
+    margin-bottom: 0.45rem;
   }
 
   .iw-product-tagline {
-    font-size: 1.15rem;
+    font-size: 1rem;
+    line-height: 1.35;
     margin-bottom: 1.25rem;
+    color: rgba(255, 255, 255, 0.78);
   }
 
   .iw-product-learn-btn {
-    padding: 9px 20px;
+    padding: 9px 22px;
     font-size: 0.85rem;
   }
 }

@@ -11,7 +11,7 @@ export const droneFleet = [
     categoryName: 'Surveillance, Mapping & Delivery Drone',
     name: 'Cyberone Trainer Drone',
     tagline: 'Dual-pilot remote training UAV',
-    image: '/assets/indo-crew.jpg',
+    image: '/assets/landing-products/cyberone-trainer.webp',
     url: 'https://www.indowings.com/products/cyberone-trainer-drone.php'
   },
   {
@@ -20,7 +20,7 @@ export const droneFleet = [
     categoryName: 'Surveillance, Mapping & Delivery Drone',
     name: 'Cyberone Lite',
     tagline: 'Rapid-deployment tactical scout UAV',
-    image: '/assets/indo-vtol.jpg',
+    image: '/assets/landing-products/cyberone-lite.webp',
     url: 'https://www.indowings.com/products/cyberone-lite.php'
   },
   {
@@ -29,7 +29,7 @@ export const droneFleet = [
     categoryName: 'Surveillance, Mapping & Delivery Drone',
     name: 'Cyberone Pro',
     tagline: 'Tactical battlefield surveillance',
-    image: '/assets/indo-tarmac.jpg',
+    image: '/assets/landing-products/cyberone-pro.webp',
     url: 'https://www.indowings.com/products/cyberonepro_v2.php'
   },
   {
@@ -38,17 +38,16 @@ export const droneFleet = [
     categoryName: 'Surveillance, Mapping & Delivery Drone',
     name: 'Cyberone Max',
     tagline: 'Heavy-lift logistics & delivery UAV',
-    image: '/assets/indo-cyberone-max.jpg',
+    image: '/assets/landing-products/cyberone-max.webp',
     url: 'https://www.indowings.com/products/cyberonemax.php'
   },
-
-    {
+  {
     id: 'e-series-pro',
     categoryKey: 'agriculture',
     categoryName: 'Agricultural Drone',
     name: 'E-Series Pro',
     tagline: 'Intelligent plant protection & spraying',
-    image: '/assets/indo-agri-eseries.jpg',
+    image: '/assets/landing-products/e-series-pro.webp',
     url: 'https://www.indowings.com/products/e-seriespro.php'
   },
   {
@@ -57,7 +56,7 @@ export const droneFleet = [
     categoryName: 'Agricultural Drone',
     name: 'S-Series Pro',
     tagline: 'Multispectral crop health mapping',
-    image: '/assets/indo-agri-sseries.jpg',
+    image: '/assets/landing-products/s-series-pro.webp',
     url: 'https://www.indowings.com/products/s-seriespro.php'
   }
 ];
@@ -74,30 +73,59 @@ export default function ProductShowcase({ onOpenDemo, onNavigate }) {
   useEffect(() => {
     const ctx = gsap.context(() => {
       const slides = gsap.utils.toArray('.iw-product-hero-slide');
-      slides.forEach((slide) => {
-        const img = slide.querySelector('.iw-product-media-img');
-        const infoBlock = slide.querySelector('.iw-product-info-block');
+      const mm = gsap.matchMedia();
 
-        if (img) {
-          // Hardware-accelerated smooth zoom scrub synchronized with scroll position
-          gsap.fromTo(
-            img,
-            { scale: 0.9 },
-            {
-              scale: 1.16,
-              ease: 'none',
-              scrollTrigger: {
-                trigger: slide,
-                start: 'top bottom',
-                end: 'bottom top',
-                scrub: 0.5,
-                invalidateOnRefresh: true
+      // DESKTOP: Full cinematic zoom scrub
+      mm.add("(min-width: 769px)", () => {
+        slides.forEach((slide) => {
+          const img = slide.querySelector('.iw-product-media-img');
+          if (img) {
+            gsap.fromTo(
+              img,
+              { scale: 0.92 },
+              {
+                scale: 1.15,
+                ease: 'none',
+                scrollTrigger: {
+                  trigger: slide,
+                  start: 'top bottom',
+                  end: 'bottom top',
+                  scrub: 0.5,
+                  invalidateOnRefresh: true
+                }
               }
-            }
-          );
-        }
+            );
+          }
+        });
+      });
 
-        // Text details reveal
+      // MOBILE: Restrained subtle zoom so drone stays 100% centered inside screen
+      mm.add("(max-width: 768px)", () => {
+        slides.forEach((slide) => {
+          const img = slide.querySelector('.iw-product-media-img');
+          if (img) {
+            gsap.fromTo(
+              img,
+              { scale: 0.97 },
+              {
+                scale: 1.03,
+                ease: 'none',
+                scrollTrigger: {
+                  trigger: slide,
+                  start: 'top bottom',
+                  end: 'bottom top',
+                  scrub: 0.5,
+                  invalidateOnRefresh: true
+                }
+              }
+            );
+          }
+        });
+      });
+
+      // Text details reveal
+      slides.forEach((slide) => {
+        const infoBlock = slide.querySelector('.iw-product-info-block');
         if (infoBlock) {
           const elements = infoBlock.children;
           gsap.fromTo(

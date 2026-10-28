@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import gsap from 'gsap';
 
 const slidesData = [
-  { id: 0, type: 'video', src: '/assets/cyberone-lite/video-opener.mp4', label: '01' },
+  { id: 0, type: 'video', src: '/assets/cyberone-max/strick-video.mp4', label: '01' },
   { id: 1, type: 'image', src: '/assets/cyberone-max/cyberonemax-hero-uhd.jpg', label: '02' },
   { id: 2, type: 'image', src: '/assets/cyberone-trainer/trainer-hero-hd.jpg', label: '03' },
   { id: 3, type: 'image', src: '/assets/cyberone-pro/cyberonepro4.avif', label: '04' },
@@ -126,7 +126,7 @@ export default function Hero({ triggerAnim = false }) {
             draggable="false"
             onContextMenu={(e) => e.preventDefault()}
           >
-            <source src="/assets/cyberone-lite/video-opener.mp4" type="video/mp4" />
+            <source src="/assets/cyberone-max/strick-video.mp4" type="video/mp4" />
           </video>
         </div>
 

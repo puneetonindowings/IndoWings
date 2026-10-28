@@ -48,7 +48,7 @@ export const droneFleet = [
     categoryName: 'Agricultural Drone',
     name: 'E-Series Pro',
     tagline: 'Intelligent plant protection & spraying',
-    image: '/assets/indo-agri-eseries.jpg',
+    image: '/assets/eseries-hero-hd.jpg',
     url: 'https://www.indowings.com/products/e-seriespro.php'
   },
   {
@@ -57,7 +57,7 @@ export const droneFleet = [
     categoryName: 'Agricultural Drone',
     name: 'S-Series Pro',
     tagline: 'Multispectral crop health mapping',
-    image: '/assets/indo-agri-sseries.jpg',
+    image: '/assets/sseries-hero-hd.jpg',
     url: 'https://www.indowings.com/products/s-seriespro.php'
   }
 ];

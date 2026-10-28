@@ -11,7 +11,6 @@ const INSTAGRAM_POSTS = [
     id: 'reel-1',
     title: 'Surveillance',
     subtitle: 'Autonomous Perimeter Security',
-    tag: 'REEL // 01',
     video: '/assets/insta/reel-1.mp4',
     url: 'https://www.instagram.com/p/DcxdkEDNj87/',
     ariaLabel: 'View Indo Wings Surveillance Drone Technology Reel on Instagram'
@@ -20,7 +19,6 @@ const INSTAGRAM_POSTS = [
     id: 'reel-2',
     title: 'Target Tracking',
     subtitle: 'Edge-AI Computer Vision',
-    tag: 'REEL // 02',
     video: '/assets/insta/reel-2.mp4',
     url: 'https://www.instagram.com/p/Dccx4AWNPDq/',
     ariaLabel: 'View Indo Wings Target Locking & Tracking Reel on Instagram'
@@ -29,7 +27,6 @@ const INSTAGRAM_POSTS = [
     id: 'reel-3',
     title: 'Police Expo',
     subtitle: 'Cyberone Tactical Lineup',
-    tag: 'REEL // 03',
     video: '/assets/insta/reel-3.mp4',
     url: 'https://www.instagram.com/p/DctJVlwNz_Q/',
     ariaLabel: 'View Indo Wings Police Expo Showcase Reel on Instagram'
@@ -38,7 +35,6 @@ const INSTAGRAM_POSTS = [
     id: 'reel-4',
     title: 'Aerial Solutions',
     subtitle: 'Enterprise Survey & Mapping',
-    tag: 'REEL // 04',
     video: '/assets/insta/reel-4.mp4',
     url: 'https://www.instagram.com/p/DdLz1JhtBcy/',
     ariaLabel: 'View Indo Wings Aerial Solutions Reel on Instagram'
@@ -47,7 +43,6 @@ const INSTAGRAM_POSTS = [
     id: 'reel-5',
     title: 'Built for the Future',
     subtitle: 'Next-Gen Sovereign Aerospace',
-    tag: 'REEL // 05',
     video: '/assets/insta/reel-5.mp4',
     url: 'https://www.instagram.com/p/DcS8S8DNBtb/',
     ariaLabel: 'View Indo Wings Built for the Future Reel on Instagram'
@@ -224,9 +219,8 @@ export default function InstagramSection() {
                 {/* CINEMATIC SHADE & VIGNETTE */}
                 <div className="iw-insta-shade" />
 
-                {/* TOP BAR: TAG & FROSTED INSTAGRAM BADGE */}
+                {/* TOP BAR: FROSTED INSTAGRAM BADGE */}
                 <div className="iw-insta-tile-top">
-                  <span className="iw-insta-tag-badge">{item.tag}</span>
                   <div className="iw-insta-badge-circle" title="Open Reel on Instagram">
                     <Instagram size={15} strokeWidth={2.3} />
                   </div>

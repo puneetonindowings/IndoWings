@@ -647,6 +647,7 @@ a {
   }
 
   .iw-hero-helsing-container {
+    bottom: max(2rem, calc(1.5rem + env(safe-area-inset-bottom, 0px)));
     padding: 0 0.5rem;
   }
 

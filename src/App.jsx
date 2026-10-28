@@ -5,6 +5,7 @@ import MissionManifesto from './components/MissionManifesto.jsx';
 import ProductShowcase from './components/ProductShowcase.jsx';
 import FeaturedOn from './components/FeaturedOn.jsx';
 import BlogSection from './components/BlogSection.jsx';
+import InstagramSection from './components/InstagramSection.jsx';
 import Footer from './components/Footer.jsx';
 import DemoModal from './components/DemoModal.jsx';
 import LoginModal from './components/LoginModal.jsx';
@@ -111,6 +112,7 @@ export default function App() {
         e.target.closest('.iw-product-hero-slide') ||
         e.target.closest('.iw-featured-section') ||
         e.target.closest('.iw-blog-section') ||
+        e.target.closest('.iw-insta-section') ||
         e.target.closest('.iw-footer-section') ||
         e.target.closest('.iw-header') ||
         e.target.closest('.iw-c1-page') ||
@@ -252,6 +254,9 @@ export default function App() {
 
           {/* ANDURIL STYLE EDITORIAL NEWS & INSIGHTS (WITH INDOWINGS SOVEREIGN DEFENSE PALETTE) */}
           <BlogSection />
+
+          {/* AUTHENTIC INDOWINGS INSTAGRAM SHOWCASE */}
+          <InstagramSection />
 
           {/* SHIELD AI STYLE FOOTER (WITH INDOWINGS SOVEREIGN DEFENSE AESTHETICS & GIANT WATERMARK) */}
           <Footer 

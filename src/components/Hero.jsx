@@ -2,11 +2,11 @@ import React, { useState, useEffect, useRef } from 'react';
 import gsap from 'gsap';
 
 const slidesData = [
-  { id: 0, type: 'video', src: '/assets/cyberone-max/strick-video.mp4', label: '01' },
+  { id: 0, type: 'image', src: '/assets/cyberone-lite/lite-hero-hd.jpg', label: '01' },
   { id: 1, type: 'image', src: '/assets/cyberone-max/cyberonemax-hero-uhd.jpg', label: '02' },
   { id: 2, type: 'image', src: '/assets/cyberone-trainer/trainer-hero-hd.jpg', label: '03' },
   { id: 3, type: 'image', src: '/assets/cyberone-pro/cyberonepro4.avif', label: '04' },
-  { id: 4, type: 'image', src: '/assets/cyberone-lite/lite-hero-hd.jpg', label: '05' }
+  { id: 4, type: 'image', src: '/assets/eseries-hero-hd.jpg', label: '05' }
 ];
 
 export default function Hero({ triggerAnim = false }) {
@@ -26,33 +26,9 @@ export default function Hero({ triggerAnim = false }) {
     return () => clearInterval(timer);
   }, [totalSlides, currentSlide]);
 
-  // Video playback management on slide change & viewport visibility
+  // Auto-slide transition effect
   useEffect(() => {
-    let isIntersecting = true;
-
-    const observer = new IntersectionObserver(([entry]) => {
-      isIntersecting = entry.isIntersecting;
-      if (!isIntersecting && videoRef.current) {
-        videoRef.current.pause();
-      } else if (isIntersecting && currentSlide === 0 && videoRef.current) {
-        videoRef.current.play().catch(() => {});
-      }
-    }, { threshold: 0.1 });
-
-    const heroEl = document.getElementById('hero');
-    if (heroEl) observer.observe(heroEl);
-
-    if (currentSlide === 0 && isIntersecting) {
-      if (videoRef.current) {
-        videoRef.current.play().catch(() => {});
-      }
-    } else {
-      if (videoRef.current) {
-        videoRef.current.pause();
-      }
-    }
-
-    return () => observer.disconnect();
+    // Media transitions handled smoothly by CSS opacity
   }, [currentSlide]);
 
   // MANUAL KEYBOARD NAVIGATION: Arrow keys
@@ -112,22 +88,16 @@ export default function Hero({ triggerAnim = false }) {
       {/* FULLSCREEN PRISTINE MEDIA STACK (PROTECTED AGAINST DRAG & THEFT) */}
       <div className="qs-media-stack">
         
-        {/* SLIDE 0: AUTHENTIC INDOWINGS TACTICAL UAV VIDEO */}
+        {/* SLIDE 0: CYBERONE LITE AGILE TACTICAL SCOUT */}
         <div className={`qs-slide ${currentSlide === 0 ? 'active' : ''}`}>
-          <video
-            ref={videoRef}
-            className="qs-media"
-            autoPlay
-            muted
-            loop
-            playsInline
-            preload="auto"
-            poster="/assets/cyberone-max/cyberonemax-hero-uhd.jpg"
+          <img 
+            src="/assets/cyberone-lite/lite-hero-hd.jpg" 
+            alt="IndoWings Cyberone Lite Tactical Scout UAV" 
+            className="qs-media" 
             draggable="false"
             onContextMenu={(e) => e.preventDefault()}
-          >
-            <source src="/assets/cyberone-max/strick-video.mp4" type="video/mp4" />
-          </video>
+            onDragStart={(e) => e.preventDefault()}
+          />
         </div>
 
         {/* SLIDE 1: CYBERONE MAX HEAVY LIFT */}
@@ -166,11 +136,11 @@ export default function Hero({ triggerAnim = false }) {
           />
         </div>
 
-        {/* SLIDE 4: CYBERONE LITE AGILE SCOUT */}
+        {/* SLIDE 4: E-SERIES PRO PRECISION AGRICULTURE */}
         <div className={`qs-slide ${currentSlide === 4 ? 'active' : ''}`}>
           <img 
-            src="/assets/cyberone-lite/lite-hero-hd.jpg" 
-            alt="IndoWings Cyberone Lite Tactical Scout UAV in Flight" 
+            src="/assets/eseries-hero-hd.jpg" 
+            alt="IndoWings E-Series Pro Precision Agriculture Drone" 
             className="qs-media" 
             draggable="false"
             onContextMenu={(e) => e.preventDefault()}

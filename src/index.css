@@ -1141,6 +1141,14 @@ textarea,
   pointer-events: none;
 }
 
+.iw-product-media-picture {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
 .iw-product-media-img {
   position: absolute;
   inset: 0;
@@ -1161,8 +1169,9 @@ textarea,
   height: 100%;
   z-index: 2;
   background:
-    linear-gradient(180deg, rgba(0, 0, 0, 0.5) 0%, transparent 22%, transparent 60%, rgba(0, 0, 0, 0.95) 100%),
-    linear-gradient(90deg, rgba(0, 0, 0, 0.88) 0%, rgba(0, 0, 0, 0.4) 38%, transparent 75%);
+    linear-gradient(180deg, rgba(0, 0, 0, 0.4) 0%, transparent 22%, transparent 65%, rgba(0, 0, 0, 0.92) 100%),
+    radial-gradient(ellipse at 18% 85%, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.4) 42%, transparent 72%);
+  pointer-events: none;
 }
 
 .iw-product-vignette {
@@ -1171,7 +1180,8 @@ textarea,
   width: 100%;
   height: 100%;
   z-index: 2;
-  background: radial-gradient(ellipse at 50% 50%, transparent 45%, rgba(0, 0, 0, 0.8) 100%);
+  background: radial-gradient(ellipse at 50% 50%, transparent 60%, rgba(0, 0, 0, 0.45) 100%);
+  pointer-events: none;
 }
 
 .iw-product-shield {
@@ -1410,36 +1420,40 @@ textarea,
     justify-content: center;
   }
 
-  /* Force drone image to be contained, centered, and never clipped */
+  .iw-product-media-picture {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+
+  /* Dedicated 9:16 portrait master: drone perfectly centered at 32% height, never clipped */
   .iw-product-media-img {
     position: absolute;
     inset: 0;
     width: 100%;
     height: 100%;
-    object-fit: contain !important;
-    object-position: center 36% !important;
-    transform-origin: center 36% !important;
-    padding: 0 1rem;
+    object-fit: cover !important;
+    object-position: center top !important;
+    transform-origin: center 32% !important;
+    padding: 0 !important;
     box-sizing: border-box;
   }
 
-  /* Cinematic overlay gradients on mobile tuned so the centered drone is bright & pristine */
+  /* Cinematic overlay gradients on mobile tuned so the centered drone is 100% bright & crystal clear */
   .iw-product-gradient-overlay {
     background: linear-gradient(
       180deg,
-      rgba(0, 0, 0, 0.45) 0%,
-      transparent 20%,
-      transparent 58%,
+      rgba(0, 0, 0, 0.25) 0%,
+      transparent 18%,
+      transparent 55%,
       rgba(0, 0, 0, 0.95) 100%
     ) !important;
   }
 
   .iw-product-vignette {
-    background: radial-gradient(
-      ellipse at 50% 36%,
-      transparent 55%,
-      rgba(0, 0, 0, 0.65) 100%
-    ) !important;
+    display: none !important;
   }
 
   .iw-product-info-block {

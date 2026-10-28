@@ -1085,12 +1085,42 @@ textarea,
 
 @media (max-width: 768px) {
   .iw-manifesto-section {
-    padding: 0 1.5rem 4rem;
+    padding: 30vh 1.5rem 3.5rem;
+    min-height: 100vh;
+    min-height: 100dvh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+  }
+
+  .iw-manifesto-bg-img {
+    object-position: 63% 18%;
+  }
+
+  /* Vertical cinematic gradient on mobile: Clear upper zone for aircraft & engineer, dark fade for text */
+  .iw-manifesto-gradient-overlay {
+    background: linear-gradient(
+      180deg,
+      rgba(0, 0, 0, 0.42) 0%,
+      rgba(0, 0, 0, 0.0) 18%,
+      rgba(0, 0, 0, 0.05) 36%,
+      rgba(0, 0, 0, 0.52) 58%,
+      rgba(0, 0, 0, 0.88) 78%,
+      rgba(0, 0, 0, 0.98) 94%,
+      #000000 100%
+    );
+  }
+
+  .iw-manifesto-bottom-fade {
+    height: 100px;
+    background: linear-gradient(to top, #000000 0%, transparent 100%);
   }
 
   .iw-manifesto-headline {
-    font-size: 2.2rem;
-    line-height: 1.12;
+    font-size: clamp(1.75rem, 5.4vw, 2.15rem);
+    line-height: 1.14;
+    letter-spacing: -0.025em;
+    text-shadow: 0 4px 24px rgba(0, 0, 0, 0.95);
   }
 
   .iw-br-desktop {
@@ -1098,13 +1128,52 @@ textarea,
   }
 
   .iw-manifesto-text-block {
-    gap: 1.5rem;
+    gap: 1.25rem;
   }
 
   .iw-manifesto-paragraphs {
     margin-left: 0;
     max-width: 100%;
-    gap: 1.25rem;
+    gap: 1rem;
+  }
+
+  .iw-manifesto-p-lead {
+    font-size: 0.95rem;
+    line-height: 1.56;
+    color: rgba(255, 255, 255, 0.95);
+    text-shadow: 0 2px 12px rgba(0, 0, 0, 0.95);
+  }
+
+  .iw-manifesto-p-sub {
+    font-size: 0.88rem;
+    line-height: 1.56;
+    color: rgba(255, 255, 255, 0.8);
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.95);
+  }
+}
+
+@media (max-width: 480px) {
+  .iw-manifesto-section {
+    padding: 26vh 1.25rem 2.75rem;
+  }
+
+  .iw-manifesto-bg-img {
+    object-position: 63% 15%;
+  }
+
+  .iw-manifesto-headline {
+    font-size: 1.68rem;
+    line-height: 1.15;
+  }
+
+  .iw-manifesto-p-lead {
+    font-size: 0.9rem;
+    line-height: 1.52;
+  }
+
+  .iw-manifesto-p-sub {
+    font-size: 0.84rem;
+    line-height: 1.52;
   }
 }
 
@@ -1998,17 +2067,18 @@ textarea,
 }
 
 /* ==========================================================================
-   AUTHENTIC INDOWINGS INSTAGRAM SHOWCASE (PERSPECTIVE ACCORDION)
+   AUTHENTIC INDOWINGS INSTAGRAM SHOWCASE (9:16 VERTICAL REELS)
    ========================================================================== */
 .iw-insta-section {
   position: relative;
   width: 100%;
   background-color: #000000;
   color: #ffffff;
-  padding: clamp(4.5rem, 7vw, 6.5rem) clamp(1.5rem, 4vw, 4rem);
+  padding: clamp(6rem, 8.5vw, 8.5rem) clamp(1.5rem, 4vw, 4rem) clamp(5rem, 7vw, 7rem);
   border-top: 1px solid rgba(255, 255, 255, 0.1);
   box-sizing: border-box;
   overflow: hidden;
+  scroll-margin-top: 120px;
 }
 
 .iw-insta-inner {
@@ -2111,23 +2181,22 @@ textarea,
   transform: translate(2px, -2px);
 }
 
-/* 2. PERSPECTIVE TILES */
+/* 2. AUTHENTIC 9:16 VERTICAL REEL GRID */
 .iw-insta-tiles-wrapper {
-  display: flex;
-  align-items: stretch;
-  gap: clamp(10px, 1.2vw, 16px);
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: clamp(12px, 1.4vw, 20px);
   width: 100%;
-  height: clamp(400px, 36vw, 520px);
-  perspective: 1400px;
+  max-width: 1560px;
+  margin: 0 auto;
 }
 
 .iw-insta-tile {
   position: relative;
   display: block;
-  flex: 1 1 0;
-  min-width: 0;
-  height: 100%;
-  border-radius: 18px;
+  width: 100%;
+  aspect-ratio: 9 / 16;
+  border-radius: 20px;
   overflow: hidden;
   background: #0d0d0d;
   border: 1px solid rgba(255, 255, 255, 0.12);
@@ -2137,17 +2206,26 @@ textarea,
   box-shadow: 0 12px 32px rgba(0, 0, 0, 0.55);
   transform: translateZ(0);
   transition:
-    flex-grow 650ms cubic-bezier(0.22, 1, 0.36, 1),
-    border-color 350ms ease,
-    box-shadow 350ms ease,
-    transform 350ms ease;
-  will-change: flex-grow;
+    transform 380ms cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 300ms ease,
+    box-shadow 380ms ease,
+    opacity 300ms ease,
+    filter 300ms ease;
+  will-change: transform, box-shadow;
 }
 
-.iw-insta-tile.is-active {
-  flex-grow: 2.3;
-  border-color: rgba(239, 127, 26, 0.7);
-  box-shadow: 0 24px 56px rgba(0, 0, 0, 0.75), 0 0 32px rgba(239, 127, 26, 0.18);
+/* Subtle focus spotlight effect: non-hovered tiles slightly dim */
+.iw-insta-tiles-wrapper:hover .iw-insta-tile:not(:hover):not(.is-hovered) {
+  opacity: 0.72;
+  filter: brightness(0.85);
+}
+
+.iw-insta-tile:hover,
+.iw-insta-tile.is-hovered {
+  transform: translateY(-10px) scale(1.025);
+  border-color: rgba(239, 127, 26, 0.85);
+  box-shadow: 0 24px 50px rgba(0, 0, 0, 0.8), 0 0 35px rgba(239, 127, 26, 0.35);
+  z-index: 5;
 }
 
 .iw-insta-video {
@@ -2162,9 +2240,9 @@ textarea,
   transition: transform 900ms cubic-bezier(0.2, 0.75, 0.25, 1);
 }
 
-.iw-insta-tile.is-active .iw-insta-video,
-.iw-insta-tile:hover .iw-insta-video {
-  transform: scale(1.055);
+.iw-insta-tile:hover .iw-insta-video,
+.iw-insta-tile.is-hovered .iw-insta-video {
+  transform: scale(1.06);
 }
 
 .iw-insta-shade {
@@ -2174,21 +2252,21 @@ textarea,
   pointer-events: none;
   background: linear-gradient(
     180deg,
-    rgba(0, 0, 0, 0.38) 0%,
-    rgba(0, 0, 0, 0.05) 32%,
-    rgba(0, 0, 0, 0.32) 65%,
-    rgba(0, 0, 0, 0.94) 100%
+    rgba(0, 0, 0, 0.4) 0%,
+    rgba(0, 0, 0, 0.04) 28%,
+    rgba(0, 0, 0, 0.25) 58%,
+    rgba(0, 0, 0, 0.92) 100%
   );
   transition: background 350ms ease;
 }
 
-.iw-insta-tile.is-active .iw-insta-shade,
-.iw-insta-tile:hover .iw-insta-shade {
+.iw-insta-tile:hover .iw-insta-shade,
+.iw-insta-tile.is-hovered .iw-insta-shade {
   background: linear-gradient(
     180deg,
-    rgba(0, 0, 0, 0.45) 0%,
-    rgba(0, 0, 0, 0.08) 28%,
-    rgba(0, 0, 0, 0.4) 60%,
+    rgba(0, 0, 0, 0.48) 0%,
+    rgba(0, 0, 0, 0.08) 25%,
+    rgba(0, 0, 0, 0.35) 55%,
     rgba(0, 0, 0, 0.96) 100%
   );
 }
@@ -2196,9 +2274,9 @@ textarea,
 /* TOP OVERLAY */
 .iw-insta-tile-top {
   position: absolute;
-  top: 16px;
-  left: 16px;
-  right: 16px;
+  top: 14px;
+  left: 14px;
+  right: 14px;
   z-index: 3;
   display: flex;
   align-items: center;
@@ -2208,38 +2286,39 @@ textarea,
 
 .iw-insta-tag-badge {
   font-family: var(--font-mono, monospace);
-  font-size: 0.68rem;
+  font-size: 0.65rem;
   font-weight: 700;
-  letter-spacing: 0.14em;
-  color: rgba(255, 255, 255, 0.85);
+  letter-spacing: 0.12em;
+  color: rgba(255, 255, 255, 0.9);
   background: rgba(0, 0, 0, 0.55);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
-  padding: 4px 9px;
+  padding: 4px 8px;
   border-radius: 6px;
-  border: 1px solid rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.16);
 }
 
 .iw-insta-badge-circle {
-  width: 36px;
-  height: 36px;
+  width: 34px;
+  height: 34px;
   border-radius: 50%;
   display: grid;
   place-items: center;
-  background: rgba(0, 0, 0, 0.45);
-  border: 1px solid rgba(255, 255, 255, 0.28);
+  background: rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.3);
   color: #ffffff;
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   transition: all 0.3s ease;
 }
 
-.iw-insta-tile.is-active .iw-insta-badge-circle,
-.iw-insta-tile:hover .iw-insta-badge-circle {
+.iw-insta-tile:hover .iw-insta-badge-circle,
+.iw-insta-tile.is-hovered .iw-insta-badge-circle {
   background: #ef7f1a;
   border-color: #ef7f1a;
   color: #000000;
-  transform: scale(1.08);
+  transform: scale(1.1);
+  box-shadow: 0 0 20px rgba(239, 127, 26, 0.5);
 }
 
 /* BOTTOM OVERLAY */
@@ -2249,31 +2328,26 @@ textarea,
   left: 0;
   right: 0;
   z-index: 3;
-  padding: clamp(16px, 1.8vw, 24px);
+  padding: clamp(14px, 1.4vw, 20px);
   pointer-events: none;
   display: flex;
   flex-direction: column;
-  gap: 5px;
+  gap: 4px;
 }
 
 .iw-insta-tile-subtitle {
   font-family: var(--font-mono, monospace);
-  font-size: 0.72rem;
+  font-size: 0.68rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: #ef7f1a;
   font-weight: 700;
-  opacity: 0;
-  transform: translateY(6px);
-  transition: opacity 300ms ease, transform 300ms ease;
+  opacity: 0.85;
+  transform: translateY(0);
+  transition: opacity 300ms ease, color 300ms ease;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-}
-
-.iw-insta-tile.is-active .iw-insta-tile-subtitle {
-  opacity: 1;
-  transform: translateY(0);
 }
 
 .iw-insta-tile-headline-row {
@@ -2286,7 +2360,7 @@ textarea,
 .iw-insta-tile-title {
   margin: 0;
   font-family: var(--font-heading, 'Space Grotesk', 'Inter', sans-serif);
-  font-size: clamp(1.15rem, 1.45vw, 1.45rem);
+  font-size: clamp(1.05rem, 1.25vw, 1.3rem);
   font-weight: 600;
   color: #ffffff;
   letter-spacing: -0.01em;
@@ -2297,26 +2371,24 @@ textarea,
 }
 
 .iw-insta-view-icon {
-  width: 28px;
-  height: 28px;
+  width: 26px;
+  height: 26px;
   border-radius: 50%;
   background: rgba(255, 255, 255, 0.12);
   border: 1px solid rgba(255, 255, 255, 0.25);
   display: grid;
   place-items: center;
   color: #ffffff;
-  opacity: 0;
-  transform: scale(0.8);
-  transition: opacity 250ms ease, transform 250ms ease, background 250ms ease;
+  opacity: 0.8;
+  transform: scale(0.9);
+  transition: opacity 250ms ease, transform 250ms ease, background 250ms ease, color 250ms ease;
   flex-shrink: 0;
 }
 
-.iw-insta-tile.is-active .iw-insta-view-icon {
+.iw-insta-tile:hover .iw-insta-view-icon,
+.iw-insta-tile.is-hovered .iw-insta-view-icon {
   opacity: 1;
-  transform: scale(1);
-}
-
-.iw-insta-tile.is-active:hover .iw-insta-view-icon {
+  transform: scale(1.08);
   background: #ef7f1a;
   border-color: #ef7f1a;
   color: #000000;
@@ -2332,20 +2404,19 @@ textarea,
 }
 
 /* RESPONSIVE BREAKPOINTS */
-@media (max-width: 991px) {
+@media (max-width: 1200px) {
   .iw-insta-tiles-wrapper {
-    height: 380px;
-    gap: 10px;
+    gap: 12px;
   }
 
-  .iw-insta-tile.is-active {
-    flex-grow: 1.8;
+  .iw-insta-tile {
+    border-radius: 16px;
   }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 991px) {
   .iw-insta-section {
-    padding: 3.5rem 1.25rem 4.5rem;
+    padding: clamp(5rem, 7vw, 6.5rem) 1.25rem 4.5rem;
   }
 
   .iw-insta-header {
@@ -2355,38 +2426,35 @@ textarea,
   }
 
   .iw-insta-tiles-wrapper {
+    display: flex;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+    gap: 14px;
     width: calc(100% + 2.5rem);
     margin-left: -1.25rem;
     margin-right: -1.25rem;
     padding: 0.5rem 1.25rem 1.5rem;
-    overflow-x: auto;
-    overflow-y: hidden;
-    gap: 12px;
-    scroll-snap-type: x mandatory;
     overscroll-behavior-x: contain;
     -webkit-overflow-scrolling: touch;
-    height: auto;
     scrollbar-width: thin;
     scrollbar-color: rgba(239, 127, 26, 0.6) rgba(255, 255, 255, 0.06);
   }
 
-  .iw-insta-tile,
-  .iw-insta-tile.is-active {
-    flex: 0 0 min(76vw, 300px);
-    width: min(76vw, 300px);
-    height: auto;
-    aspect-ratio: 9 / 14;
-    border-radius: 16px;
+  .iw-insta-tile {
+    flex: 0 0 min(68vw, 260px);
+    width: min(68vw, 260px);
+    aspect-ratio: 9 / 16;
+    border-radius: 18px;
     scroll-snap-align: start;
-    flex-grow: 0 !important;
   }
 
-  .iw-insta-tile-subtitle {
+  .iw-insta-tile .iw-insta-tile-subtitle {
     opacity: 1 !important;
     transform: none !important;
   }
 
-  .iw-insta-view-icon {
+  .iw-insta-tile .iw-insta-view-icon {
     opacity: 1 !important;
     transform: none !important;
   }

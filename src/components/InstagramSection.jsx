@@ -56,7 +56,7 @@ const INSTAGRAM_POSTS = [
 
 export default function InstagramSection() {
   const sectionRef = useRef(null);
-  const [activeIndex, setActiveIndex] = useState(0);
+  const [hoveredIndex, setHoveredIndex] = useState(null);
   const videoRefs = useRef([]);
 
   // Ensure videos autoplay muted safely across modern browser policies
@@ -67,7 +67,7 @@ export default function InstagramSection() {
         const playPromise = video.play();
         if (playPromise !== undefined) {
           playPromise.catch(() => {
-            // Browser autoplay policy caught safely
+            // Autoplay policy handled safely
           });
         }
       }
@@ -123,7 +123,7 @@ export default function InstagramSection() {
       onDragStart={(e) => e.preventDefault()}
     >
       <div className="iw-insta-inner">
-        {/* MINIMAL EDITORIAL HEADER */}
+        {/* MINIMAL EDITORIAL HEADER WITH AMPLE CLEARANCE */}
         <header className="iw-insta-header">
           <div className="iw-insta-header-left">
             <div className="iw-insta-eyebrow">
@@ -146,13 +146,13 @@ export default function InstagramSection() {
           </a>
         </header>
 
-        {/* 5-TILE PERSPECTIVE ACCORDION STRIP */}
+        {/* 5 VERTICAL 9:16 INSTAGRAM REEL CARDS */}
         <div 
           className="iw-insta-tiles-wrapper"
-          onMouseLeave={() => setActiveIndex(0)}
+          onMouseLeave={() => setHoveredIndex(null)}
         >
           {INSTAGRAM_POSTS.map((item, index) => {
-            const isActive = activeIndex === index;
+            const isHovered = hoveredIndex === index;
 
             return (
               <a
@@ -161,11 +161,13 @@ export default function InstagramSection() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={item.ariaLabel}
-                className={`iw-insta-tile ${isActive ? 'is-active' : ''}`}
-                onMouseEnter={() => setActiveIndex(index)}
-                onFocus={() => setActiveIndex(index)}
+                className={`iw-insta-tile ${isHovered ? 'is-hovered' : ''}`}
+                onMouseEnter={() => setHoveredIndex(index)}
+                onMouseLeave={() => setHoveredIndex(null)}
+                onFocus={() => setHoveredIndex(index)}
+                onBlur={() => setHoveredIndex(null)}
               >
-                {/* VIDEO BACKGROUND */}
+                {/* 9:16 REEL VIDEO BACKGROUND */}
                 <video
                   ref={(el) => (videoRefs.current[index] = el)}
                   src={item.video}
@@ -183,7 +185,7 @@ export default function InstagramSection() {
                 {/* TOP BAR: TAG & FROSTED INSTAGRAM BADGE */}
                 <div className="iw-insta-tile-top">
                   <span className="iw-insta-tag-badge">{item.tag}</span>
-                  <div className="iw-insta-badge-circle" title="Open on Instagram">
+                  <div className="iw-insta-badge-circle" title="Open Reel on Instagram">
                     <Instagram size={15} strokeWidth={2.3} />
                   </div>
                 </div>

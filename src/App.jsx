@@ -7,6 +7,7 @@ import FeaturedOn from './components/FeaturedOn.jsx';
 import BlogSection from './components/BlogSection.jsx';
 import InstagramSection from './components/InstagramSection.jsx';
 import TrustedBy from './components/TrustedBy.jsx';
+import FaqSection from './components/FaqSection.jsx';
 import Footer from './components/Footer.jsx';
 import DemoModal from './components/DemoModal.jsx';
 import LoginModal from './components/LoginModal.jsx';
@@ -115,6 +116,7 @@ export default function App() {
         e.target.closest('.iw-blog-section') ||
         e.target.closest('.iw-insta-section') ||
         e.target.closest('.iw-trusted-section') ||
+        e.target.closest('.iw-faq-section') ||
         e.target.closest('.iw-footer-section') ||
         e.target.closest('.iw-header') ||
         e.target.closest('.iw-c1-page') ||
@@ -262,6 +264,9 @@ export default function App() {
 
           {/* KEY ASSOCIATIONS & ENTERPRISE CLIENTS (CONTINUOUS SCROLLING LOOP) */}
           <TrustedBy />
+
+          {/* FREQUENTLY ASKED QUESTIONS ACCORDION */}
+          <FaqSection onOpenDemo={handleOpenDemoWithProduct} />
 
           {/* SHIELD AI STYLE FOOTER (WITH INDOWINGS SOVEREIGN DEFENSE AESTHETICS & GIANT WATERMARK) */}
           <Footer 

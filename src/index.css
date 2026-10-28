@@ -1486,6 +1486,11 @@ textarea,
     gap: 2.5rem;
   }
 
+  /* Hide background grid lines on mobile so no vertical or horizontal lines appear across the content */
+  .iw-featured-grid {
+    display: none !important;
+  }
+
   .iw-featured-title {
     font-size: 1.85rem;
   }

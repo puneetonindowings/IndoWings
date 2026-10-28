@@ -2,36 +2,34 @@ import React, { useState, useRef, useEffect } from 'react';
 import { ChevronDown, ArrowRight, ArrowUpRight, Menu, X } from 'lucide-react';
 
 /**
- * EXACT SPACEX STYLE MINIMALIST VERTICAL TEXT DROPDOWN
- * Clean, pure uppercase navigation items floating directly beneath parent nav items
+ * Clean, standard IndoWings navigation data matching indowings.com
  */
 const menuData = {
-  company: [
-    { label: 'ABOUT INDOWINGS', action: 'manifesto' },
-    { label: 'LEADERSHIP & VISION', action: 'manifesto' },
-    { label: 'NEWS & INSIGHTS', href: '#news-insights' },
-    { label: 'CAREERS & CULTURE', action: 'demo' }
-  ],
   products: [
-    { label: 'CYBERONE TRAINER', drone: 'Cyberone Trainer Drone', route: 'cyberone-trainer', href: '#/products/cyberone-trainer-drone' },
-    { label: 'CYBERONE LITE', drone: 'Cyberone Lite', route: 'cyberone-lite', href: '#/products/cyberone-lite' },
-    { label: 'CYBERONE PRO', drone: 'Cyberone Pro', route: 'cyberone-pro', href: '#/products/cyberone-pro' },
-    { label: 'CYBERONE MAX', drone: 'Cyberone Max', route: 'cyberone-max', href: '#/products/cyberone-max' },
-    { label: 'E-SERIES PRO', drone: 'E-Series Pro', href: '#e-series-pro' },
-    { label: 'S-SERIES PRO', drone: 'S-Series Pro', href: '#s-series-pro' }
+    { label: 'Cyberone Trainer Drone', drone: 'Cyberone Trainer Drone', route: 'cyberone-trainer', href: '#/products/cyberone-trainer-drone' },
+    { label: 'Cyberone Lite', drone: 'Cyberone Lite', route: 'cyberone-lite', href: '#/products/cyberone-lite' },
+    { label: 'Cyberone Pro', drone: 'Cyberone Pro', route: 'cyberone-pro', href: '#/products/cyberone-pro' },
+    { label: 'Cyberone Max', drone: 'Cyberone Max', route: 'cyberone-max', href: '#/products/cyberone-max' },
+    { label: 'E-Series Pro', drone: 'E-Series Pro', href: '#e-series-pro' },
+    { label: 'S-Series Pro', drone: 'S-Series Pro', href: '#s-series-pro' }
   ],
   software: [
-    { label: 'INDOFLY AUTONOMY OS', drone: 'IndoFly Autonomy OS' },
-    { label: 'INDOSIM SIMULATOR', drone: 'IndoSIM Simulator' },
-    { label: 'PIX4D GEOSPATIAL', drone: 'Pix4D Geospatial Suite' }
+    { label: 'IndoFly', drone: 'IndoFly' },
+    { label: 'IndoSIM', drone: 'IndoSIM' },
+    { label: 'Pix4D', drone: 'Pix4D' }
   ],
   industries: [
-    { label: 'DEFENSE & BORDERS', drone: 'Defense & Borders' },
-    { label: 'MAPPING & SURVEY', drone: 'Mapping & Survey' },
-    { label: 'FOREST MONITORING', drone: 'Forest Monitoring' },
-    { label: 'DISASTER RELIEF & SAR', drone: 'Disaster Relief & SAR' },
-    { label: 'ENERGY & POWER TRANSMISSION', drone: 'Energy & Power Transmission' },
-    { label: 'PRECISION AGRICULTURE', drone: 'Precision Agriculture' }
+    { label: 'Mapping & Survey', drone: 'Mapping & Survey' },
+    { label: 'Forest Monitoring', drone: 'Forest Monitoring' },
+    { label: 'Fire Fighting', drone: 'Fire Fighting' },
+    { label: 'Disaster Management', drone: 'Disaster Management' },
+    { label: 'Energy & Power Transmission', drone: 'Energy & Power Transmission' },
+    { label: 'Agriculture', drone: 'Agriculture' }
+  ],
+  company: [
+    { label: 'About Us', action: 'about' },
+    { label: 'Media', href: '#news-insights' },
+    { label: 'Careers', action: 'demo' }
   ]
 };
 
@@ -56,8 +54,8 @@ function SpaceXDropdown({ items, onOpenDemo, onNavigate, onClose }) {
             } else if (item.href) {
               const el = document.querySelector(item.href);
               if (el) el.scrollIntoView({ behavior: 'smooth' });
-            } else if (item.action === 'manifesto') {
-              const el = document.getElementById('manifesto');
+            } else if (item.action === 'about' || item.action === 'manifesto') {
+              const el = document.getElementById('manifesto') || document.getElementById('about');
               if (el) el.scrollIntoView({ behavior: 'smooth' });
               else onOpenDemo();
             } else if (item.drone) {
@@ -76,10 +74,10 @@ function SpaceXDropdown({ items, onOpenDemo, onNavigate, onClose }) {
 }
 
 export default function Navbar({ onOpenDemo, onOpenLogin, onSelectAntiDrone, onNavigate }) {
-  const [activeMenu, setActiveMenu] = useState(null); // 'company' | 'products' | 'software' | 'industries' | null
+  const [activeMenu, setActiveMenu] = useState(null); // 'products' | 'software' | 'industries' | 'company' | null
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [isClosing, setIsClosing] = useState(false);
-  const [expandedSection, setExpandedSection] = useState('fleet');
+  const [expandedSection, setExpandedSection] = useState('products');
   const leaveTimeoutRef = useRef(null);
 
   const handleOpenMobile = () => {
@@ -125,7 +123,7 @@ export default function Navbar({ onOpenDemo, onOpenLogin, onSelectAntiDrone, onN
     <header className="iw-header">
       <div className="iw-header-inner">
         
-        {/* LEFT: EXACT INDOWINGS LOGO (Crisp White + Orange Wing Bars) */}
+        {/* LEFT: INDOWINGS LOGO */}
         <a 
           href="#" 
           className="iw-brand" 
@@ -145,29 +143,10 @@ export default function Navbar({ onOpenDemo, onOpenLogin, onSelectAntiDrone, onN
           />
         </a>
 
-        {/* CENTER: 5 MAIN NAVS WITH EXACT SPACEX VERTICAL DROPDOWNS */}
+        {/* CENTER: STANDARD MAIN NAVIGATION */}
         <nav className="iw-nav-center">
           
-          {/* 1. COMPANY */}
-          <div 
-            className={`iw-nav-item ${activeMenu === 'company' ? 'active' : ''}`}
-            onMouseEnter={() => handleMouseEnter('company')}
-            onMouseLeave={handleMouseLeave}
-          >
-            <button type="button" className="iw-nav-btn">
-              COMPANY <ChevronDown className="iw-chevron" />
-            </button>
-            {activeMenu === 'company' && (
-              <SpaceXDropdown 
-                items={menuData.company} 
-                onOpenDemo={onOpenDemo} 
-                onNavigate={onNavigate}
-                onClose={() => setActiveMenu(null)} 
-              />
-            )}
-          </div>
-
-          {/* 2. PRODUCTS */}
+          {/* 1. PRODUCTS */}
           <div 
             className={`iw-nav-item ${activeMenu === 'products' ? 'active' : ''}`}
             onMouseEnter={() => handleMouseEnter('products')}
@@ -186,7 +165,7 @@ export default function Navbar({ onOpenDemo, onOpenLogin, onSelectAntiDrone, onN
             )}
           </div>
 
-          {/* 3. SOFTWARE */}
+          {/* 2. SOFTWARE */}
           <div 
             className={`iw-nav-item ${activeMenu === 'software' ? 'active' : ''}`}
             onMouseEnter={() => handleMouseEnter('software')}
@@ -205,7 +184,7 @@ export default function Navbar({ onOpenDemo, onOpenLogin, onSelectAntiDrone, onN
             )}
           </div>
 
-          {/* 4. INDUSTRIES */}
+          {/* 3. INDUSTRIES */}
           <div 
             className={`iw-nav-item ${activeMenu === 'industries' ? 'active' : ''}`}
             onMouseEnter={() => handleMouseEnter('industries')}
@@ -217,6 +196,25 @@ export default function Navbar({ onOpenDemo, onOpenLogin, onSelectAntiDrone, onN
             {activeMenu === 'industries' && (
               <SpaceXDropdown 
                 items={menuData.industries} 
+                onOpenDemo={onOpenDemo} 
+                onNavigate={onNavigate}
+                onClose={() => setActiveMenu(null)} 
+              />
+            )}
+          </div>
+
+          {/* 4. COMPANY */}
+          <div 
+            className={`iw-nav-item ${activeMenu === 'company' ? 'active' : ''}`}
+            onMouseEnter={() => handleMouseEnter('company')}
+            onMouseLeave={handleMouseLeave}
+          >
+            <button type="button" className="iw-nav-btn">
+              COMPANY <ChevronDown className="iw-chevron" />
+            </button>
+            {activeMenu === 'company' && (
+              <SpaceXDropdown 
+                items={menuData.company} 
                 onOpenDemo={onOpenDemo} 
                 onNavigate={onNavigate}
                 onClose={() => setActiveMenu(null)} 
@@ -244,7 +242,7 @@ export default function Navbar({ onOpenDemo, onOpenLogin, onSelectAntiDrone, onN
 
         </nav>
 
-        {/* RIGHT: 3 ACTION LINKS + MOBILE BURGER TOGGLE */}
+        {/* RIGHT: ACTION BUTTONS */}
         <div className="iw-nav-right">
           <button 
             type="button" 
@@ -260,7 +258,7 @@ export default function Navbar({ onOpenDemo, onOpenLogin, onSelectAntiDrone, onN
             className="iw-action-link iw-action-desktop-only" 
             onClick={() => onOpenDemo()}
           >
-            <span>REQUEST FOR DEMO</span>
+            <span>REQUEST DEMO</span>
             <ArrowRight className="iw-action-arrow" />
           </button>
 
@@ -286,7 +284,7 @@ export default function Navbar({ onOpenDemo, onOpenLogin, onSelectAntiDrone, onN
 
       </div>
 
-      {/* FULLSCREEN MOBILE MENU (HARMATTAN AI & SPACEX AESTHETIC) */}
+      {/* FULLSCREEN MOBILE MENU */}
       {(mobileMenuOpen || isClosing) && (
         <div 
           className={`iw-fullscreen-menu ${mobileMenuOpen && !isClosing ? 'is-open' : ''} ${isClosing ? 'is-closing' : ''}`}
@@ -294,7 +292,7 @@ export default function Navbar({ onOpenDemo, onOpenLogin, onSelectAntiDrone, onN
           aria-modal="true"
           aria-label="Mobile Navigation"
         >
-          {/* TOP BAR: BRAND LOGO + HARMATTAN AI STYLE TACTICAL BOXED CLOSE BUTTON */}
+          {/* TOP BAR: BRAND LOGO + CLOSE BUTTON */}
           <div className="iw-fs-header">
             <a
               href="#"
@@ -327,18 +325,18 @@ export default function Navbar({ onOpenDemo, onOpenLogin, onSelectAntiDrone, onN
           <div className="iw-fs-body">
             <nav className="iw-fs-nav-list">
               
-              {/* SECTION 1: DRONE FLEET ACCORDION */}
+              {/* 1. PRODUCTS ACCORDION */}
               <div className="iw-fs-nav-group">
                 <button
                   type="button"
                   className="iw-fs-item iw-fs-accordion-trigger"
-                  onClick={() => setExpandedSection(prev => prev === 'fleet' ? null : 'fleet')}
+                  onClick={() => setExpandedSection(prev => prev === 'products' ? null : 'products')}
                 >
-                  <span>FLEET & PRODUCTS</span>
-                  <ChevronDown className={`iw-fs-chevron ${expandedSection === 'fleet' ? 'expanded' : ''}`} size={20} />
+                  <span>PRODUCTS</span>
+                  <ChevronDown className={`iw-fs-chevron ${expandedSection === 'products' ? 'expanded' : ''}`} size={20} />
                 </button>
 
-                {expandedSection === 'fleet' && (
+                {expandedSection === 'products' && (
                   <div className="iw-fs-sublinks">
                     <button
                       type="button"
@@ -350,7 +348,7 @@ export default function Navbar({ onOpenDemo, onOpenLogin, onSelectAntiDrone, onN
                       }}
                     >
                       <span className="iw-fs-dot"></span>
-                      CYBERONE TRAINER DRONE
+                      Cyberone Trainer Drone
                     </button>
                     <button
                       type="button"
@@ -362,7 +360,7 @@ export default function Navbar({ onOpenDemo, onOpenLogin, onSelectAntiDrone, onN
                       }}
                     >
                       <span className="iw-fs-dot"></span>
-                      CYBERONE LITE (TACTICAL SCOUT)
+                      Cyberone Lite
                     </button>
                     <button
                       type="button"
@@ -374,7 +372,7 @@ export default function Navbar({ onOpenDemo, onOpenLogin, onSelectAntiDrone, onN
                       }}
                     >
                       <span className="iw-fs-dot"></span>
-                      CYBERONE PRO (SURVEILLANCE)
+                      Cyberone Pro
                     </button>
                     <button
                       type="button"
@@ -386,7 +384,7 @@ export default function Navbar({ onOpenDemo, onOpenLogin, onSelectAntiDrone, onN
                       }}
                     >
                       <span className="iw-fs-dot"></span>
-                      CYBERONE MAX (HEAVY LIFT)
+                      Cyberone Max
                     </button>
                     <button
                       type="button"
@@ -399,7 +397,7 @@ export default function Navbar({ onOpenDemo, onOpenLogin, onSelectAntiDrone, onN
                       }}
                     >
                       <span className="iw-fs-dot"></span>
-                      E-SERIES PRO (AGRICULTURE)
+                      E-Series Pro
                     </button>
                     <button
                       type="button"
@@ -412,114 +410,234 @@ export default function Navbar({ onOpenDemo, onOpenLogin, onSelectAntiDrone, onN
                       }}
                     >
                       <span className="iw-fs-dot"></span>
-                      S-SERIES PRO (MAPPING)
+                      S-Series Pro
                     </button>
                   </div>
                 )}
               </div>
 
-              {/* SECTION 2: DEFENSE CAPABILITIES */}
+              {/* 2. SOFTWARE ACCORDION */}
               <div className="iw-fs-nav-group">
                 <button
                   type="button"
                   className="iw-fs-item iw-fs-accordion-trigger"
-                  onClick={() => setExpandedSection(prev => prev === 'defense' ? null : 'defense')}
+                  onClick={() => setExpandedSection(prev => prev === 'software' ? null : 'software')}
                 >
-                  <span>DEFENSE & C-UAS</span>
-                  <ChevronDown className={`iw-fs-chevron ${expandedSection === 'defense' ? 'expanded' : ''}`} size={20} />
+                  <span>SOFTWARE</span>
+                  <ChevronDown className={`iw-fs-chevron ${expandedSection === 'software' ? 'expanded' : ''}`} size={20} />
                 </button>
 
-                {expandedSection === 'defense' && (
+                {expandedSection === 'software' && (
                   <div className="iw-fs-sublinks">
                     <button
                       type="button"
                       className="iw-fs-sublink"
                       onClick={() => {
                         handleCloseMobile();
-                        onSelectAntiDrone();
+                        onOpenDemo('IndoFly');
                       }}
                     >
                       <span className="iw-fs-dot"></span>
-                      SKYCTRL ANTI-DRONE C-UAS
+                      IndoFly
                     </button>
                     <button
                       type="button"
                       className="iw-fs-sublink"
                       onClick={() => {
                         handleCloseMobile();
-                        onOpenDemo('Autonomous Border Security');
+                        onOpenDemo('IndoSIM');
                       }}
                     >
                       <span className="iw-fs-dot"></span>
-                      BORDER SURVEILLANCE GRID
+                      IndoSIM
                     </button>
                     <button
                       type="button"
                       className="iw-fs-sublink"
                       onClick={() => {
                         handleCloseMobile();
-                        onOpenDemo('Tactical Reconnaissance');
+                        onOpenDemo('Pix4D');
                       }}
                     >
                       <span className="iw-fs-dot"></span>
-                      TACTICAL RECONNAISSANCE
+                      Pix4D
                     </button>
                   </div>
                 )}
               </div>
 
-              {/* SECTION 3: COMPANY & MANIFESTO */}
+              {/* 3. INDUSTRIES ACCORDION */}
+              <div className="iw-fs-nav-group">
+                <button
+                  type="button"
+                  className="iw-fs-item iw-fs-accordion-trigger"
+                  onClick={() => setExpandedSection(prev => prev === 'industries' ? null : 'industries')}
+                >
+                  <span>INDUSTRIES</span>
+                  <ChevronDown className={`iw-fs-chevron ${expandedSection === 'industries' ? 'expanded' : ''}`} size={20} />
+                </button>
+
+                {expandedSection === 'industries' && (
+                  <div className="iw-fs-sublinks">
+                    <button
+                      type="button"
+                      className="iw-fs-sublink"
+                      onClick={() => {
+                        handleCloseMobile();
+                        onOpenDemo('Mapping & Survey');
+                      }}
+                    >
+                      <span className="iw-fs-dot"></span>
+                      Mapping & Survey
+                    </button>
+                    <button
+                      type="button"
+                      className="iw-fs-sublink"
+                      onClick={() => {
+                        handleCloseMobile();
+                        onOpenDemo('Forest Monitoring');
+                      }}
+                    >
+                      <span className="iw-fs-dot"></span>
+                      Forest Monitoring
+                    </button>
+                    <button
+                      type="button"
+                      className="iw-fs-sublink"
+                      onClick={() => {
+                        handleCloseMobile();
+                        onOpenDemo('Fire Fighting');
+                      }}
+                    >
+                      <span className="iw-fs-dot"></span>
+                      Fire Fighting
+                    </button>
+                    <button
+                      type="button"
+                      className="iw-fs-sublink"
+                      onClick={() => {
+                        handleCloseMobile();
+                        onOpenDemo('Disaster Management');
+                      }}
+                    >
+                      <span className="iw-fs-dot"></span>
+                      Disaster Management
+                    </button>
+                    <button
+                      type="button"
+                      className="iw-fs-sublink"
+                      onClick={() => {
+                        handleCloseMobile();
+                        onOpenDemo('Energy & Power Transmission');
+                      }}
+                    >
+                      <span className="iw-fs-dot"></span>
+                      Energy & Power Transmission
+                    </button>
+                    <button
+                      type="button"
+                      className="iw-fs-sublink"
+                      onClick={() => {
+                        handleCloseMobile();
+                        onOpenDemo('Agriculture');
+                      }}
+                    >
+                      <span className="iw-fs-dot"></span>
+                      Agriculture
+                    </button>
+                  </div>
+                )}
+              </div>
+
+              {/* 4. COMPANY ACCORDION */}
+              <div className="iw-fs-nav-group">
+                <button
+                  type="button"
+                  className="iw-fs-item iw-fs-accordion-trigger"
+                  onClick={() => setExpandedSection(prev => prev === 'company' ? null : 'company')}
+                >
+                  <span>COMPANY</span>
+                  <ChevronDown className={`iw-fs-chevron ${expandedSection === 'company' ? 'expanded' : ''}`} size={20} />
+                </button>
+
+                {expandedSection === 'company' && (
+                  <div className="iw-fs-sublinks">
+                    <button
+                      type="button"
+                      className="iw-fs-sublink"
+                      onClick={() => {
+                        handleCloseMobile();
+                        if (onNavigate) onNavigate('home');
+                        const el = document.getElementById('manifesto') || document.getElementById('about');
+                        if (el) el.scrollIntoView({ behavior: 'smooth' });
+                      }}
+                    >
+                      <span className="iw-fs-dot"></span>
+                      About Us
+                    </button>
+                    <button
+                      type="button"
+                      className="iw-fs-sublink"
+                      onClick={() => {
+                        handleCloseMobile();
+                        if (onNavigate) onNavigate('home');
+                        const el = document.getElementById('news-insights');
+                        if (el) el.scrollIntoView({ behavior: 'smooth' });
+                      }}
+                    >
+                      <span className="iw-fs-dot"></span>
+                      Media
+                    </button>
+                    <button
+                      type="button"
+                      className="iw-fs-sublink"
+                      onClick={() => {
+                        handleCloseMobile();
+                        onOpenDemo('Careers at IndoWings');
+                      }}
+                    >
+                      <span className="iw-fs-dot"></span>
+                      Careers
+                    </button>
+                  </div>
+                )}
+              </div>
+
+              {/* 5. ANTI-DRONE */}
               <div className="iw-fs-nav-group">
                 <button
                   type="button"
                   className="iw-fs-item"
                   onClick={() => {
                     handleCloseMobile();
-                    if (onNavigate) onNavigate('home');
-                    const el = document.getElementById('manifesto') || document.getElementById('about');
-                    if (el) el.scrollIntoView({ behavior: 'smooth' });
+                    onSelectAntiDrone();
                   }}
                 >
-                  <span>SOVEREIGN MANIFESTO</span>
+                  <span>ANTI-DRONE</span>
                   <ArrowRight size={18} className="iw-fs-item-arrow" />
                 </button>
               </div>
 
-              {/* SECTION 4: NEWS & INSIGHTS */}
+              {/* 6. CONTACT */}
               <div className="iw-fs-nav-group">
                 <button
                   type="button"
                   className="iw-fs-item"
                   onClick={() => {
                     handleCloseMobile();
-                    if (onNavigate) onNavigate('home');
-                    const el = document.getElementById('news-insights');
+                    const el = document.getElementById('contact');
                     if (el) el.scrollIntoView({ behavior: 'smooth' });
+                    else onOpenDemo('Contact Us');
                   }}
                 >
-                  <span>NEWS & INSIGHTS</span>
-                  <ArrowRight size={18} className="iw-fs-item-arrow" />
-                </button>
-              </div>
-
-              {/* SECTION 5: CONTACT & CAREERS */}
-              <div className="iw-fs-nav-group">
-                <button
-                  type="button"
-                  className="iw-fs-item"
-                  onClick={() => {
-                    handleCloseMobile();
-                    onOpenDemo('General Inquiry & Careers');
-                  }}
-                >
-                  <span>CONTACT US</span>
+                  <span>CONTACT</span>
                   <ArrowRight size={18} className="iw-fs-item-arrow" />
                 </button>
               </div>
 
             </nav>
 
-            {/* BOTTOM HIGH-IMPACT HARMATTAN-STYLE ACTIONS */}
+            {/* BOTTOM ACTIONS */}
             <div className="iw-fs-bottom">
               <button 
                 type="button" 
@@ -529,7 +647,7 @@ export default function Navbar({ onOpenDemo, onOpenLogin, onSelectAntiDrone, onN
                   onOpenDemo();
                 }}
               >
-                <span>REQUEST FLIGHT DEMO</span>
+                <span>REQUEST DEMO</span>
                 <ArrowUpRight size={20} strokeWidth={2.5} />
               </button>
 
@@ -541,7 +659,7 @@ export default function Navbar({ onOpenDemo, onOpenLogin, onSelectAntiDrone, onN
                   onOpenLogin();
                 }}
               >
-                <span>DEFENSE PORTAL LOGIN</span>
+                <span>LOGIN</span>
               </button>
             </div>
 

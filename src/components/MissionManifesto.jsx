@@ -74,8 +74,8 @@ export default function MissionManifesto() {
     >
             <div className="iw-manifesto-bg-wrapper">
         <img
-          src="/assets/indowings-hangar-helsing.jpg"
-          alt="IndoWings Autonomous Defense Aircraft"
+          src="/assets/indo-hangar-manifesto.jpg"
+          alt="IndoWings Autonomous Defense Aircraft & Tactical UAV Hangar"
           className="iw-manifesto-bg-img"
           draggable="false"
           onContextMenu={(e) => e.preventDefault()}

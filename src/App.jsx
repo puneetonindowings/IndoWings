@@ -211,6 +211,7 @@ export default function App() {
           <CyberoneLitePage 
             onBack={() => navigateTo('home')}
             onOpenDemo={handleOpenDemoWithProduct}
+            onNavigate={navigateTo}
           />
           <Footer 
             onOpenDemo={() => handleOpenDemoWithProduct('Cyberone Lite')}

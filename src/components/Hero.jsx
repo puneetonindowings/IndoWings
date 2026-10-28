@@ -2,11 +2,11 @@ import React, { useState, useEffect, useRef } from 'react';
 import gsap from 'gsap';
 
 const slidesData = [
-  { id: 0, type: 'video', src: '/assets/indo-hero-video.mp4', label: '01' },
-  { id: 1, type: 'image', src: '/assets/indo-tarmac.jpg', label: '02' },
-  { id: 2, type: 'image', src: '/assets/indo-crew.jpg', label: '03' },
-  { id: 3, type: 'image', src: '/assets/indo-cockpit.png', label: '04' },
-  { id: 4, type: 'image', src: '/assets/indo-vtol.jpg', label: '05' }
+  { id: 0, type: 'video', src: '/assets/cyberone-lite/video-opener.mp4', label: '01' },
+  { id: 1, type: 'image', src: '/assets/cyberone-max/cyberonemax-hero-uhd.jpg', label: '02' },
+  { id: 2, type: 'image', src: '/assets/cyberone-trainer/trainer-hero-hd.jpg', label: '03' },
+  { id: 3, type: 'image', src: '/assets/cyberone-pro/cyberonepro4.avif', label: '04' },
+  { id: 4, type: 'image', src: '/assets/cyberone-lite/lite-hero-hd.jpg', label: '05' }
 ];
 
 export default function Hero({ triggerAnim = false }) {
@@ -18,11 +18,11 @@ export default function Hero({ triggerAnim = false }) {
 
   const totalSlides = slidesData.length;
 
-  // AUTO SCROLL TIMER: Increased duration to 20 seconds for a relaxed, cinematic pace
+  // AUTO SCROLL TIMER: 18 seconds for relaxed cinematic pace
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrentSlide(prev => (prev + 1) % totalSlides);
-    }, 20000);
+    }, 18000);
     return () => clearInterval(timer);
   }, [totalSlides, currentSlide]);
 
@@ -55,7 +55,7 @@ export default function Hero({ triggerAnim = false }) {
     return () => observer.disconnect();
   }, [currentSlide]);
 
-  // MANUAL KEYBOARD NAVIGATION: Optional Arrow keys
+  // MANUAL KEYBOARD NAVIGATION: Arrow keys
   useEffect(() => {
     const handleKeyDown = (e) => {
       if (e.key === 'ArrowDown' || e.key === 'ArrowRight') {
@@ -112,7 +112,7 @@ export default function Hero({ triggerAnim = false }) {
       {/* FULLSCREEN PRISTINE MEDIA STACK (PROTECTED AGAINST DRAG & THEFT) */}
       <div className="qs-media-stack">
         
-        {/* SLIDE 0: 4K LOOPING DRONE VIDEO */}
+        {/* SLIDE 0: AUTHENTIC INDOWINGS TACTICAL UAV VIDEO */}
         <div className={`qs-slide ${currentSlide === 0 ? 'active' : ''}`}>
           <video
             ref={videoRef}
@@ -122,19 +122,19 @@ export default function Hero({ triggerAnim = false }) {
             loop
             playsInline
             preload="auto"
-            poster="/assets/indo-cockpit.png"
+            poster="/assets/cyberone-max/cyberonemax-hero-uhd.jpg"
             draggable="false"
             onContextMenu={(e) => e.preventDefault()}
           >
-            <source src="/assets/indo-hero-video.mp4" type="video/mp4" />
+            <source src="/assets/cyberone-lite/video-opener.mp4" type="video/mp4" />
           </video>
         </div>
 
-        {/* SLIDE 1: TARMAC MILITARY DRONE */}
+        {/* SLIDE 1: CYBERONE MAX HEAVY LIFT */}
         <div className={`qs-slide ${currentSlide === 1 ? 'active' : ''}`}>
           <img 
-            src="/assets/indo-tarmac.jpg" 
-            alt="Tactical Defense Drone on Runway Tarmac" 
+            src="/assets/cyberone-max/cyberonemax-hero-uhd.jpg" 
+            alt="IndoWings Cyberone Max Heavy-Lift UAV" 
             className="qs-media" 
             draggable="false"
             onContextMenu={(e) => e.preventDefault()}
@@ -142,11 +142,11 @@ export default function Hero({ triggerAnim = false }) {
           />
         </div>
 
-        {/* SLIDE 2: TACTICAL FIELD CREW */}
+        {/* SLIDE 2: CYBERONE TRAINER FIELD UAV */}
         <div className={`qs-slide ${currentSlide === 2 ? 'active' : ''}`}>
           <img 
-            src="/assets/indo-crew.jpg" 
-            alt="Defense Operators Inspecting eVTOL Drone" 
+            src="/assets/cyberone-trainer/trainer-hero-hd.jpg" 
+            alt="IndoWings Cyberone Trainer Remote Pilot UAV" 
             className="qs-media" 
             draggable="false"
             onContextMenu={(e) => e.preventDefault()}
@@ -154,11 +154,11 @@ export default function Hero({ triggerAnim = false }) {
           />
         </div>
 
-        {/* SLIDE 3: COCKPIT HUD */}
+        {/* SLIDE 3: CYBERONE PRO TACTICAL SURVEILLANCE */}
         <div className={`qs-slide ${currentSlide === 3 ? 'active' : ''}`}>
           <img 
-            src="/assets/indo-cockpit.png" 
-            alt="Autonomous Flight Cockpit Canopy" 
+            src="/assets/cyberone-pro/cyberonepro4.avif" 
+            alt="IndoWings Cyberone Pro Tactical Surveillance UAV" 
             className="qs-media" 
             draggable="false"
             onContextMenu={(e) => e.preventDefault()}
@@ -166,11 +166,11 @@ export default function Hero({ triggerAnim = false }) {
           />
         </div>
 
-        {/* SLIDE 4: HIGH-ALTITUDE VTOL FLIGHT */}
+        {/* SLIDE 4: CYBERONE LITE AGILE SCOUT */}
         <div className={`qs-slide ${currentSlide === 4 ? 'active' : ''}`}>
           <img 
-            src="/assets/indo-vtol.jpg" 
-            alt="IndoWings VTOL Drone in Flight" 
+            src="/assets/cyberone-lite/lite-hero-hd.jpg" 
+            alt="IndoWings Cyberone Lite Tactical Scout UAV in Flight" 
             className="qs-media" 
             draggable="false"
             onContextMenu={(e) => e.preventDefault()}

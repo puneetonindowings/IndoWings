@@ -5,13 +5,13 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 gsap.registerPlugin(ScrollTrigger);
 
 export const droneFleet = [
-    {
+  {
     id: 'cyberone-trainer-drone',
     categoryKey: 'surveillance',
     categoryName: 'Surveillance, Mapping & Delivery Drone',
     name: 'Cyberone Trainer Drone',
     tagline: 'Dual-pilot remote training UAV',
-    image: '/assets/indo-crew.jpg',
+    image: '/assets/cyberone-trainer/trainer-hero-hd.jpg',
     url: 'https://www.indowings.com/products/cyberone-trainer-drone.php'
   },
   {
@@ -20,7 +20,7 @@ export const droneFleet = [
     categoryName: 'Surveillance, Mapping & Delivery Drone',
     name: 'Cyberone Lite',
     tagline: 'Rapid-deployment tactical scout UAV',
-    image: '/assets/indo-vtol.jpg',
+    image: '/assets/cyberone-lite/lite-hero-hd.jpg',
     url: 'https://www.indowings.com/products/cyberone-lite.php'
   },
   {
@@ -29,7 +29,7 @@ export const droneFleet = [
     categoryName: 'Surveillance, Mapping & Delivery Drone',
     name: 'Cyberone Pro',
     tagline: 'Tactical battlefield surveillance',
-    image: '/assets/indo-tarmac.jpg',
+    image: '/assets/cyberone-pro/cyberonepro4.avif',
     url: 'https://www.indowings.com/products/cyberonepro_v2.php'
   },
   {
@@ -38,7 +38,7 @@ export const droneFleet = [
     categoryName: 'Surveillance, Mapping & Delivery Drone',
     name: 'Cyberone Max',
     tagline: 'Heavy-lift logistics & delivery UAV',
-    image: '/assets/indo-cyberone-max.jpg',
+    image: '/assets/cyberone-max/cyberonemax-hero-uhd.jpg',
     url: 'https://www.indowings.com/products/cyberonemax.php'
   },
 

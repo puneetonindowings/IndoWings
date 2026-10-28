@@ -804,11 +804,24 @@ export default function CyberoneLitePage({ onBack, onOpenDemo }) {
           </p>
 
           {/* 3-Card Carousel Track */}
-          <div className="indo-lite-carousel-container">
+          <div 
+            className="indo-lite-carousel-container"
+            onTouchStart={(e) => {
+              window.__touchMarketStartX = e.touches[0].clientX;
+            }}
+            onTouchEnd={(e) => {
+              const deltaX = e.changedTouches[0].clientX - (window.__touchMarketStartX || 0);
+              if (deltaX > 40) {
+                setMarketIndex((prev) => (prev - 1 + marketItems.length) % marketItems.length);
+              } else if (deltaX < -40) {
+                setMarketIndex((prev) => (prev + 1) % marketItems.length);
+              }
+            }}
+          >
             <div
               className="indo-lite-carousel-track"
               style={{
-                transform: `translateX(-${marketIndex * (100 / 3)}%)`
+                transform: `translateX(calc(-${marketIndex} * ((100% + 1.5rem) / var(--market-cards-per-view, 3))))`
               }}
             >
               {/* Duplicate array for seamless infinite sliding wrap */}

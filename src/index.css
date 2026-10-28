@@ -6659,6 +6659,8 @@ textarea,
   justify-content: center;
   cursor: grab;
   user-select: none;
+  -webkit-user-select: none;
+  touch-action: pan-y;
   background: transparent;
   border: none;
 }

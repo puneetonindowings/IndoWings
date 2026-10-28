@@ -15,12 +15,12 @@ export default function CyberoneLitePage({ onBack, onOpenDemo }) {
   // STATE DEFINITIONS
   // ---------------------------------------------------------------------------
 
-  // Section 4: Interactive 360 Drone Viewer State (Starts on frame 17, matching official angle)
-  const [frame360, setFrame360] = useState(17);
+  // Section 4: Interactive 360 Drone Viewer State (Pure right-to-left horizontal 360 turntable rotation)
+  const [frame360, setFrame360] = useState(0);
   const [isDragging, setIsDragging] = useState(false);
   const [dragStartX, setDragStartX] = useState(0);
-  const [dragStartFrame, setDragStartFrame] = useState(17);
-  const totalFrames = 30; // 0.png to 29.png
+  const [dragStartFrame, setDragStartFrame] = useState(0);
+  const totalFrames = 30; // 0.png to 29.png (horizontal turntable)
 
   // Section 6: Markets 3-Card Carousel State (0 to 6)
   const [marketIndex, setMarketIndex] = useState(0);
@@ -29,11 +29,17 @@ export default function CyberoneLitePage({ onBack, onOpenDemo }) {
   // Section 9: FAQ Accordion State (Supports toggle open/close)
   const [openFaq, setOpenFaq] = useState(0);
 
-  // ---------------------------------------------------------------------------
-  // 360 INTERACTIVE VIEWER CONTROLS (Manual Drag Only - No Auto-Rotation)
-  // ---------------------------------------------------------------------------
+  // Preload all 30 horizontal turntable frames for instant lag-free rotation
+  useEffect(() => {
+    for (let i = 0; i < totalFrames; i++) {
+      const img = new Image();
+      img.src = `/assets/cyberone-lite/360/${i}.png`;
+    }
+  }, []);
 
-  // Mouse & Touch Drag handlers for 360 viewer
+  // ---------------------------------------------------------------------------
+  // 360 INTERACTIVE VIEWER CONTROLS (Manual Drag Only - Pure Horizontal 360 Turn)
+  // ---------------------------------------------------------------------------
   const handleStartDrag = (clientX) => {
     setIsDragging(true);
     setDragStartX(clientX);
@@ -43,7 +49,7 @@ export default function CyberoneLitePage({ onBack, onOpenDemo }) {
   const handleMoveDrag = (clientX) => {
     if (!isDragging) return;
     const deltaX = clientX - dragStartX;
-    const sensitivity = 12; // pixels per frame
+    const sensitivity = 10; // smooth pixels per frame
     const frameDelta = Math.floor(deltaX / sensitivity);
     let newFrame = (dragStartFrame - frameDelta) % totalFrames;
     if (newFrame < 0) newFrame += totalFrames;
@@ -53,6 +59,41 @@ export default function CyberoneLitePage({ onBack, onOpenDemo }) {
   const handleEndDrag = () => {
     setIsDragging(false);
   };
+
+  // Window-level drag listeners so dragging outside canvas remains smooth
+  useEffect(() => {
+    if (!isDragging) return;
+
+    const handleWindowMouseMove = (e) => {
+      handleMoveDrag(e.clientX);
+    };
+
+    const handleWindowMouseUp = () => {
+      setIsDragging(false);
+    };
+
+    const handleWindowTouchMove = (e) => {
+      if (e.touches && e.touches[0]) {
+        handleMoveDrag(e.touches[0].clientX);
+      }
+    };
+
+    const handleWindowTouchEnd = () => {
+      setIsDragging(false);
+    };
+
+    window.addEventListener('mousemove', handleWindowMouseMove);
+    window.addEventListener('mouseup', handleWindowMouseUp);
+    window.addEventListener('touchmove', handleWindowTouchMove, { passive: true });
+    window.addEventListener('touchend', handleWindowTouchEnd);
+
+    return () => {
+      window.removeEventListener('mousemove', handleWindowMouseMove);
+      window.removeEventListener('mouseup', handleWindowMouseUp);
+      window.removeEventListener('touchmove', handleWindowTouchMove);
+      window.removeEventListener('touchend', handleWindowTouchEnd);
+    };
+  }, [isDragging, dragStartX, dragStartFrame]);
 
   // ---------------------------------------------------------------------------
   // MARKETS CAROUSEL AUTO-ADVANCE

@@ -14,7 +14,7 @@ const menuData = {
     { label: 'S-Series Pro', drone: 'S-Series Pro', href: '#s-series-pro' }
   ],
   software: [
-    { label: 'IndoFly', drone: 'IndoFly' },
+    { label: 'IndoFly', drone: 'IndoFly', route: 'indofly', href: '#/products/indofly' },
     { label: 'IndoSIM', drone: 'IndoSIM' },
     { label: 'Pix4D', drone: 'Pix4D' }
   ],

@@ -16,6 +16,7 @@ import CyberoneLitePage from './components/CyberoneLitePage.jsx';
 import CyberoneTrainerPage from './components/CyberoneTrainerPage.jsx';
 import CyberoneProPage from './components/CyberoneProPage.jsx';
 import CyberoneMaxPage from './components/CyberoneMaxPage.jsx';
+import IndoFlyPage from './components/IndoFlyPage.jsx';
 
 export default function App() {
   const [isDemoOpen, setIsDemoOpen] = useState(false);
@@ -23,10 +24,13 @@ export default function App() {
   const [activeProduct, setActiveProduct] = useState('');
   const [isReadyForHeroAnim, setIsReadyForHeroAnim] = useState(false);
   
-  // Routing state: 'home' | 'cyberone-lite' | 'cyberone-trainer' | 'cyberone-pro' | 'cyberone-max'
+  // Routing state: 'home' | 'cyberone-lite' | 'cyberone-trainer' | 'cyberone-pro' | 'cyberone-max' | 'indofly'
   const [currentRoute, setCurrentRoute] = useState(() => {
     const hash = window.location.hash.toLowerCase();
     const path = window.location.pathname.toLowerCase();
+    if (hash.includes('indofly') || path.includes('indofly')) {
+      return 'indofly';
+    }
     if (hash.includes('cyberone-trainer') || path.includes('cyberone-trainer')) {
       return 'cyberone-trainer';
     }
@@ -47,7 +51,9 @@ export default function App() {
     const handleLocationChange = () => {
       const hash = window.location.hash.toLowerCase();
       const path = window.location.pathname.toLowerCase();
-      if (hash.includes('cyberone-trainer') || path.includes('cyberone-trainer')) {
+      if (hash.includes('indofly') || path.includes('indofly')) {
+        setCurrentRoute('indofly');
+      } else if (hash.includes('cyberone-trainer') || path.includes('cyberone-trainer')) {
         setCurrentRoute('cyberone-trainer');
       } else if (hash.includes('cyberone-lite') || path.includes('cyberone-lite')) {
         setCurrentRoute('cyberone-lite');
@@ -71,7 +77,10 @@ export default function App() {
 
   const navigateTo = (route) => {
     setCurrentRoute(route);
-    if (route === 'cyberone-trainer') {
+    if (route === 'indofly') {
+      window.location.hash = '#/products/indofly';
+      window.scrollTo(0, 0);
+    } else if (route === 'cyberone-trainer') {
       window.location.hash = '#/products/cyberone-trainer-drone';
       window.scrollTo(0, 0);
     } else if (route === 'cyberone-lite') {
@@ -145,7 +154,27 @@ export default function App() {
 
   return (
     <div className="relative w-full min-h-screen bg-black text-white selection:bg-[#f58220] selection:text-white">
-      {currentRoute === 'cyberone-max' ? (
+      {currentRoute === 'indofly' ? (
+        /* DEDICATED INDOFLY GCS SOFTWARE PAGE WITH OFFICIAL NAVBAR & FOOTER */
+        <>
+          <Navbar 
+            onOpenDemo={(drone) => handleOpenDemoWithProduct(drone || 'IndoFly GCS')}
+            onOpenLogin={() => setIsLoginOpen(true)}
+            onSelectAntiDrone={() => handleOpenDemoWithProduct('SKYctrl C-UAS')}
+            onNavigate={navigateTo}
+          />
+          <IndoFlyPage 
+            onBack={() => navigateTo('home')}
+            onOpenDemo={handleOpenDemoWithProduct}
+            onNavigate={navigateTo}
+          />
+          <Footer 
+            onOpenDemo={() => handleOpenDemoWithProduct('IndoFly GCS')}
+            onOpenLogin={() => setIsLoginOpen(true)}
+            onNavigate={navigateTo}
+          />
+        </>
+      ) : currentRoute === 'cyberone-max' ? (
         /* DEDICATED CYBERONE MAX MODEL PAGE WITH OFFICIAL NAVBAR & FOOTER */
         <>
           <Navbar 

@@ -15,7 +15,7 @@ const menuData = {
   ],
   software: [
     { label: 'IndoFly', drone: 'IndoFly', route: 'indofly', href: '#/products/indofly' },
-    { label: 'IndoSIM', drone: 'IndoSIM' },
+    { label: 'IndoSIM', drone: 'IndoSIM', route: 'indosim', href: '#/products/indosim' },
     { label: 'Pix4D', drone: 'Pix4D' }
   ],
   industries: [
@@ -434,7 +434,8 @@ export default function Navbar({ onOpenDemo, onOpenLogin, onSelectAntiDrone, onN
                       className="iw-fs-sublink"
                       onClick={() => {
                         handleCloseMobile();
-                        onOpenDemo('IndoFly');
+                        if (onNavigate) onNavigate('indofly');
+                        else window.location.hash = '#/products/indofly';
                       }}
                     >
                       <span className="iw-fs-dot"></span>
@@ -445,7 +446,8 @@ export default function Navbar({ onOpenDemo, onOpenLogin, onSelectAntiDrone, onN
                       className="iw-fs-sublink"
                       onClick={() => {
                         handleCloseMobile();
-                        onOpenDemo('IndoSIM');
+                        if (onNavigate) onNavigate('indosim');
+                        else window.location.hash = '#/products/indosim';
                       }}
                     >
                       <span className="iw-fs-dot"></span>

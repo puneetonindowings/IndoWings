@@ -17,6 +17,8 @@ import CyberoneTrainerPage from './components/CyberoneTrainerPage.jsx';
 import CyberoneProPage from './components/CyberoneProPage.jsx';
 import CyberoneMaxPage from './components/CyberoneMaxPage.jsx';
 import IndoFlyPage from './components/IndoFlyPage.jsx';
+import IndoSimPage from './components/IndoSimPage.jsx';
+import NotFoundPage from './components/NotFoundPage.jsx';
 
 export default function App() {
   const [isDemoOpen, setIsDemoOpen] = useState(false);
@@ -24,10 +26,13 @@ export default function App() {
   const [activeProduct, setActiveProduct] = useState('');
   const [isReadyForHeroAnim, setIsReadyForHeroAnim] = useState(false);
   
-  // Routing state: 'home' | 'cyberone-lite' | 'cyberone-trainer' | 'cyberone-pro' | 'cyberone-max' | 'indofly'
-  const [currentRoute, setCurrentRoute] = useState(() => {
+  // Routing state: 'home' | 'cyberone-lite' | 'cyberone-trainer' | 'cyberone-pro' | 'cyberone-max' | 'indofly' | 'indosim' | '404'
+  const parseCurrentRoute = () => {
     const hash = window.location.hash.toLowerCase();
     const path = window.location.pathname.toLowerCase();
+    if (hash.includes('indosim') || path.includes('indosim')) {
+      return 'indosim';
+    }
     if (hash.includes('indofly') || path.includes('indofly')) {
       return 'indofly';
     }
@@ -43,27 +48,24 @@ export default function App() {
     if (hash.includes('cyberone-max') || path.includes('cyberone-max') || hash.includes('cyberonemax') || path.includes('cyberonemax')) {
       return 'cyberone-max';
     }
+    if (hash.includes('404') || path.includes('404') || hash.includes('not-found') || path.includes('not-found')) {
+      return '404';
+    }
+    if (!hash || hash === '#' || hash === '#/' || hash === '#home') {
+      return 'home';
+    }
+    if (hash.startsWith('#/')) {
+      return '404';
+    }
     return 'home';
-  });
+  };
+
+  const [currentRoute, setCurrentRoute] = useState(parseCurrentRoute);
 
   // Sync route on hash/popstate
   useEffect(() => {
     const handleLocationChange = () => {
-      const hash = window.location.hash.toLowerCase();
-      const path = window.location.pathname.toLowerCase();
-      if (hash.includes('indofly') || path.includes('indofly')) {
-        setCurrentRoute('indofly');
-      } else if (hash.includes('cyberone-trainer') || path.includes('cyberone-trainer')) {
-        setCurrentRoute('cyberone-trainer');
-      } else if (hash.includes('cyberone-lite') || path.includes('cyberone-lite')) {
-        setCurrentRoute('cyberone-lite');
-      } else if (hash.includes('cyberone-pro') || path.includes('cyberone-pro') || hash.includes('cyberonepro') || path.includes('cyberonepro')) {
-        setCurrentRoute('cyberone-pro');
-      } else if (hash.includes('cyberone-max') || path.includes('cyberone-max') || hash.includes('cyberonemax') || path.includes('cyberonemax')) {
-        setCurrentRoute('cyberone-max');
-      } else {
-        setCurrentRoute('home');
-      }
+      setCurrentRoute(parseCurrentRoute());
     };
 
     window.addEventListener('hashchange', handleLocationChange);
@@ -77,7 +79,10 @@ export default function App() {
 
   const navigateTo = (route) => {
     setCurrentRoute(route);
-    if (route === 'indofly') {
+    if (route === 'indosim') {
+      window.location.hash = '#/products/indosim';
+      window.scrollTo(0, 0);
+    } else if (route === 'indofly') {
       window.location.hash = '#/products/indofly';
       window.scrollTo(0, 0);
     } else if (route === 'cyberone-trainer') {
@@ -91,6 +96,9 @@ export default function App() {
       window.scrollTo(0, 0);
     } else if (route === 'cyberone-max') {
       window.location.hash = '#/products/cyberone-max';
+      window.scrollTo(0, 0);
+    } else if (route === '404') {
+      window.location.hash = '#/404';
       window.scrollTo(0, 0);
     } else {
       window.location.hash = '';
@@ -131,6 +139,7 @@ export default function App() {
         e.target.closest('.iw-c1-page') ||
         e.target.closest('.indo-pro-page') ||
         e.target.closest('.indo-max-page') ||
+        e.target.closest('.indo-fly-page') ||
         e.target.closest('.vbat-page')
       ) {
         e.preventDefault();
@@ -154,7 +163,27 @@ export default function App() {
 
   return (
     <div className="relative w-full min-h-screen bg-black text-white selection:bg-[#f58220] selection:text-white">
-      {currentRoute === 'indofly' ? (
+      {currentRoute === 'indosim' ? (
+        /* DEDICATED INDOSIM FLIGHT SIMULATION PAGE WITH OFFICIAL NAVBAR & FOOTER */
+        <>
+          <Navbar 
+            onOpenDemo={(drone) => handleOpenDemoWithProduct(drone || 'IndoSIM Simulator')}
+            onOpenLogin={() => setIsLoginOpen(true)}
+            onSelectAntiDrone={() => handleOpenDemoWithProduct('SKYctrl C-UAS')}
+            onNavigate={navigateTo}
+          />
+          <IndoSimPage 
+            onBack={() => navigateTo('home')}
+            onOpenDemo={handleOpenDemoWithProduct}
+            onNavigate={navigateTo}
+          />
+          <Footer 
+            onOpenDemo={() => handleOpenDemoWithProduct('IndoSIM Simulator')}
+            onOpenLogin={() => setIsLoginOpen(true)}
+            onNavigate={navigateTo}
+          />
+        </>
+      ) : currentRoute === 'indofly' ? (
         /* DEDICATED INDOFLY GCS SOFTWARE PAGE WITH OFFICIAL NAVBAR & FOOTER */
         <>
           <Navbar 
@@ -170,6 +199,22 @@ export default function App() {
           />
           <Footer 
             onOpenDemo={() => handleOpenDemoWithProduct('IndoFly GCS')}
+            onOpenLogin={() => setIsLoginOpen(true)}
+            onNavigate={navigateTo}
+          />
+        </>
+      ) : currentRoute === '404' ? (
+        /* COLORLIB HQ V01 ADAPTED INDOWINGS DEFENSE 404 UNCHARTED AIRSPACE PAGE */
+        <>
+          <Navbar 
+            onOpenDemo={(drone) => handleOpenDemoWithProduct(drone || 'Operations')}
+            onOpenLogin={() => setIsLoginOpen(true)}
+            onSelectAntiDrone={() => handleOpenDemoWithProduct('SKYctrl C-UAS')}
+            onNavigate={navigateTo}
+          />
+          <NotFoundPage onNavigate={navigateTo} />
+          <Footer 
+            onOpenDemo={() => handleOpenDemoWithProduct('')}
             onOpenLogin={() => setIsLoginOpen(true)}
             onNavigate={navigateTo}
           />

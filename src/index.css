@@ -11430,3 +11430,981 @@ textarea,
   align-items: center;
   justify-content: center;
 }
+
+
+/* ==========================================================================
+   INDOFLY GROUND CONTROL STATION (GCS) - DEDICATED SOVEREIGN STYLES
+   ========================================================================== */
+
+.indofly-page {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  background-color: #05070a;
+  color: #ffffff;
+  overflow-x: hidden;
+}
+
+.indofly-ambient {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.indofly-ambient-glow {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 900px;
+  max-width: 100vw;
+  height: 550px;
+  background: radial-gradient(ellipse at top, rgba(245, 130, 32, 0.16) 0%, rgba(5, 7, 10, 0) 70%);
+}
+
+.indofly-hud-grid {
+  position: absolute;
+  inset: 0;
+  background-image: 
+    linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+  background-size: 64px 64px;
+  opacity: 0.5;
+}
+
+.indofly-content {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+}
+
+.indofly-container {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+.indofly-hero {
+  padding-top: clamp(6.5rem, 10vw, 9.5rem);
+  padding-bottom: clamp(3.5rem, 6vw, 5.5rem);
+}
+
+.indofly-breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+  font-family: var(--font-mono, monospace);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.indofly-breadcrumb button {
+  background: none;
+  border: none;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+  padding: 0;
+  transition: color 0.2s ease;
+}
+
+.indofly-breadcrumb button:hover {
+  color: #ffffff;
+}
+
+.indofly-breadcrumb .active {
+  color: #f58220;
+}
+
+.indofly-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.35rem 0.9rem;
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  margin-bottom: 1.5rem;
+  backdrop-filter: blur(8px);
+}
+
+.indofly-pulse-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background-color: #f58220;
+  box-shadow: 0 0 10px #f58220;
+  animation: indoflyPulse 2s infinite ease-in-out;
+}
+
+@keyframes indoflyPulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(0.85); }
+}
+
+.indofly-badge-text {
+  font-family: var(--font-mono, monospace);
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.indofly-hero-title {
+  font-size: clamp(2.4rem, 5.5vw, 4.8rem);
+  font-weight: 800;
+  line-height: 1.08;
+  letter-spacing: -0.02em;
+  color: #ffffff;
+  text-transform: uppercase;
+  margin: 0 0 1.25rem 0;
+}
+
+.indofly-hero-title .highlight {
+  color: #f58220;
+  background: linear-gradient(135deg, #ff9d42 0%, #f58220 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.indofly-hero-subtext {
+  font-size: clamp(0.95rem, 1.3vw, 1.15rem);
+  color: rgba(255, 255, 255, 0.72);
+  line-height: 1.65;
+  max-width: 680px;
+  margin: 0 auto 2.25rem auto;
+}
+
+.indofly-metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.85rem;
+  max-width: 760px;
+  margin: 0 auto 2.5rem auto;
+  text-align: left;
+}
+
+@media (min-width: 640px) {
+  .indofly-metrics-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.indofly-metric-card {
+  padding: 0.9rem 1rem;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  transition: all 0.25s ease;
+}
+
+.indofly-metric-card:hover {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(245, 130, 32, 0.3);
+  transform: translateY(-2px);
+}
+
+.indofly-metric-label {
+  font-family: var(--font-mono, monospace);
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: rgba(255, 255, 255, 0.45);
+  margin-bottom: 0.25rem;
+}
+
+.indofly-metric-val {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.indofly-metric-val.accent {
+  color: #f58220;
+}
+
+.indofly-hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.indofly-btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.85rem 1.85rem;
+  border-radius: 9999px;
+  background: #f58220;
+  color: #000000;
+  font-weight: 700;
+  font-size: 0.88rem;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 25px rgba(245, 130, 32, 0.35);
+}
+
+.indofly-btn-primary:hover {
+  background: #ff9133;
+  box-shadow: 0 0 35px rgba(245, 130, 32, 0.55);
+  transform: translateY(-1px);
+}
+
+.indofly-btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.85rem 1.65rem;
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.05);
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  font-weight: 500;
+  font-size: 0.88rem;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.indofly-btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.3);
+  color: #ffffff;
+}
+
+.indofly-hero-device-wrap {
+  margin-top: clamp(2.5rem, 5vw, 4rem);
+  max-width: 1050px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.indofly-hero-device-box {
+  position: relative;
+  border-radius: 20px;
+  padding: 0.6rem;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.12) 0%, rgba(255, 255, 255, 0.02) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 25px 70px rgba(0, 0, 0, 0.9);
+}
+
+@media (min-width: 640px) {
+  .indofly-hero-device-box {
+    border-radius: 28px;
+    padding: 0.85rem;
+  }
+}
+
+.indofly-hero-screen {
+  position: relative;
+  border-radius: 14px;
+  overflow: hidden;
+  background: #000000;
+  aspect-ratio: 16 / 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@media (min-width: 640px) {
+  .indofly-hero-screen {
+    border-radius: 20px;
+  }
+}
+
+.indofly-hero-screen img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  padding: 0.5rem;
+}
+
+@media (min-width: 768px) {
+  .indofly-hero-screen img {
+    padding: 1.5rem;
+  }
+}
+
+.indofly-hud-tag-tl {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  font-family: var(--font-mono, monospace);
+  font-size: 0.65rem;
+  color: rgba(255, 255, 255, 0.4);
+  letter-spacing: 0.08em;
+  pointer-events: none;
+}
+
+.indofly-hud-tag-br {
+  position: absolute;
+  bottom: 1rem;
+  right: 1rem;
+  font-family: var(--font-mono, monospace);
+  font-size: 0.65rem;
+  color: rgba(245, 130, 32, 0.8);
+  letter-spacing: 0.08em;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  pointer-events: none;
+}
+
+/* SECTIONS COMMON */
+.indofly-section {
+  padding: clamp(3.5rem, 6vw, 6rem) 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.indofly-section-head {
+  text-align: center;
+  max-width: 720px;
+  margin: 0 auto clamp(2rem, 4vw, 3rem) auto;
+}
+
+.indofly-section-tag {
+  display: block;
+  font-family: var(--font-mono, monospace);
+  font-size: 0.72rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: #f58220;
+  margin-bottom: 0.75rem;
+}
+
+.indofly-section-title {
+  font-size: clamp(1.8rem, 3.8vw, 3rem);
+  font-weight: 700;
+  color: #ffffff;
+  line-height: 1.15;
+  margin: 0 0 1rem 0;
+}
+
+.indofly-section-desc {
+  font-size: clamp(0.88rem, 1.1vw, 1rem);
+  color: rgba(255, 255, 255, 0.65);
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* MODULES WORKSPACE */
+.indofly-tabs-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-bottom: 2rem;
+}
+
+@media (min-width: 640px) {
+  .indofly-tabs-bar {
+    gap: 0.75rem;
+    margin-bottom: 2.5rem;
+  }
+}
+
+.indofly-tab-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.65rem 1.15rem;
+  border-radius: 12px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  cursor: pointer;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.03);
+  color: rgba(255, 255, 255, 0.6);
+  transition: all 0.25s ease;
+}
+
+.indofly-tab-btn:hover {
+  background: rgba(255, 255, 255, 0.07);
+  color: #ffffff;
+}
+
+.indofly-tab-btn.is-active {
+  background: rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+  border-color: rgba(245, 130, 32, 0.6);
+  box-shadow: 0 0 20px rgba(245, 130, 32, 0.2);
+}
+
+.indofly-tab-btn.is-active svg {
+  color: #f58220;
+}
+
+.indofly-workspace-box {
+  background: #0b0e13;
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 1.25rem;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8);
+}
+
+@media (min-width: 640px) {
+  .indofly-workspace-box {
+    border-radius: 28px;
+    padding: 1.75rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .indofly-workspace-box {
+    padding: 2.25rem;
+  }
+}
+
+.indofly-workspace-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.75rem;
+  align-items: center;
+}
+
+@media (min-width: 1024px) {
+  .indofly-workspace-grid {
+    grid-template-columns: 7fr 5fr;
+    gap: 2.5rem;
+  }
+}
+
+.indofly-screenshot-wrap {
+  position: relative;
+  border-radius: 14px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: #000000;
+  aspect-ratio: 16 / 10;
+}
+
+.indofly-screenshot-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  padding: 0.5rem;
+  transition: transform 0.4s ease;
+}
+
+.indofly-screenshot-wrap:hover img {
+  transform: scale(1.02);
+}
+
+.indofly-screenshot-badge {
+  position: absolute;
+  top: 0.75rem;
+  left: 0.75rem;
+  padding: 0.25rem 0.65rem;
+  border-radius: 6px;
+  background: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  font-family: var(--font-mono, monospace);
+  font-size: 0.65rem;
+  color: rgba(255, 255, 255, 0.75);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.indofly-module-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.indofly-module-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-family: var(--font-mono, monospace);
+  font-size: 0.72rem;
+  color: #f58220;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 0.5rem;
+}
+
+.indofly-module-headline {
+  font-size: clamp(1.25rem, 2vw, 1.65rem);
+  font-weight: 700;
+  color: #ffffff;
+  line-height: 1.25;
+  margin: 0 0 0.85rem 0;
+}
+
+.indofly-module-desc {
+  font-size: 0.88rem;
+  color: rgba(255, 255, 255, 0.7);
+  line-height: 1.6;
+  margin: 0 0 1.25rem 0;
+}
+
+.indofly-highlights-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  margin-bottom: 1.5rem;
+}
+
+.indofly-highlight-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.6rem;
+  font-size: 0.84rem;
+  color: rgba(255, 255, 255, 0.82);
+}
+
+.indofly-highlight-item svg {
+  color: #f58220;
+  flex-shrink: 0;
+  margin-top: 0.15rem;
+}
+
+.indofly-telemetry-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.6rem;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.indofly-telemetry-pill {
+  padding: 0.6rem 0.75rem;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.indofly-telemetry-k {
+  font-family: var(--font-mono, monospace);
+  font-size: 0.62rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.indofly-telemetry-v {
+  font-family: var(--font-mono, monospace);
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.9);
+  margin-top: 0.15rem;
+}
+
+/* BENTO GRID (COMPUTER VISION) */
+.indofly-bento-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
+}
+
+@media (min-width: 640px) {
+  .indofly-bento-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .indofly-bento-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.indofly-bento-card {
+  border-radius: 16px;
+  background: #0c0e12;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  transition: all 0.3s ease;
+}
+
+.indofly-bento-card:hover {
+  border-color: rgba(255, 255, 255, 0.25);
+  transform: translateY(-2px);
+}
+
+.indofly-bento-media {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  background: rgba(0, 0, 0, 0.6);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.indofly-bento-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.indofly-bento-card:hover .indofly-bento-media img {
+  transform: scale(1.05);
+}
+
+.indofly-bento-placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  text-align: center;
+}
+
+.indofly-bento-icon-circle {
+  width: 52px;
+  height: 52px;
+  border-radius: 14px;
+  background: rgba(245, 130, 32, 0.1);
+  border: 1px solid rgba(245, 130, 32, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #f58220;
+  margin-bottom: 0.75rem;
+}
+
+.indofly-bento-tag {
+  position: absolute;
+  top: 0.65rem;
+  right: 0.65rem;
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+  background: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  font-family: var(--font-mono, monospace);
+  font-size: 0.6rem;
+  color: #f58220;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.indofly-bento-body {
+  padding: 1.25rem;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.indofly-bento-badge {
+  font-family: var(--font-mono, monospace);
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: rgba(255, 255, 255, 0.4);
+  margin-bottom: 0.35rem;
+}
+
+.indofly-bento-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin: 0 0 0.5rem 0;
+}
+
+.indofly-bento-desc {
+  font-size: 0.78rem;
+  color: rgba(255, 255, 255, 0.6);
+  line-height: 1.5;
+  margin: 0 0 1rem 0;
+}
+
+.indofly-bento-specs {
+  padding-top: 0.75rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.indofly-bento-spec-item {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-size: 0.72rem;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.indofly-dot {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background-color: #f58220;
+}
+
+/* CONFIG CARDS (PRE-FLIGHT) */
+.indofly-config-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.75rem;
+}
+
+@media (min-width: 1024px) {
+  .indofly-config-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.indofly-config-card {
+  border-radius: 20px;
+  background: #0c0e12;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6);
+}
+
+@media (min-width: 640px) {
+  .indofly-config-card {
+    padding: 2rem;
+  }
+}
+
+.indofly-config-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.85rem;
+}
+
+.indofly-config-subtitle {
+  font-family: var(--font-mono, monospace);
+  font-size: 0.72rem;
+  color: #f58220;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.indofly-status-light {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #10b981;
+  box-shadow: 0 0 8px #10b981;
+}
+
+.indofly-config-title {
+  font-size: clamp(1.25rem, 2.2vw, 1.6rem);
+  font-weight: 700;
+  color: #ffffff;
+  margin: 0 0 0.75rem 0;
+}
+
+.indofly-config-desc {
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.7);
+  line-height: 1.6;
+  margin: 0 0 1.25rem 0;
+}
+
+.indofly-config-img-wrap {
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: #000000;
+  aspect-ratio: 16 / 9;
+  margin-bottom: 1.25rem;
+  padding: 0.5rem;
+}
+
+.indofly-config-img-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.indofly-config-footer {
+  margin-top: 1.5rem;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-family: var(--font-mono, monospace);
+  font-size: 0.68rem;
+  color: rgba(255, 255, 255, 0.4);
+}
+
+/* TECH SPECS TABLE */
+.indofly-specs-box {
+  border-radius: 18px;
+  background: #0c0e12;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  overflow: hidden;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6);
+}
+
+.indofly-spec-row {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem 1.25rem;
+  gap: 0.35rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  transition: background 0.2s ease;
+}
+
+.indofly-spec-row:last-child {
+  border-bottom: none;
+}
+
+.indofly-spec-row:hover {
+  background: rgba(255, 255, 255, 0.02);
+}
+
+@media (min-width: 640px) {
+  .indofly-spec-row {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.1rem 1.5rem;
+  }
+}
+
+.indofly-spec-label {
+  font-family: var(--font-mono, monospace);
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.48);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.indofly-spec-value {
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.95);
+  max-width: 550px;
+}
+
+@media (min-width: 640px) {
+  .indofly-spec-value {
+    text-align: right;
+  }
+}
+
+/* FAQ ACCORDION */
+.indofly-faq-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.indofly-faq-item {
+  border-radius: 12px;
+  background: #0c0e12;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  overflow: hidden;
+  transition: all 0.25s ease;
+}
+
+.indofly-faq-item.is-open {
+  border-color: rgba(245, 130, 32, 0.4);
+}
+
+.indofly-faq-trigger {
+  width: 100%;
+  padding: 1.15rem 1.25rem;
+  text-align: left;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #ffffff;
+  transition: background 0.2s ease;
+}
+
+.indofly-faq-trigger:hover {
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.indofly-faq-question {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.indofly-faq-icon {
+  color: rgba(255, 255, 255, 0.45);
+  flex-shrink: 0;
+}
+
+.indofly-faq-item.is-open .indofly-faq-icon {
+  color: #f58220;
+}
+
+.indofly-faq-body {
+  padding: 0 1.25rem 1.25rem 1.25rem;
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.72);
+  line-height: 1.65;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  padding-top: 0.85rem;
+}
+
+/* CTA BANNER */
+.indofly-cta-box {
+  position: relative;
+  border-radius: 24px;
+  background: linear-gradient(180deg, #141820 0%, #090b0f 100%);
+  border: 1px solid rgba(245, 130, 32, 0.35);
+  padding: clamp(2.5rem, 5vw, 4rem) clamp(1.5rem, 4vw, 3rem);
+  text-align: center;
+  overflow: hidden;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.9), 0 0 50px rgba(245, 130, 32, 0.12);
+}
+
+.indofly-cta-radial {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 500px;
+  height: 250px;
+  background: radial-gradient(ellipse at top, rgba(245, 130, 32, 0.28) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.indofly-cta-inner {
+  position: relative;
+  z-index: 1;
+  max-width: 680px;
+  margin: 0 auto;
+}
+
+.indofly-cta-title {
+  font-size: clamp(1.8rem, 3.5vw, 2.75rem);
+  font-weight: 800;
+  color: #ffffff;
+  margin: 0 0 1rem 0;
+  text-transform: uppercase;
+}
+
+.indofly-cta-desc {
+  font-size: clamp(0.88rem, 1.1vw, 1.02rem);
+  color: rgba(255, 255, 255, 0.72);
+  line-height: 1.65;
+  margin: 0 auto 2.25rem auto;
+}

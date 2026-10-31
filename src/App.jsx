@@ -18,7 +18,13 @@ import CyberoneProPage from './components/CyberoneProPage.jsx';
 import CyberoneMaxPage from './components/CyberoneMaxPage.jsx';
 import IndoFlyPage from './components/IndoFlyPage.jsx';
 import IndoSimPage from './components/IndoSimPage.jsx';
+import Pix4DPage from './components/Pix4DPage.jsx';
+import AboutPage from './components/AboutPage.jsx';
+import MediaPage from './components/MediaPage.jsx';
 import NotFoundPage from './components/NotFoundPage.jsx';
+import LoginPage from './components/LoginPage.jsx';
+import CareerPage from './components/CareerPage.jsx';
+import AdminCareerDashboard from './components/AdminCareerDashboard.jsx';
 
 export default function App() {
   const [isDemoOpen, setIsDemoOpen] = useState(false);
@@ -30,6 +36,24 @@ export default function App() {
   const parseCurrentRoute = () => {
     const hash = window.location.hash.toLowerCase();
     const path = window.location.pathname.toLowerCase();
+    if (hash.includes('admin') || path.includes('admin')) {
+      return 'admin-career';
+    }
+    if (hash.includes('career') || path.includes('career') || hash.includes('jobs') || path.includes('jobs')) {
+      return 'career';
+    }
+    if (hash.includes('login') || path.includes('login') || hash.includes('auth') || path.includes('auth')) {
+      return 'login';
+    }
+    if (hash.includes('media') || path.includes('media')) {
+      return 'media';
+    }
+    if (hash.includes('about') || path.includes('about')) {
+      return 'about';
+    }
+    if (hash.includes('pix4d') || path.includes('pix4d')) {
+      return 'pix4d';
+    }
     if (hash.includes('indosim') || path.includes('indosim')) {
       return 'indosim';
     }
@@ -79,7 +103,24 @@ export default function App() {
 
   const navigateTo = (route) => {
     setCurrentRoute(route);
-    if (route === 'indosim') {
+    if (route === 'login') {
+      window.location.hash = '#/auth/login';
+      window.scrollTo(0, 0);
+    } else if (route === 'career') {
+      window.location.hash = '#/company/career';
+      window.scrollTo(0, 0);
+    } else if (route === 'admin-career') {
+      window.location.hash = '#/admin/careers';
+      window.scrollTo(0, 0);
+    } else if (route === 'media') {
+      window.location.hash = '#/company/media';
+      window.scrollTo(0, 0);
+    } else if (route === 'about') {
+      window.location.hash = '#/company/about';
+      window.scrollTo(0, 0);
+    } else if (route === 'pix4d') {
+      window.location.hash = '#/products/pix4d';
+    } else if (route === 'indosim') {
       window.location.hash = '#/products/indosim';
       window.scrollTo(0, 0);
     } else if (route === 'indofly') {
@@ -163,12 +204,120 @@ export default function App() {
 
   return (
     <div className="relative w-full min-h-screen bg-black text-white selection:bg-[#f58220] selection:text-white">
-      {currentRoute === 'indosim' ? (
+      {currentRoute === 'login' ? (
+        <>
+          <Navbar 
+            onOpenDemo={(drone) => handleOpenDemoWithProduct(drone || 'Portal Inquiry')}
+            onOpenLogin={() => navigateTo('login')}
+            onSelectAntiDrone={() => handleOpenDemoWithProduct('SKYctrl C-UAS')}
+            onNavigate={navigateTo}
+          />
+          <LoginPage onNavigate={navigateTo} onOpenDemo={handleOpenDemoWithProduct} />
+          <Footer 
+            onOpenDemo={() => handleOpenDemoWithProduct('Portal Inquiry')}
+            onOpenLogin={() => navigateTo('login')}
+            onNavigate={navigateTo}
+          />
+        </>
+      ) : currentRoute === 'career' ? (
+        <>
+          <Navbar 
+            onOpenDemo={(drone) => handleOpenDemoWithProduct(drone || 'Careers')}
+            onOpenLogin={() => navigateTo('login')}
+            onSelectAntiDrone={() => handleOpenDemoWithProduct('SKYctrl C-UAS')}
+            onNavigate={navigateTo}
+          />
+          <CareerPage 
+            onNavigate={navigateTo} 
+            onOpenDemo={handleOpenDemoWithProduct} 
+          />
+          <Footer 
+            onOpenDemo={() => handleOpenDemoWithProduct('Careers')}
+            onOpenLogin={() => navigateTo('login')}
+            onNavigate={navigateTo}
+          />
+        </>
+      ) : currentRoute === 'admin-career' ? (
+        <>
+          <Navbar 
+            onOpenDemo={(drone) => handleOpenDemoWithProduct(drone || 'Admin')}
+            onOpenLogin={() => navigateTo('login')}
+            onSelectAntiDrone={() => handleOpenDemoWithProduct('SKYctrl C-UAS')}
+            onNavigate={navigateTo}
+          />
+          <AdminCareerDashboard onNavigate={navigateTo} />
+          <Footer 
+            onOpenDemo={() => handleOpenDemoWithProduct('Admin')}
+            onOpenLogin={() => navigateTo('login')}
+            onNavigate={navigateTo}
+          />
+        </>
+      ) : currentRoute === 'media' ? (
+        /* DEDICATED MEDIA & NEWSROOM PAGE WITH OFFICIAL NAVBAR & FOOTER */
+        <>
+          <Navbar 
+            onOpenDemo={(drone) => handleOpenDemoWithProduct(drone || 'Media / Press Inquiry')}
+            onOpenLogin={() => navigateTo('login')}
+            onSelectAntiDrone={() => handleOpenDemoWithProduct('SKYctrl C-UAS')}
+            onNavigate={navigateTo}
+          />
+          <MediaPage 
+            onBack={() => navigateTo('home')}
+            onOpenDemo={handleOpenDemoWithProduct}
+            onNavigate={navigateTo}
+          />
+          <Footer 
+            onOpenDemo={() => handleOpenDemoWithProduct('Media / Press Inquiry')}
+            onOpenLogin={() => navigateTo('login')}
+            onNavigate={navigateTo}
+          />
+        </>
+      ) : currentRoute === 'about' ? (
+        /* DEDICATED ABOUT US PAGE WITH OFFICIAL NAVBAR & FOOTER */
+        <>
+          <Navbar 
+            onOpenDemo={(drone) => handleOpenDemoWithProduct(drone || 'Corporate Partnership')}
+            onOpenLogin={() => navigateTo('login')}
+            onSelectAntiDrone={() => handleOpenDemoWithProduct('SKYctrl C-UAS')}
+            onNavigate={navigateTo}
+          />
+          <AboutPage 
+            onBack={() => navigateTo('home')}
+            onOpenDemo={handleOpenDemoWithProduct}
+            onNavigate={navigateTo}
+          />
+          <Footer 
+            onOpenDemo={() => handleOpenDemoWithProduct('Corporate Partnership')}
+            onOpenLogin={() => navigateTo('login')}
+            onNavigate={navigateTo}
+          />
+        </>
+      ) : currentRoute === 'pix4d' ? (
+        /* DEDICATED PIX4D PHOTOGRAMMETRY PAGE WITH OFFICIAL NAVBAR & FOOTER */
+        <>
+          <Navbar 
+            onOpenDemo={(drone) => handleOpenDemoWithProduct(drone || 'Pix4D Software Suite')}
+            onOpenLogin={() => navigateTo('login')}
+            onSelectAntiDrone={() => handleOpenDemoWithProduct('SKYctrl C-UAS')}
+            onNavigate={navigateTo}
+          />
+          <Pix4DPage 
+            onBack={() => navigateTo('home')}
+            onOpenDemo={handleOpenDemoWithProduct}
+            onNavigate={navigateTo}
+          />
+          <Footer 
+            onOpenDemo={() => handleOpenDemoWithProduct('Pix4D Software Suite')}
+            onOpenLogin={() => navigateTo('login')}
+            onNavigate={navigateTo}
+          />
+        </>
+      ) : currentRoute === 'indosim' ? (
         /* DEDICATED INDOSIM FLIGHT SIMULATION PAGE WITH OFFICIAL NAVBAR & FOOTER */
         <>
           <Navbar 
             onOpenDemo={(drone) => handleOpenDemoWithProduct(drone || 'IndoSIM Simulator')}
-            onOpenLogin={() => setIsLoginOpen(true)}
+            onOpenLogin={() => navigateTo('login')}
             onSelectAntiDrone={() => handleOpenDemoWithProduct('SKYctrl C-UAS')}
             onNavigate={navigateTo}
           />
@@ -179,7 +328,7 @@ export default function App() {
           />
           <Footer 
             onOpenDemo={() => handleOpenDemoWithProduct('IndoSIM Simulator')}
-            onOpenLogin={() => setIsLoginOpen(true)}
+            onOpenLogin={() => navigateTo('login')}
             onNavigate={navigateTo}
           />
         </>
@@ -188,7 +337,7 @@ export default function App() {
         <>
           <Navbar 
             onOpenDemo={(drone) => handleOpenDemoWithProduct(drone || 'IndoFly GCS')}
-            onOpenLogin={() => setIsLoginOpen(true)}
+            onOpenLogin={() => navigateTo('login')}
             onSelectAntiDrone={() => handleOpenDemoWithProduct('SKYctrl C-UAS')}
             onNavigate={navigateTo}
           />
@@ -199,7 +348,7 @@ export default function App() {
           />
           <Footer 
             onOpenDemo={() => handleOpenDemoWithProduct('IndoFly GCS')}
-            onOpenLogin={() => setIsLoginOpen(true)}
+            onOpenLogin={() => navigateTo('login')}
             onNavigate={navigateTo}
           />
         </>
@@ -208,14 +357,14 @@ export default function App() {
         <>
           <Navbar 
             onOpenDemo={(drone) => handleOpenDemoWithProduct(drone || 'Operations')}
-            onOpenLogin={() => setIsLoginOpen(true)}
+            onOpenLogin={() => navigateTo('login')}
             onSelectAntiDrone={() => handleOpenDemoWithProduct('SKYctrl C-UAS')}
             onNavigate={navigateTo}
           />
           <NotFoundPage onNavigate={navigateTo} />
           <Footer 
             onOpenDemo={() => handleOpenDemoWithProduct('')}
-            onOpenLogin={() => setIsLoginOpen(true)}
+            onOpenLogin={() => navigateTo('login')}
             onNavigate={navigateTo}
           />
         </>
@@ -224,7 +373,7 @@ export default function App() {
         <>
           <Navbar 
             onOpenDemo={(drone) => handleOpenDemoWithProduct(drone || 'Cyberone Max')}
-            onOpenLogin={() => setIsLoginOpen(true)}
+            onOpenLogin={() => navigateTo('login')}
             onSelectAntiDrone={() => handleOpenDemoWithProduct('SKYctrl C-UAS')}
             onNavigate={navigateTo}
           />
@@ -235,7 +384,7 @@ export default function App() {
           />
           <Footer 
             onOpenDemo={() => handleOpenDemoWithProduct('Cyberone Max')}
-            onOpenLogin={() => setIsLoginOpen(true)}
+            onOpenLogin={() => navigateTo('login')}
             onNavigate={navigateTo}
           />
         </>
@@ -244,7 +393,7 @@ export default function App() {
         <>
           <Navbar 
             onOpenDemo={(drone) => handleOpenDemoWithProduct(drone || 'Cyberone Pro')}
-            onOpenLogin={() => setIsLoginOpen(true)}
+            onOpenLogin={() => navigateTo('login')}
             onSelectAntiDrone={() => handleOpenDemoWithProduct('SKYctrl C-UAS')}
             onNavigate={navigateTo}
           />
@@ -255,7 +404,7 @@ export default function App() {
           />
           <Footer 
             onOpenDemo={() => handleOpenDemoWithProduct('Cyberone Pro')}
-            onOpenLogin={() => setIsLoginOpen(true)}
+            onOpenLogin={() => navigateTo('login')}
             onNavigate={navigateTo}
           />
         </>
@@ -264,7 +413,7 @@ export default function App() {
         <>
           <Navbar 
             onOpenDemo={(drone) => handleOpenDemoWithProduct(drone || 'Cyberone Trainer Drone')}
-            onOpenLogin={() => setIsLoginOpen(true)}
+            onOpenLogin={() => navigateTo('login')}
             onSelectAntiDrone={() => handleOpenDemoWithProduct('SKYctrl C-UAS')}
             onNavigate={navigateTo}
           />
@@ -275,7 +424,7 @@ export default function App() {
           />
           <Footer 
             onOpenDemo={() => handleOpenDemoWithProduct('Cyberone Trainer Drone')}
-            onOpenLogin={() => setIsLoginOpen(true)}
+            onOpenLogin={() => navigateTo('login')}
             onNavigate={navigateTo}
           />
         </>
@@ -284,7 +433,7 @@ export default function App() {
         <>
           <Navbar 
             onOpenDemo={(drone) => handleOpenDemoWithProduct(drone || 'Cyberone Lite')}
-            onOpenLogin={() => setIsLoginOpen(true)}
+            onOpenLogin={() => navigateTo('login')}
             onSelectAntiDrone={() => handleOpenDemoWithProduct('SKYctrl C-UAS')}
             onNavigate={navigateTo}
           />
@@ -295,7 +444,7 @@ export default function App() {
           />
           <Footer 
             onOpenDemo={() => handleOpenDemoWithProduct('Cyberone Lite')}
-            onOpenLogin={() => setIsLoginOpen(true)}
+            onOpenLogin={() => navigateTo('login')}
             onNavigate={navigateTo}
           />
         </>
@@ -308,7 +457,7 @@ export default function App() {
           {/* 100% TRANSPARENT DEFENSE NAVBAR */}
           <Navbar 
             onOpenDemo={(drone) => handleOpenDemoWithProduct(drone || '')}
-            onOpenLogin={() => setIsLoginOpen(true)}
+            onOpenLogin={() => navigateTo('login')}
             onSelectAntiDrone={() => handleOpenDemoWithProduct('SKYctrl C-UAS')}
             onNavigate={navigateTo}
           />
@@ -345,7 +494,7 @@ export default function App() {
           {/* SHIELD AI STYLE FOOTER (WITH INDOWINGS SOVEREIGN DEFENSE AESTHETICS & GIANT WATERMARK) */}
           <Footer 
             onOpenDemo={() => handleOpenDemoWithProduct('')}
-            onOpenLogin={() => setIsLoginOpen(true)}
+            onOpenLogin={() => navigateTo('login')}
             onNavigate={navigateTo}
           />
         </>

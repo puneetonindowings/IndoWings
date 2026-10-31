@@ -1,0 +1,140 @@
+Created At: 2026-10-29T14:55:58+05:30
+Completed At: 2026-10-29T14:56:00+05:30
+The tool's output was truncated due to being too long. You can find the full output in a file at file:///C:/Users/Punit/.gemini/antigravity/brain/d55da491-a1ee-4e58-b9ad-bf4061d91dad/.system_generated/steps/669/output.txt.
+
+Here is a preview with the middle of the output truncated:
+Command exited with code 0.
+
+Command output:
+
+        <meta http-equiv="ScreenOrientation" content="autoRotate:disabled"> 
+>       <title>IndoSIM</title>
+>       <meta name="description" content="Indosim">
+        <link href="images/favicon.png" rel="icon" type="image/png">
+        <link href="images/favicon.png" rel="apple-touch-icon">
+>       <link rel="canonical" href="https://www.indowings.com/products/indosim.php">
+>       <link rel="alternate" href="https://www.indowings.com/products/indosim.php" hreflang="en">
+>       <meta property="og:title" content="Indosim">
+        <meta property="og:type" content="website">
+        <meta property="og:site_name" content="Indo Wings Private Limited">
+>       <meta property="og:description" content="Indosim">
+        <meta name="twitter:site" content="@Indowings">
+        <meta name="twitter:domain" content="https://www.indowings.com/">
+>       <meta name="twitter:title" content="Indosim">
+>       <meta name="twitter:description" content="Indosim">
+        <meta name="twitter:image" content="https://www.indowings.com/products/indofly.php">
+        <link href="../css/styles.css" rel="stylesheet" type="text/css" />
+>       <link href="../css/indosim.css" rel="stylesheet" type="text/css" />
+        <link href="../css/responsive.css" rel="stylesheet" type="text/css" />
+        <style> .cpt{background:url(images/cpt.jpeg) no-repeat; width:150px; text-align:center; padding:10px 10px; 
+font-size:16px; font-weight:500;opacity: 0.8; margin-left:10px} .form-group {margin-bottom: 0.6rem;} .el08 {width: 
+18px;height: 18px;position: relative;top: 4px; margin-left: 12px;} </style>
+>       <script async src="https://www.googletagmanager.com/gtag/js?id=UA-255416812-1"></script><script>function 
+gtag(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],gtag("js",new 
+Date),gtag("config","UA-255416812-1")</script><script async 
+src="https://www.googletagmanager.com/gtag/js?id=G-KW1LDT67VV"></script><script>function 
+gtag(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],gtag("js",new Date),gtag("config","G-KW1LDT67VV"
+)</script><script>gtag("event","conversion",{send_to:"AW-11265566932/jU84CP7xx9QYENTR6_sp"})</script><body><div><nav 
+class="navbar navbar-expand-lg navbar-light sticky-top sticky"><div class="container-fluid"><a href="../" 
+class="navbar-brand"><img src="../images/logo-mobile.svg" alt="indowings"></a><div class="collapse navbar-collapse" 
+id="mobile_nav"><ul class="navbar-nav navbar-light"><li class="nav-item dropdown megamenu-li dmenu"><a class="nav-link 
+dropdown-toggle" href="" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" 
+aria-expanded="false">COMPANY</a><div class="dropdown-menu megamenu sm-menu" aria-labelledby="dropdown01"><div 
+style="background:#191b30;height:65px"></div><div class="container-fluid m-width"><div class="row pt-4"><div 
+class="col-md-4"><ul class="nav nav-pills"><h5 class="f55">Company</h5><li class="sub-nav__link active"><a 
+href="../company/about.php" data-target="#tab-1" data-toggle="tab">About Us</a></li><li class="sub-nav__link"><a 
+href="../company/media.php" data-target="#tab-2" data-toggle="tab">Media</a></li><li class="sub-nav__link"><a 
+href="../company/career.php" data-target="#tab-3" data-toggle="tab">Career</a></li><li 
+class="sub-nav__link"></li></ul></div><div class="col-md-6 text-left"><div class="tab-content well"><div 
+class="tab-pane active" id="tab-1"><img src="https://www.indowings.com/company/images/indowings-about.webp" 
+style="height:450px" title="About Indowings" alt="About Indowings"></div><div class="tab-pane" id="tab-2"><img 
+src="https://www.indowings.com/company/images/media/media.png" style="height:440px" title="Media" 
+alt="Media"></div></div></div></div></div></div></li><li class="nav-item dropdown megamenu-li dmenu"><a 
+class="nav-link dropdown-toggle" href="" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" 
+aria-expanded="false">PRODUCTS</a><div class="dropdown-menu megamenu sm-menu" aria-labelledby="dropdown01"><div 
+style="background:#191b30;height:65px"></div><div class="container-fluid m-width"><div class="row pt-4"><div 
+class="col-md-3"><ul class="nav nav-pills"><h5 class="f55">Surveillance, Mapping &amp; Delivery Drone</h5><li 
+class="sub-nav__link active"><a href="cyberone-trainer-drone.php" data-target="#tab-5e" data-toggle="tab">Cyberone 
+Trainer Drone</a></li><li class="sub-nav__link"><a href="cyberone-lite.php" data-target="#tab-4d" 
+data-toggle="tab">Cyberone Lite</a></li><li class="sub-nav__link"><a href="cyberonepro_v2.php" data-target="#tab-3c" 
+data-toggle="tab">Cyberone Pro</a></li><li class="sub-nav__link"><a href="cyberonemax.php" data-target="#tab-2c" 
+data-toggle="tab">Cyberone Max</a></li><li class="sub-nav__link"><!--a href="antidrones.php" data-target="#tab-6f" 
+data-toggle="tab">AntiDrone</a></li><li class="sub-nav__link"><
+<truncated 15980 of 25872 bytes from the middle of the output>
+class="col-md-6 col-lg-6 pb-4">
+>                          <img src="images/indosim/indosim02.jpg" style="width:100%" alt="indosim"> 
+                       </div>
+              <div class="col-md-3 col-lg-3 pb-4 text-center">
+>               <img src="images/indosim/4.jpg" style="width:100%" alt="indosim"> 
+                <h6 class="pt-4"> Training facilities, Remote Pilot</h6>
+              <div class="col-md-3 col-lg-3 pb-4 text-center">
+>                 <img src="images/indosim/traning.jpg" style="width:100%" alt="indosim"> 
+                  <h6 class="pt-4">Training Organization (RPTOs)</h6>
+              <div class="col-md-3 col-lg-3 pb-4 text-center">
+>                <img src="images/indosim/5.jpg" style="width:100%" alt="indosim"> 
+                 <h6 class="pt-4"> Educational Institutions</h6>
+              <div class="col-md-3 col-lg-3 pb-4 text-center">
+>                <img src="images/indosim/university.jpg" style="width:100%" alt="indosim"> 
+                 <h6 class="pt-4">Universities</h6>
+  
+>       <section class=" text-white banner-top-indosim" style="background:#191b30">
+        <div class="fullscreen-video-container">
+>          <video autoplay loop muted class="dd-hide" poster="images/indosim/videos/poster.jpg">
+>             <source src="images/indosim/videos/banner.mp4"  type="video/mp4">
+           </video>
+>          <video autoplay loop muted class="dd-hide" poster="images/indosim/videos/poster.jpg">
+           <video autoplay loop muted class="mm-hide" >
+>             <source src="images/indosim/videos/banner-mobile.mp4"  type="video/mp4">
+           </video>
+     <!--div class="col-md-6 col-lg-6 order-md-1 col-lg-1 order-2 text-left text-black ">
+>       <img src="images/indosim/indosim04.jpg" style="width:100%" alt="DroneSetupWindow"> 
+     </div -->
+        <h3>DRONE FEATURES AND CAPABILITIES</h3>
+>       <div class="pdd">IndoSim is a simulator for drones built on Unreal Engine. It provides a highly realistic 
+environment for the development, testing, and training. Here’s a detailed overview of the drone features available 
+in IndoSim: </div>
+    </div>
+        <div class="col-md-12 col-lg-12 text-left text-black pb-2">
+>          <img src="images/indosim/icons/icon-08.svg" class="iconsim" />
+           <h6 class=""><b> Realistic Weather Simulation</b></h6>
+        <div class="col-md-12 col-lg-12 text-left text-black pb-2">
+>          <img src="images/indosim/icons/icon-07.svg" class="iconsim" />
+           <h6 class=""><b>Remote<br> Control</b></h6>
+        <div class="col-md-12 col-lg-12 text-left text-black pb-2">
+>          <img src="images/indosim/icons/icon-06.svg" class="iconsim" />
+           <h6 class=""><b>Movement and Navigation</b></h6>
+        <div class="col-md-12 col-lg-12 text-left text-black pb-2">
+>          <img src="images/indosim/icons/icon-05.svg" class="iconsim" />
+           <h6 class=""><b>Basic Training Missions</b></h6>
+        <div class="col-md-12 col-lg-12 text-left text-black pb-2">
+>          <img src="images/indosim/icons/icon-04.svg" class="iconsim" />
+           <h6 class=""><b>Damage <br>System</b></h6>
+        <div class="col-md-12 col-lg-12 text-left text-black pb-2">
+>          <img src="images/indosim/icons/icon-03.svg" class="iconsim" />
+           <h6 class=""><b>Realistic Parameters and Sensors</b></h6>
+        <div class="col-md-12 col-lg-12 text-left text-black pb-2">
+>          <img src="images/indosim/icons/icon-02.svg" style="height: 42px;" class="iconsim" />
+           <h6 class=""><b>Flight<br>Parameters</b></h6>
+        <div class="col-md-12 col-lg-12 text-left text-black pb-2">
+>          <img src="images/indosim/icons/icon-01.svg" class="iconsim" />
+           <h6 class=""><b>Indigenous <br>Base Board</b></h6>
+                             <li>USB containing the Setup File</li>
+>                            <li>IndoSIM Key</li>
+                             <li>VR Headset (Optional)</li>
+                             <div class="col-md-6 col-lg-6 col-6 pb-4">
+>                               <img src="images/indosim/Controller.png" style="width:100%" alt="indosim"> 
+                             </div>
+                             <div class="col-md-6 col-lg-6 col-6 pb-4">
+>                               <img src="images/indosim/Controller.png" style="width:100%" alt="indosim"> 
+                             </div>
+                       <br>
+>                      <!--img src="images/indosim/stytem.png" style="width:100%" alt="SafetyWindow" --> 
+                       <table class="table table-bordered">
+   </table>
+>                      <!--img src="images/indosim/stytem.png" style="width:100%" alt="SafetyWindow" --> 
+                    </div>
+                      
+>                      <img src="images/indosim/indosim06.png" style="width:100%" alt="indosim"> 
+                    </div>
+
+

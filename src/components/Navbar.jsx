@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { ChevronDown, ArrowRight, ArrowUpRight, Menu, X } from 'lucide-react';
+import { ChevronDown, ArrowRight, ArrowUpRight, Menu, X, User, Shield, LogOut, Briefcase, ExternalLink } from 'lucide-react';
+import { authService, supabase } from '../lib/supabase.js';
 
 /**
  * Clean, standard IndoWings navigation data matching indowings.com
@@ -16,7 +17,7 @@ const menuData = {
   software: [
     { label: 'IndoFly', drone: 'IndoFly', route: 'indofly', href: '#/products/indofly' },
     { label: 'IndoSIM', drone: 'IndoSIM', route: 'indosim', href: '#/products/indosim' },
-    { label: 'Pix4D', drone: 'Pix4D' }
+    { label: 'Pix4D', drone: 'Pix4D', route: 'pix4d', href: '#/products/pix4d' }
   ],
   industries: [
     { label: 'Mapping & Survey', drone: 'Mapping & Survey' },
@@ -27,9 +28,9 @@ const menuData = {
     { label: 'Agriculture', drone: 'Agriculture' }
   ],
   company: [
-    { label: 'About Us', action: 'about' },
-    { label: 'Media', href: '#news-insights' },
-    { label: 'Careers', action: 'demo' }
+    { label: 'About Us', route: 'about' },
+    { label: 'Media', route: 'media' },
+    { label: 'Careers', route: 'career' }
   ]
 };
 
@@ -55,6 +56,14 @@ function SpaceXDropdown({ items, onOpenDemo, onNavigate, onClose }) {
               const el = document.querySelector(item.href);
               if (el) el.scrollIntoView({ behavior: 'smooth' });
             } else if (item.action === 'about' || item.action === 'manifesto') {
+              if (onNavigate) {
+                onNavigate('about');
+              } else {
+                const el = document.getElementById('manifesto') || document.getElementById('about');
+                if (el) el.scrollIntoView({ behavior: 'smooth' });
+                else onOpenDemo();
+              }
+            } else if (false) {
               const el = document.getElementById('manifesto') || document.getElementById('about');
               if (el) el.scrollIntoView({ behavior: 'smooth' });
               else onOpenDemo();
@@ -74,7 +83,94 @@ function SpaceXDropdown({ items, onOpenDemo, onNavigate, onClose }) {
 }
 
 export default function Navbar({ onOpenDemo, onOpenLogin, onSelectAntiDrone, onNavigate }) {
-  const [activeMenu, setActiveMenu] = useState(null); // 'products' | 'software' | 'industries' | 'company' | null
+  const [activeMenu, setActiveMenu] = useState(null);
+  const [userSession, setUserSession] = useState(null);
+  const [isProfileOpen, setIsProfileOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [currentHash, setCurrentHash] = useState(() => window.location.hash);
+  const profileDropdownRef = useRef(null);
+
+  // Sync scroll and route state for solid dark navbar on internal pages
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 15);
+    };
+    const handleHash = () => {
+      setCurrentHash(window.location.hash);
+    };
+    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('hashchange', handleHash);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('hashchange', handleHash);
+    };
+  }, []);
+
+  const isInternal = currentHash && 
+    currentHash !== '#' && 
+    currentHash !== '#/' && 
+    currentHash !== '#home';
+
+  // Sync user auth state
+  useEffect(() => {
+    let isMounted = true;
+    const syncAuth = async () => {
+      const session = await authService.getSession();
+      if (isMounted) setUserSession(session);
+    };
+    syncAuth();
+
+    const { data: authListener } = supabase.auth.onAuthStateChange(async (event, session) => {
+      if (isMounted) {
+        if (session?.user) {
+          const isAdmin = authService.isAdmin(session.user);
+          setUserSession({ user: session.user, isAdmin });
+        } else {
+          const local = await authService.getSession();
+          setUserSession(local);
+        }
+      }
+    });
+
+    const handleAuthEvent = () => syncAuth();
+    window.addEventListener('storage', handleAuthEvent);
+    window.addEventListener('auth_state_changed', handleAuthEvent);
+
+    const handleClickOutside = (e) => {
+      if (profileDropdownRef.current && !profileDropdownRef.current.contains(e.target)) {
+        setIsProfileOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+
+    return () => {
+      isMounted = false;
+      if (authListener?.subscription) authListener.subscription.unsubscribe();
+      window.removeEventListener('storage', handleAuthEvent);
+      window.removeEventListener('auth_state_changed', handleAuthEvent);
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
+
+  const handleSignOut = async () => {
+    await authService.signOut();
+    setUserSession(null);
+    setIsProfileOpen(false);
+    window.dispatchEvent(new Event('auth_state_changed'));
+    if (onNavigate) onNavigate('home');
+  };
+
+  // Standard navbar display name matching Navbar typography: 'ADMIN' for admin, or user's first name
+  const getNavDisplayName = () => {
+    if (!userSession?.user) return '';
+    if (userSession.isAdmin) return 'ADMIN';
+    const fullName = userSession.user.name || '';
+    if (fullName.trim()) {
+      return fullName.trim().split(' ')[0].toUpperCase();
+    }
+    const emailPrefix = userSession.user.email?.split('@')[0] || 'USER';
+    return emailPrefix.split('.')[0].split('_')[0].toUpperCase();
+  }; // 'products' | 'software' | 'industries' | 'company' | null
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [isClosing, setIsClosing] = useState(false);
   const [expandedSection, setExpandedSection] = useState('products');
@@ -120,7 +216,7 @@ export default function Navbar({ onOpenDemo, onOpenLogin, onSelectAntiDrone, onN
   };
 
   return (
-    <header className="iw-header">
+    <header className={`iw-header ${isScrolled || isInternal ? "is-solid" : ""}`}>
       <div className="iw-header-inner">
         
         {/* LEFT: INDOWINGS LOGO */}
@@ -262,14 +358,101 @@ export default function Navbar({ onOpenDemo, onOpenLogin, onSelectAntiDrone, onN
             <ArrowRight className="iw-action-arrow" />
           </button>
 
-          <button 
-            type="button" 
-            className="iw-action-link iw-action-desktop-only" 
-            onClick={onOpenLogin}
-          >
-            <span>LOGIN</span>
-            <ArrowRight className="iw-action-arrow" />
-          </button>
+          {userSession?.user ? (
+            <div className="iw-profile-nav-wrapper" ref={profileDropdownRef}>
+              <button 
+                type="button" 
+                className={`iw-action-link iw-action-desktop-only iw-profile-link ${isProfileOpen ? 'is-active' : ''}`}
+                onClick={() => setIsProfileOpen(prev => !prev)}
+                title={userSession.isAdmin ? 'Admin Console' : 'User Account'}
+              >
+                <span>{getNavDisplayName()}</span>
+                <ChevronDown size={13} className={`iw-action-chevron ${isProfileOpen ? 'open' : ''}`} />
+              </button>
+
+              {isProfileOpen && (
+                <div className="iw-profile-dropdown" role="menu">
+                  <div className="iw-profile-dropdown-header">
+                    <div className="iw-profile-user-info">
+                      <div className="iw-profile-name">
+                        {userSession.isAdmin ? 'Puneet Kushwaha' : (userSession.user.name || getNavDisplayName())}
+                      </div>
+                      <div className="iw-profile-email">
+                        {userSession.user.email}
+                      </div>
+                    </div>
+                    <div className={`iw-profile-badge ${userSession.isAdmin ? 'admin' : 'user'}`}>
+                      {userSession.isAdmin ? 'ADMIN' : 'USER'}
+                    </div>
+                  </div>
+
+                  <div className="iw-profile-dropdown-divider" />
+
+                  <div className="iw-profile-dropdown-links">
+                    {userSession.isAdmin ? (
+                      <>
+                        <button
+                          type="button"
+                          className="iw-profile-dropdown-item highlight"
+                          onClick={() => {
+                            setIsProfileOpen(false);
+                            if (onNavigate) onNavigate('admin-career');
+                          }}
+                        >
+                          <Briefcase size={15} className="iw-item-icon" />
+                          <span>Career Command Center</span>
+                        </button>
+
+                        <button
+                          type="button"
+                          className="iw-profile-dropdown-item"
+                          onClick={() => {
+                            setIsProfileOpen(false);
+                            if (onNavigate) onNavigate('career');
+                          }}
+                        >
+                          <ExternalLink size={15} className="iw-item-icon" />
+                          <span>View Public Careers</span>
+                        </button>
+                      </>
+                    ) : (
+                      <button
+                        type="button"
+                        className="iw-profile-dropdown-item highlight"
+                        onClick={() => {
+                          setIsProfileOpen(false);
+                          if (onNavigate) onNavigate('career');
+                        }}
+                      >
+                        <Briefcase size={15} className="iw-item-icon" />
+                        <span>Browse Aerospace Careers</span>
+                      </button>
+                    )}
+                  </div>
+
+                  <div className="iw-profile-dropdown-divider" />
+
+                  <button
+                    type="button"
+                    className="iw-profile-dropdown-item logout"
+                    onClick={handleSignOut}
+                  >
+                    <LogOut size={15} className="iw-item-icon" />
+                    <span>Sign Out</span>
+                  </button>
+                </div>
+              )}
+            </div>
+          ) : (
+            <button 
+              type="button" 
+              className="iw-action-link iw-action-desktop-only" 
+              onClick={onOpenLogin}
+            >
+              <span>LOGIN</span>
+              <ArrowRight className="iw-action-arrow" />
+            </button>
+          )}
 
           {/* MOBILE BURGER TOGGLE */}
           <button 
@@ -458,7 +641,11 @@ export default function Navbar({ onOpenDemo, onOpenLogin, onSelectAntiDrone, onN
                       className="iw-fs-sublink"
                       onClick={() => {
                         handleCloseMobile();
-                        onOpenDemo('Pix4D');
+                        if (onNavigate) {
+                          onNavigate('pix4d');
+                        } else {
+                          window.location.hash = '#/products/pix4d';
+                        }
                       }}
                     >
                       <span className="iw-fs-dot"></span>
@@ -569,9 +756,7 @@ export default function Navbar({ onOpenDemo, onOpenLogin, onSelectAntiDrone, onN
                       className="iw-fs-sublink"
                       onClick={() => {
                         handleCloseMobile();
-                        if (onNavigate) onNavigate('home');
-                        const el = document.getElementById('manifesto') || document.getElementById('about');
-                        if (el) el.scrollIntoView({ behavior: 'smooth' });
+                        if (onNavigate) onNavigate('about');
                       }}
                     >
                       <span className="iw-fs-dot"></span>
@@ -582,9 +767,7 @@ export default function Navbar({ onOpenDemo, onOpenLogin, onSelectAntiDrone, onN
                       className="iw-fs-sublink"
                       onClick={() => {
                         handleCloseMobile();
-                        if (onNavigate) onNavigate('home');
-                        const el = document.getElementById('news-insights');
-                        if (el) el.scrollIntoView({ behavior: 'smooth' });
+                        if (onNavigate) onNavigate('media');
                       }}
                     >
                       <span className="iw-fs-dot"></span>
@@ -595,7 +778,7 @@ export default function Navbar({ onOpenDemo, onOpenLogin, onSelectAntiDrone, onN
                       className="iw-fs-sublink"
                       onClick={() => {
                         handleCloseMobile();
-                        onOpenDemo('Careers at IndoWings');
+                        if (onNavigate) { onNavigate('career'); } else { onOpenDemo('Careers at IndoWings'); }
                       }}
                     >
                       <span className="iw-fs-dot"></span>
@@ -653,16 +836,75 @@ export default function Navbar({ onOpenDemo, onOpenLogin, onSelectAntiDrone, onN
                 <ArrowUpRight size={20} strokeWidth={2.5} />
               </button>
 
-              <button 
-                type="button" 
-                className="iw-fs-cta-secondary"
-                onClick={() => {
-                  handleCloseMobile();
-                  onOpenLogin();
-                }}
-              >
-                <span>LOGIN</span>
-              </button>
+              {userSession?.user ? (
+                <div className="iw-fs-user-card">
+                  <div className="iw-fs-user-header">
+                    <div className="iw-fs-user-avatar">
+                      {userSession.isAdmin ? <Shield size={18} /> : <User size={18} />}
+                    </div>
+                    <div>
+                      <div className="iw-fs-user-name">
+                        {userSession.user.name || (userSession.isAdmin ? 'Puneet Kushwaha' : 'Candidate User')}
+                      </div>
+                      <div className="iw-fs-user-email">{userSession.user.email}</div>
+                    </div>
+                    <span className={`iw-fs-user-badge ${userSession.isAdmin ? 'admin' : 'user'}`}>
+                      {userSession.isAdmin ? 'ADMIN' : 'USER'}
+                    </span>
+                  </div>
+
+                  {userSession.isAdmin ? (
+                    <button
+                      type="button"
+                      className="iw-fs-cta-primary"
+                      style={{ marginBottom: '0.75rem' }}
+                      onClick={() => {
+                        handleCloseMobile();
+                        if (onNavigate) onNavigate('admin-career');
+                      }}
+                    >
+                      <span>CAREER COMMAND</span>
+                      <ArrowRight size={18} />
+                    </button>
+                  ) : (
+                    <button
+                      type="button"
+                      className="iw-fs-cta-primary"
+                      style={{ marginBottom: '0.75rem' }}
+                      onClick={() => {
+                        handleCloseMobile();
+                        if (onNavigate) onNavigate('career');
+                      }}
+                    >
+                      <span>BROWSE CAREERS</span>
+                      <ArrowRight size={18} />
+                    </button>
+                  )}
+
+                  <button
+                    type="button"
+                    className="iw-fs-cta-secondary"
+                    onClick={() => {
+                      handleCloseMobile();
+                      handleSignOut();
+                    }}
+                  >
+                    <LogOut size={16} style={{ marginRight: '8px' }} />
+                    <span>SIGN OUT</span>
+                  </button>
+                </div>
+              ) : (
+                <button 
+                  type="button" 
+                  className="iw-fs-cta-secondary"
+                  onClick={() => {
+                    handleCloseMobile();
+                    onOpenLogin();
+                  }}
+                >
+                  <span>LOGIN</span>
+                </button>
+              )}
             </div>
 
           </div>

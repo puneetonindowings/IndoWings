@@ -165,10 +165,10 @@ export default function Footer({ onOpenDemo, onOpenLogin, onNavigate }) {
             <div className="iw-footer-col">
               <h5 className="iw-col-heading">Quick Links</h5>
               <ul className="iw-col-list">
-                <li><a href="https://www.indowings.com/company/about.php" target="_blank" rel="noopener noreferrer">Who We Are</a></li>
-                <li><button type="button" onClick={onOpenDemo} className="iw-footer-btn-link">Our Team</button></li>
-                <li><a href="https://www.indowings.com/company/media.php" target="_blank" rel="noopener noreferrer">Media</a></li>
-                <li><a href="https://www.indowings.com/company/career.php" target="_blank" rel="noopener noreferrer">Careers</a></li>
+                <li><button type="button" onClick={() => onNavigate && onNavigate("about")} className="iw-footer-btn-link">Who We Are</button></li>
+                <li><button type="button" onClick={() => onNavigate && onNavigate("about")} className="iw-footer-btn-link">Our Leadership</button></li>
+                <li><button type="button" onClick={() => onNavigate && onNavigate("media")} className="iw-footer-btn-link">Media</button></li>
+                <li><button type="button" onClick={() => onNavigate ? onNavigate('career') : window.open('https://www.indowings.com/company/career.php', '_blank')} className="iw-footer-btn-link">Careers</button></li>
                 <li><button type="button" onClick={onOpenDemo} className="iw-footer-btn-link">Connect</button></li>
                 <li><a href="https://www.indowings.com/become-dealer.php" target="_blank" rel="noopener noreferrer">Become a Partner</a></li>
                 <li><a href="https://www.indowings.com/declaration-of-use.php" target="_blank" rel="noopener noreferrer">Educational License Form</a></li>
@@ -179,7 +179,7 @@ export default function Footer({ onOpenDemo, onOpenLogin, onNavigate }) {
             {/* COL D: SOFTWARE & ACCREDITATION BADGES */}
             <div className="iw-footer-col iw-footer-accreditations-col">
               <h5 className="iw-col-heading">Software</h5>
-              <a href="https://www.indowings.com/products/pix4d.php" target="_blank" rel="noopener noreferrer" className="iw-pix4d-link">
+              <a href="#/products/pix4d" onClick={(e) => { e.preventDefault(); if (onNavigate) onNavigate("pix4d"); else window.location.hash = "#/products/pix4d"; }} className="iw-pix4d-link">
                 <img src="/assets/footer/pix4d-footer.webp" alt="Pix4D Partner" className="iw-pix4d-logo" />
               </a>
 

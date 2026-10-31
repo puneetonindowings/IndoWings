@@ -468,13 +468,23 @@ export default function LoginPage({ onNavigate }) {
             ===================================================================== */}
         {otpStep === 'otp-verify' ? (
           <form onSubmit={handleVerifyOtp} className="ebolt-form">
-            {/* High-Tech 6-Segment Digital PIN Slots */}
+            {/* High-Tech 6-Segment Digital PIN Slots (Fully Inline Styled - Zero CSS Glitch) */}
             <div 
-              className="ebolt-otp-slots-wrap" 
               onClick={() => otpInputRef.current?.focus()}
               role="button"
               tabIndex={0}
               aria-label="Click to enter 6-digit verification code"
+              style={{
+                position: 'relative',
+                width: '100%',
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+                gap: '8px',
+                margin: '0.85rem 0 1.25rem',
+                cursor: 'text',
+                userSelect: 'none'
+              }}
             >
               {[0, 1, 2, 3, 4, 5].map((slotIdx) => {
                 const digit = (otpCode || '')[slotIdx] || '';
@@ -483,20 +493,58 @@ export default function LoginPage({ onNavigate }) {
                 return (
                   <div 
                     key={slotIdx}
-                    className={`ebolt-otp-digit-slot ${isFilled ? 'is-filled' : ''} ${isCurrent && !isFilled ? 'is-active' : ''}`}
+                    style={{
+                      flex: 1,
+                      maxWidth: '48px',
+                      height: '58px',
+                      background: isFilled ? '#0d1322' : isCurrent ? '#101626' : '#080b12',
+                      border: isCurrent 
+                        ? '2px solid #ff7a1a' 
+                        : isFilled 
+                          ? '1.5px solid rgba(255, 122, 26, 0.75)' 
+                          : '1.5px solid rgba(255, 255, 255, 0.18)',
+                      borderRadius: '12px',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      boxShadow: isCurrent 
+                        ? '0 0 0 3px rgba(255, 122, 26, 0.28), 0 0 20px rgba(255, 122, 26, 0.35)' 
+                        : '0 4px 14px rgba(0, 0, 0, 0.5)',
+                      transition: 'all 0.2s ease',
+                      transform: isCurrent ? 'translateY(-2px)' : 'none',
+                      boxSizing: 'border-box'
+                    }}
                   >
                     {isFilled ? (
-                      <span className="ebolt-otp-digit-char">{digit}</span>
+                      <span style={{
+                        fontFamily: "var(--font-heading, 'Space Grotesk', sans-serif)",
+                        fontSize: '1.75rem',
+                        fontWeight: 800,
+                        color: '#ff7a1a',
+                        lineHeight: 1
+                      }}>
+                        {digit}
+                      </span>
                     ) : isCurrent ? (
-                      <span className="ebolt-otp-cursor" />
+                      <span style={{
+                        width: '2px',
+                        height: '24px',
+                        background: '#ff7a1a',
+                        borderRadius: '1px'
+                      }} />
                     ) : (
-                      <span className="ebolt-otp-placeholder-dot" />
+                      <span style={{
+                        width: '7px',
+                        height: '7px',
+                        borderRadius: '50%',
+                        background: 'rgba(255, 255, 255, 0.2)'
+                      }} />
                     )}
                   </div>
                 );
               })}
 
-              {/* Native invisible input overlay for universal keyboard & paste capture */}
+              {/* Native input overlay: hardcoded inline styles so browser can NEVER show a white box */}
               <input
                 ref={otpInputRef}
                 type="text"
@@ -510,7 +558,24 @@ export default function LoginPage({ onNavigate }) {
                   setOtpCode(cleaned);
                   if (error) setError('');
                 }}
-                className="ebolt-otp-invisible-input"
+                style={{
+                  position: 'absolute',
+                  top: 0,
+                  left: 0,
+                  width: '100%',
+                  height: '100%',
+                  opacity: 0,
+                  filter: 'alpha(opacity=0)',
+                  cursor: 'pointer',
+                  border: 'none',
+                  outline: 'none',
+                  background: 'transparent',
+                  color: 'transparent',
+                  caretColor: 'transparent',
+                  zIndex: 10,
+                  margin: 0,
+                  padding: 0
+                }}
                 autoComplete="one-time-code"
                 autoFocus
               />
@@ -826,6 +891,32 @@ export default function LoginPage({ onNavigate }) {
                     <span>Login with Email OTP</span>
                   </>
                 )}
+              </button>
+            </div>
+
+            {/* DIRECT FORGOT PASSWORD BUTTON ON EMAIL SCREEN */}
+            <div style={{ textAlign: 'center', marginTop: '14px' }}>
+              <button
+                type="button"
+                onClick={() => {
+                  setAuthMode('forgot-password');
+                  setError('');
+                  setSuccess('');
+                }}
+                style={{
+                  background: 'transparent',
+                  border: 'none',
+                  color: '#ff7a1a',
+                  fontSize: '0.85rem',
+                  fontWeight: 600,
+                  cursor: 'pointer',
+                  padding: '6px 10px',
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: '6px'
+                }}
+              >
+                <span>Forgot password?</span>
               </button>
             </div>
           </form>
